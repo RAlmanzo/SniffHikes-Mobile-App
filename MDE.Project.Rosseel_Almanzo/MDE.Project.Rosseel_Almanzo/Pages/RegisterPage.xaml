@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDE.Project.Rosseel_Almanzo.Pages.RegisterPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout BackgroundColor="LightBlue">
+                <Button Text="Add picture" HorizontalOptions="StartAndExpand" Margin="0,20,0,0"></Button>
+                <!--<ListView HorizontalOptions="CenterAndExpand" WidthRequest="350" HeightRequest="500" BackgroundColor="Black" ItemsSource="{Binding Pictures}">
+                    <ListView.DataTemplate>
+                </ListView>-->
+                <CollectionView VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" WidthRequest="350" HeightRequest="130" BackgroundColor="LightGray" Margin="0,0,0,30">
+                
+                </CollectionView>
+                <StackLayout WidthRequest="350" HorizontalOptions="Center">
+                    <Label Text="FirstName"></Label>
+                    <Entry Text="{Binding FirstName}"></Entry>
+                </StackLayout>
+                <StackLayout WidthRequest="350" HorizontalOptions="Center">
+                    <Label Text="LastName" Padding="0,25,0,0"></Label>
+                    <Entry IsPassword="True" Text="{Binding LastName}"></Entry>
+                </StackLayout>
+                <StackLayout WidthRequest="350" HorizontalOptions="Center">
+                    <Label Text="Email"></Label>
+                    <Entry Text="{Binding Email}"></Entry>
+                </StackLayout>
+                <StackLayout WidthRequest="350" HorizontalOptions="Center">
+                    <Label Text="City"></Label>
+                    <Entry Text="{Binding City}"></Entry>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" WidthRequest="350" HorizontalOptions="Center">
+                    <Label Text="Male"></Label>
+                    <Switch IsToggled="False" />
+                    <Label Text="Female"></Label>
+                    <Switch IsToggled="False" />
+                </StackLayout>
+                <StackLayout WidthRequest="350" HorizontalOptions="Center">
+                    <Label Text="Birthday"></Label>
+                    <DatePicker Date="{Binding Birthday}" Format="dd-MM-yyyy"></DatePicker>
+                </StackLayout>
+                <StackLayout WidthRequest="350" HorizontalOptions="Center">
+                    <Label Text="Password" Padding="0,25,0,0"></Label>
+                    <Entry IsPassword="True" Text="{Binding Password}"></Entry>
+                </StackLayout>
+                <Button Text="Register" HorizontalOptions="CenterAndExpand" Margin="0,50,0,25"></Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
