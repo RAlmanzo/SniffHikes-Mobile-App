@@ -1,12 +1,26 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MDE.Project.Rosseel_Almanzo.Styles.Styles">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+﻿<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Style TargetType="Button" x:Key="baseButtonStyle">
+        <Setter Property="BorderWidth" Value="2"></Setter>
+        <Setter Property="CornerRadius" Value="15"></Setter>
+        <Setter Property="FontSize" Value="Medium"></Setter>
+        <Setter Property="WidthRequest" Value="200"></Setter>
+        <Setter Property="Margin" Value="0,0,0,50"></Setter>
+    </Style>
+    <Style TargetType="Button" BasedOn="{StaticResource baseButtonStyle}">
+        <Setter Property="BackgroundColor" Value="{StaticResource primary}"></Setter>
+        <Setter Property="TextColor" Value="Black"></Setter>
+        <Setter Property="BorderColor" Value="#55ee55"></Setter>
+
+    </Style>
+    <Style TargetType="Button" x:Key="btnPrimary" BasedOn="{StaticResource baseButtonStyle}">
+        <Setter Property="BackgroundColor" Value="LightGray"></Setter>
+        <Setter Property="TextColor" Value="Gray"></Setter>
+        <Setter Property="BorderColor" Value="BlanchedAlmond"></Setter>
+        <Setter Property="FontSize" Value="10"></Setter>
+    </Style>
+
+    <Style TargetType="Label" x:Key="h1">
+        <Setter Property="FontSize" Value="32"></Setter>
+    </Style>
+</ResourceDictionary>
