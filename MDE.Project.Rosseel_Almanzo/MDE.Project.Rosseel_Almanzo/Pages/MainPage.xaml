@@ -25,21 +25,21 @@
                     <Image Source="https://source.unsplash.com/user/c_v_r/1900x800"></Image>
                 </Frame>
             </StackLayout>
-            <Button Grid.Column="1" Grid.Row="1" Text="Evenementen" Command="{Binding EventCommand}"></Button>
+            <Button Grid.Column="1" Grid.Row="1" Text="Evenementen" Command="{Binding EventsCommand}"></Button>
 
             <StackLayout Grid.Column="0" Grid.Row="2">
                 <Frame Padding="0" CornerRadius="75" IsClippedToBounds="True" HeightRequest="200">
                     <Image Source="https://source.unsplash.com/user/c_v_r/1900x800"></Image>
                 </Frame>
             </StackLayout>
-            <Button Grid.Column="1" Grid.Row="2" Text="Wandelroutes" Command="{Binding RouteCommand}"></Button>
+            <Button Grid.Column="1" Grid.Row="2" Text="Wandelroutes" Command="{Binding RoutesCommand}"></Button>
 
             <StackLayout Grid.Column="0" Grid.Row="3">
                 <Frame Padding="0" CornerRadius="75" IsClippedToBounds="True" HeightRequest="200">
                     <Image Source="https://source.unsplash.com/user/c_v_r/1900x800"></Image>
                 </Frame>
             </StackLayout>
-            <Button Grid.Column="1" Grid.Row="3" Text="Losloopzone's" Command="{Binding ZoneCommand}"></Button>
+            <Button Grid.Column="1" Grid.Row="3" Text="Losloopzone's" Command="{Binding ZonesCommand}"></Button>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
