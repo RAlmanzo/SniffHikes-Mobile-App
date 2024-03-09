@@ -4,7 +4,7 @@
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.LoginPage">
     <ContentPage.Content>
         <Grid>
-            <Image Source="https://source.unsplash.com/user/c_v_r/1900x800" Aspect="AspectFill" WidthRequest="300" HeightRequest="300"></Image>
+            <Image Source="https://source.unsplash.com/user/c_v_r/1900x800" Aspect="AspectFill" WidthRequest="400" HeightRequest="800"></Image>
             <StackLayout>
                 <Frame BackgroundColor="Transparent">
                     <Label Text="Login" FontSize="60" HorizontalTextAlignment="Center" Padding="0,50,0,50" TextColor="LimeGreen"></Label>
@@ -18,9 +18,10 @@
                     <Entry IsPassword="True" Text="{Binding Password}" TextColor="LimeGreen" Placeholder="............." PlaceholderColor="AntiqueWhite"></Entry>
                 </StackLayout>
 
-                <Button Text="Login" Command="{Binding LoginCommand}" HorizontalOptions="CenterAndExpand" Margin="0,50,0,0"></Button>
-                <Button Text="Register" Command="{Binding RegisterCommand}" Style="{StaticResource btnPrimary}" HorizontalOptions="CenterAndExpand"></Button>
-                <!--<Label Text="Register"></Label>-->
+                <StackLayout Margin="50">
+                    <Button Text="Login" Command="{Binding LoginCommand}"></Button>
+                    <Button Text="Register" Command="{Binding RegisterCommand}" Style="{StaticResource btnPrimary}"></Button>
+                </StackLayout>
             </StackLayout>
         </Grid>
     </ContentPage.Content>
