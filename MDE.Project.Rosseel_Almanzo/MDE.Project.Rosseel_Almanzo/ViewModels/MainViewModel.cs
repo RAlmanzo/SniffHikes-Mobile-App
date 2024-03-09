@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
-    public class RegisterViewModel : FreshBasePageModel
+    public class MainViewModel : FreshBasePageModel
     {
     }
 }

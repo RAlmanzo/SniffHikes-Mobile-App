@@ -95,7 +95,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\drawable\AFreedomPath.jpeg" />
+    <AndroidResource Include="Resources\drawable\AFreedomPath.jpeg" />
     <Content Include="Resources\drawable\baratheon.png" />
     <Content Include="Resources\drawable\LoginImage.jpeg" />
   </ItemGroup>

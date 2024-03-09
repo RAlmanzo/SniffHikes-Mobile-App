@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace MDE.Project.Rosseel_Almanzo
+namespace MDE.Project.Rosseel_Almanzo.Pages
 {
     public partial class MainPage : ContentPage
     {
