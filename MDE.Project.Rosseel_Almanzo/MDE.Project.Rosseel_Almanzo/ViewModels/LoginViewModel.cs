@@ -1,4 +1,5 @@
-﻿using MDE.Project.Rosseel_Almanzo.Pages;
+﻿using FreshMvvm;
+using MDE.Project.Rosseel_Almanzo.Pages;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,7 +8,7 @@ using Xamarin.Forms;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
-    public class LoginViewModel
+    public class LoginViewModel : FreshBasePageModel
     {
         public string Email { get; set; }
         public string Password { get; set; }
@@ -15,9 +16,9 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         {
             get
             {
-                return new Command(async() =>
+                return new Command(async () =>
                 {
-                    await Application.Current.MainPage.Navigation.PushAsync(new MainPage());
+                    await CoreMethods.PushPageModel<MainViewModel>();
                 });
             }
         }
@@ -28,7 +29,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
+                    await CoreMethods.PushPageModel<RegisterViewModel>();
                 });
             }
         }
