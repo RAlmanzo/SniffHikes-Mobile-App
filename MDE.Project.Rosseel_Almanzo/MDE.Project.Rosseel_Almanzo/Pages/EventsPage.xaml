@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDE.Project.Rosseel_Almanzo.Pages.EventsPage"
+             xmlns:local="clr-namespace:MDE.Project.Rosseel_Almanzo.Pages">
+    <!--Pages can be added as references or inline-->
+    <ContentPage Title="Events">
+        <Frame>
+            <Label Text="WELKOM" FontSize="50"></Label>
+        </Frame>
+    </ContentPage>
+    <local:MyEventsPage Title="My Events"></local:MyEventsPage>
+</TabbedPage>
