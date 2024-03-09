@@ -34,5 +34,7 @@
 
   <ItemGroup>
     <Folder Include="Assets\Images\" />
+    <Folder Include="Domain\Models\" />
+    <Folder Include="Domain\Services\Mock\" />
   </ItemGroup>
 </Project>
