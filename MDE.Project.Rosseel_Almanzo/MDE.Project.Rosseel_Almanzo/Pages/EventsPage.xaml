@@ -2,9 +2,15 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.EventsPage"
-             xmlns:local="clr-namespace:MDE.Project.Rosseel_Almanzo.Pages">
+             xmlns:local="clr-namespace:MDE.Project.Rosseel_Almanzo.Pages"
+            NavigationPage.HasNavigationBar="False"
+            BarBackgroundColor="Black"
+            SelectedTabColor="LimeGreen"
+            UnselectedTabColor="White"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom">
     <!--Pages can be added as references or inline-->
-    <ContentPage Title="Events">
+    <ContentPage Title="Events" IconImageSource="AFreedomPath">
         
     </ContentPage>
     <local:MyEventsPage Title="My Events"></local:MyEventsPage>
