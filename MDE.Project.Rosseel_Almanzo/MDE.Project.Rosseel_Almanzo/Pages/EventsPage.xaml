@@ -5,9 +5,7 @@
              xmlns:local="clr-namespace:MDE.Project.Rosseel_Almanzo.Pages">
     <!--Pages can be added as references or inline-->
     <ContentPage Title="Events">
-        <Frame>
-            <Label Text="WELKOM" FontSize="50"></Label>
-        </Frame>
+        
     </ContentPage>
     <local:MyEventsPage Title="My Events"></local:MyEventsPage>
 </TabbedPage>
