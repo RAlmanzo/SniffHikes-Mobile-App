@@ -4,15 +4,17 @@
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.RegisterPage">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout BackgroundColor="LightBlue">
-                <Button Text="Add picture" HorizontalOptions="StartAndExpand" Margin="0,20,0,0"></Button>
+            <StackLayout BackgroundColor="DeepSkyBlue">
                 <!--<ListView HorizontalOptions="CenterAndExpand" WidthRequest="350" HeightRequest="500" BackgroundColor="Black" ItemsSource="{Binding Pictures}">
                     <ListView.DataTemplate>
                 </ListView>-->
-                <CollectionView VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" WidthRequest="350" HeightRequest="130" BackgroundColor="LightGray" Margin="0,0,0,30">
-                
-                </CollectionView>
-                <StackLayout WidthRequest="350" HorizontalOptions="Center">
+                <StackLayout HeightRequest="200" Orientation="Horizontal" Padding="0,25,0,0">
+                    <Frame Padding="0" CornerRadius="100" IsClippedToBounds="True">
+                        <Image Source="https://source.unsplash.com/user/c_v_r/1900x800" WidthRequest="200" HeightRequest="200"></Image>
+                    </Frame>
+                    <Button Text="Add picture" HorizontalOptions="EndAndExpand" Margin="0,20,0,0"></Button>
+                </StackLayout>
+                <StackLayout Padding="0,25,0,0" WidthRequest="350" HorizontalOptions="Center">
                     <Label Text="FirstName"></Label>
                     <Entry Text="{Binding FirstName}"></Entry>
                 </StackLayout>
@@ -20,29 +22,29 @@
                     <Label Text="LastName" Padding="0,25,0,0"></Label>
                     <Entry IsPassword="True" Text="{Binding LastName}"></Entry>
                 </StackLayout>
-                <StackLayout WidthRequest="350" HorizontalOptions="Center">
+                <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
                     <Label Text="Email"></Label>
                     <Entry Text="{Binding Email}"></Entry>
                 </StackLayout>
-                <StackLayout WidthRequest="350" HorizontalOptions="Center">
+                <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
                     <Label Text="City"></Label>
                     <Entry Text="{Binding City}"></Entry>
                 </StackLayout>
-                <StackLayout Orientation="Horizontal" WidthRequest="350" HorizontalOptions="Center">
+                <StackLayout Orientation="Horizontal" WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
                     <Label Text="Male"></Label>
                     <Switch IsToggled="False" />
                     <Label Text="Female"></Label>
                     <Switch IsToggled="False" />
                 </StackLayout>
-                <StackLayout WidthRequest="350" HorizontalOptions="Center">
+                <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
                     <Label Text="Birthday"></Label>
                     <DatePicker Date="{Binding Birthday}" Format="dd-MM-yyyy"></DatePicker>
                 </StackLayout>
-                <StackLayout WidthRequest="350" HorizontalOptions="Center">
-                    <Label Text="Password" Padding="0,25,0,0"></Label>
+                <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
+                    <Label Text="Password"></Label>
                     <Entry IsPassword="True" Text="{Binding Password}"></Entry>
                 </StackLayout>
-                <Button Text="Register" HorizontalOptions="CenterAndExpand" Margin="0,50,0,25"></Button>
+                <Button Text="Register" Margin="0,50,0,25"></Button>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
