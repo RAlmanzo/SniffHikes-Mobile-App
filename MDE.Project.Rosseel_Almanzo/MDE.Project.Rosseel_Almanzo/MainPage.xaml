@@ -1,24 +1,45 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDE.Project.Rosseel_Almanzo.MainPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+            </Grid.RowDefinitions>
 
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-    </StackLayout>
 
+            <StackLayout Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+                <Label Text="Welkom" FontSize="50" HorizontalOptions="CenterAndExpand"></Label>
+            </StackLayout>
+
+            <StackLayout Grid.Column="0" Grid.Row="1">
+                <Frame Padding="0" CornerRadius="75" IsClippedToBounds="True" HeightRequest="200">
+                    <Image Source="https://source.unsplash.com/user/c_v_r/1900x800"></Image>
+                </Frame>
+            </StackLayout>
+            <Button Grid.Column="1" Grid.Row="1" Text="Evenementen" Command="{Binding EventCommand}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" ></Button>
+
+            <StackLayout Grid.Column="0" Grid.Row="2">
+                <Frame Padding="0" CornerRadius="75" IsClippedToBounds="True" HeightRequest="200">
+                    <Image Source="https://source.unsplash.com/user/c_v_r/1900x800"></Image>
+                </Frame>
+            </StackLayout>
+            <Button Grid.Column="1" Grid.Row="2" Text="Wandelroutes" Command="{Binding RouteCommand}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" ></Button>
+
+            <StackLayout Grid.Column="0" Grid.Row="3">
+                <Frame Padding="0" CornerRadius="75" IsClippedToBounds="True" HeightRequest="200">
+                    <Image Source="https://source.unsplash.com/user/c_v_r/1900x800"></Image>
+                </Frame>
+            </StackLayout>
+            <Button Grid.Column="1" Grid.Row="3" Text="Losloopzone's" Command="{Binding ZoneCommand}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" ></Button>
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>
