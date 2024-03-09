@@ -6,6 +6,13 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Models
 {
     public class Event
     {
-        
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public IEnumerable<Image> Images { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+        public DateTime DateEvent { get; set; }
     }
 }
