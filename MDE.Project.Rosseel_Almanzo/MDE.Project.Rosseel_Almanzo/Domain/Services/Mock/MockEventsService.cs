@@ -74,7 +74,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             return await Task.FromResult(_events.FirstOrDefault(e => e.Id == id));
         }
 
-        public async Task<List<Image>> GetEventImagesByEventIdAsync(int id)
+        public async Task<List<Image>> GetEventImagesAsync(int id)
         {
             var selectedEvent = await GetEventByIdAsync(id);
             return (List<Image>)await Task.FromResult(selectedEvent.Images);
