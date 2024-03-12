@@ -14,13 +14,13 @@ namespace MDE.Project.Rosseel_Almanzo.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
-        private LoginViewModel _viewModel;
+        //private LoginViewModel _viewModel;
 
         public LoginPage()
         {
             InitializeComponent();
-            _viewModel = new LoginViewModel();
-            BindingContext = _viewModel;
+            //_viewModel = new LoginViewModel();
+            //BindingContext = _viewModel;
         }
     }
 }
