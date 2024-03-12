@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.EventsPage"
              xmlns:local="clr-namespace:MDE.Project.Rosseel_Almanzo.Pages"
-            NavigationPage.HasNavigationBar="False"
             BarBackgroundColor="Black"
             SelectedTabColor="LimeGreen"
             UnselectedTabColor="White"
