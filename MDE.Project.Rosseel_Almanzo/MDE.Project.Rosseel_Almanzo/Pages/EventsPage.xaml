@@ -10,36 +10,41 @@
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom">
     <!--Pages can be added as references or inline-->
-    <ContentPage Title="Events" IconImageSource="AFreedomPath">
+    <ContentPage Title="Events" 
+                 IconImageSource="AFreedomPath" 
+                 BackgroundColor="Black">
         <ListView x:Name="lstItems" ItemsSource="{Binding Events}" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150" />
-                                <ColumnDefinition Width="280" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="50"/>
-                                <RowDefinition Height="150"/>
-                            </Grid.RowDefinitions>
+                        <Frame BorderColor="LimeGreen" BackgroundColor="Black" CornerRadius="50" Padding="0" Margin="10" HasShadow="True">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.Padding>0,20,0,0</Grid.Padding>
 
-                            <StackLayout Orientation="Horizontal" Padding="15" Grid.Column="0" Grid.Row="1">
-                                <Frame Padding="0" CornerRadius="50" IsClippedToBounds="True" WidthRequest="120">
-                                    <Image Source="https://source.unsplash.com/user/c_v_r/1900x800"></Image>
-                                </Frame>
-                            </StackLayout>
+                                <StackLayout Orientation="Horizontal" Padding="15" Grid.Column="0" Grid.Row="1">
+                                    <Frame Padding="0" CornerRadius="50" IsClippedToBounds="True" WidthRequest="120">
+                                        <Image Source="https://source.unsplash.com/user/c_v_r/1900x800" HeightRequest="150"></Image>
+                                    </Frame>
+                                </StackLayout>
 
-                            <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Title}" FontSize="20"></Label>
-                            <Label Grid.Row="1" Grid.Column="1"  Text="{Binding Description}" FontSize="Subtitle"></Label>
-                        </Grid>
+                                <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Title}" FontSize="20" Padding="25,0,0,0" TextDecorations="Underline" TextColor="LimeGreen"></Label>
+                                <Label Grid.Row="1" Grid.Column="1"  Text="{Binding Description}" FontSize="Subtitle" TextColor="LimeGreen"></Label>
+                            </Grid>
+                        </Frame>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </ContentPage>
 
-    <local:MyEventsPage Title="My Events"></local:MyEventsPage>
-    <local:MyEventsPage Title="Create"></local:MyEventsPage>
+    <local:MyEventsPage></local:MyEventsPage>
+    <local:CreateEventPage></local:CreateEventPage>
 </TabbedPage>
