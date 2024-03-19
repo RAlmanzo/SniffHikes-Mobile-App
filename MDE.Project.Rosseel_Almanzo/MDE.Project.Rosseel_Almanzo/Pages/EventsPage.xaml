@@ -31,7 +31,7 @@
 
                                 <StackLayout Orientation="Horizontal" Padding="15" Grid.Column="0" Grid.Row="1">
                                     <Frame Padding="0" CornerRadius="50" IsClippedToBounds="True" WidthRequest="120">
-                                        <Image Source="https://source.unsplash.com/user/c_v_r/1900x800" HeightRequest="150"></Image>
+                                        <Image Source="loooogin" HeightRequest="150"></Image>
                                     </Frame>
                                 </StackLayout>
 

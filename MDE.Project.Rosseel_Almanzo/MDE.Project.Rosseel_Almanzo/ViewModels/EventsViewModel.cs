@@ -17,7 +17,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
         private ObservableCollection<Event> events;
         private ObservableCollection<Domain.Models.Image> images;
-        private Event selectedEvent;
+        //private Event selectedEvent;
 
         public ObservableCollection<Domain.Models.Image> Images 
         { 

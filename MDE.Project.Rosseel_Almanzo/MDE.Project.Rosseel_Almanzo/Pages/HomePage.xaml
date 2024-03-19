@@ -3,47 +3,50 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.HomePage"
              NavigationPage.HasBackButton="False"
-             Title="Home">
+             Title="Home"
+             BackgroundImageSource="treeriver">
     <ContentPage.Content>
-        <ScrollView>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="200"></RowDefinition>
-                    <RowDefinition Height="100"></RowDefinition>
-                    <RowDefinition Height="100"></RowDefinition>
-                    <RowDefinition Height="100"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.Padding>20,0,0,0</Grid.Padding>
+        <StackLayout>
+            <ScrollView>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200"></RowDefinition>
+                        <RowDefinition Height="100"></RowDefinition>
+                        <RowDefinition Height="100"></RowDefinition>
+                        <RowDefinition Height="100"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.Padding>20,0,0,0</Grid.Padding>
 
-                <Frame Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="30" Padding="0,0,30,0">
-                    <Label Text="SniffHikes" FontSize="50" HorizontalOptions="CenterAndExpand" FontFamily="Verdana"></Label>
-                </Frame>
-
-                <StackLayout Grid.Column="0" Grid.Row="1">
-                    <Frame Padding="0" CornerRadius="75" IsClippedToBounds="True" HeightRequest="200">
-                        <Image Source="https://source.unsplash.com/user/c_v_r/1900x800"></Image>
+                    <Frame Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="30" Padding="0,0,30,0" BackgroundColor="Transparent">
+                        <Label Text="SniffHikes" FontSize="50" HorizontalOptions="CenterAndExpand" TextColor="LimeGreen" ></Label>
                     </Frame>
-                </StackLayout>
-                <Button Grid.Column="1" Grid.Row="1" Text="Evenementen" Command="{Binding EventsCommand}"></Button>
 
-                <StackLayout Grid.Column="0" Grid.Row="2">
-                    <Frame Padding="0" CornerRadius="75" IsClippedToBounds="True" HeightRequest="200">
-                        <Image Source="https://source.unsplash.com/user/c_v_r/1900x800"></Image>
-                    </Frame>
-                </StackLayout>
-                <Button Grid.Column="1" Grid.Row="2" Text="Wandelroutes" Command="{Binding RoutesCommand}"></Button>
+                    <StackLayout Grid.Column="0" Grid.Row="1">
+                        <Frame Padding="0" CornerRadius="75" IsClippedToBounds="True" HeightRequest="200" BorderColor="Black">
+                            <Image Source="inca"></Image>
+                        </Frame>
+                    </StackLayout>
+                    <Button Grid.Column="1" Grid.Row="1" Text="Evenementen" Command="{Binding EventsCommand}"></Button>
 
-                <StackLayout Grid.Column="0" Grid.Row="3">
-                    <Frame Padding="0" CornerRadius="75" IsClippedToBounds="True" HeightRequest="200">
-                        <Image Source="https://source.unsplash.com/user/c_v_r/1900x800"></Image>
-                    </Frame>
-                </StackLayout>
-                <Button Grid.Column="1" Grid.Row="3" Text="Losloopzone's" Command="{Binding ZonesCommand}"></Button>
-            </Grid>
-        </ScrollView>
+                    <StackLayout Grid.Column="0" Grid.Row="2">
+                        <Frame Padding="0" CornerRadius="75" IsClippedToBounds="True" HeightRequest="200" BorderColor="White">
+                            <Image Source="login"></Image>
+                        </Frame>
+                    </StackLayout>
+                    <Button Grid.Column="1" Grid.Row="2" Text="Wandelroutes" Command="{Binding RoutesCommand}"></Button>
+
+                    <StackLayout Grid.Column="0" Grid.Row="3">
+                        <Frame Padding="0" CornerRadius="75" IsClippedToBounds="True" HeightRequest="200">
+                            <Image Source="Apanorama"></Image>
+                        </Frame>
+                    </StackLayout>
+                    <Button Grid.Column="1" Grid.Row="3" Text="Losloopzone's" Command="{Binding ZonesCommand}"></Button>
+                </Grid>
+            </ScrollView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
