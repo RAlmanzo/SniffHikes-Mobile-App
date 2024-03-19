@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Threading.Tasks;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +25,11 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                     City = "La Roche-en-Ardenne",
                     Country = "België",
                     DateEvent = DateTime.Now.AddDays(7),
+                    Images = new Image[]
+                    {
+                        new Image{Title="first image", UrlPath ="AFreedomPath"},
+                        new Image{Title="Second image", UrlPath="https://source.unsplash.com/user/c_v_r/1900x800"}
+                    }
                 },
                 new Event
                 {
@@ -66,6 +72,12 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         public async Task<Event> GetEventByIdAsync(int id)
         {
             return await Task.FromResult(_events.FirstOrDefault(e => e.Id == id));
+        }
+
+        public async Task<List<Image>> GetEventImagesAsync(int id)
+        {
+            var selectedEvent = await GetEventByIdAsync(id);
+            return (List<Image>)await Task.FromResult(selectedEvent.Images);
         }
     }
 }

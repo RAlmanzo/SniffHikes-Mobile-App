@@ -1,25 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MDE.Project.Rosseel_Almanzo.Pages.LoginPage">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="MDE.Project.Rosseel_Almanzo.Pages.LoginPage"
+             BackgroundImageSource="loooogin">
     <ContentPage.Content>
         <ScrollView>
             <Grid>
-                <Image Source="https://source.unsplash.com/user/c_v_r/1900x800" Aspect="AspectFill" WidthRequest="400" HeightRequest="800"></Image>
                 <StackLayout>
                     <Frame BackgroundColor="Transparent">
-                        <Label Text="Login" FontSize="60" HorizontalTextAlignment="Center" Padding="0,50,0,50" TextColor="LimeGreen"></Label>
+                        <Label Text="Login" FontSize="80" HorizontalTextAlignment="Center" Padding="0,0,0,50" TextColor="LimeGreen" FontFamily="bolt"></Label>
                     </Frame>
                     <StackLayout WidthRequest="350" HorizontalOptions="Center">
-                        <Label Text="Email" TextColor="LimeGreen"></Label>
-                        <Entry Text="{Binding Email}" TextColor="LimeGreen" Placeholder="example@gmail.com" PlaceholderColor="AntiqueWhite"></Entry>
+                        <Label Text="Email" TextColor="white" FontSize="25"></Label>
+                        <Entry Text="{Binding Email}" TextColor="White" Placeholder="example@gmail.com" PlaceholderColor="White"></Entry>
                     </StackLayout>
                     <StackLayout WidthRequest="350" HorizontalOptions="Center">
-                        <Label Text="Password" Padding="0,25,0,0" TextColor="LimeGreen"></Label>
-                        <Entry IsPassword="True" Text="{Binding Password}" TextColor="LimeGreen" Placeholder="............." PlaceholderColor="AntiqueWhite"></Entry>
+                        <Label Text="Password" Padding="0,25,0,0" TextColor="White" FontSize="25"></Label>
+                        <Entry IsPassword="True" Text="{Binding Password}" TextColor="White" Placeholder="............." PlaceholderColor="White"></Entry>
                     </StackLayout>
 
-                    <StackLayout Margin="50">
+                    <StackLayout Margin="50,150,50,0">
                         <Button Text="Login" Command="{Binding LoginCommand}"></Button>
                         <Button Text="Register" Command="{Binding RegisterCommand}" Style="{StaticResource btnPrimary}"></Button>
                     </StackLayout>

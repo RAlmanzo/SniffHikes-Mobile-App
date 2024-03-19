@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace MDE.Project.Rosseel_Almanzo.Pages
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : FlyoutPage
     {
         public MainPage()
         {

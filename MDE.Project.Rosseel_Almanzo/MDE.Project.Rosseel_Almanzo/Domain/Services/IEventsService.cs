@@ -10,5 +10,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
     {
         Task<Event> GetEventByIdAsync(int id);
         Task<List<Event>> GetAllEvents();
+        Task<List<Image>> GetEventImagesAsync(int id);
     }
 }

@@ -13,13 +13,13 @@ namespace MDE.Project.Rosseel_Almanzo.Pages
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class RegisterPage : ContentPage
 	{
-		private RegisterViewModel _viewModel;
+		//private RegisterViewModel _viewModel;
 
 		public RegisterPage ()
 		{
 			InitializeComponent ();
-			_viewModel = new RegisterViewModel();
-			BindingContext = _viewModel;
+			//_viewModel = new RegisterViewModel();
+			//BindingContext = _viewModel;
 		}
 	}
 }
