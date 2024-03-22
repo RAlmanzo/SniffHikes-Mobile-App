@@ -18,7 +18,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    await CoreMethods.PushPageModel<MainViewModel>();
+                    await CoreMethods.PushPageModel<HomeViewModel>();
                 });
             }
         }
