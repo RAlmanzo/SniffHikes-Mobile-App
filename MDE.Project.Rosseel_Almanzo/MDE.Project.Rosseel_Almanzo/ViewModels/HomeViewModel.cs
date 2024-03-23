@@ -44,5 +44,16 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 });
             }
         }
+
+        public ICommand RoutesCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<RoutesViewModel>();
+                });
+            }
+        }
     }
 }
