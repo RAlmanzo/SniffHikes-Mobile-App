@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDE.Project.Rosseel_Almanzo.Pages.MyRoutesPage"
+             Title="MyEvents" 
+             IconImageSource="AFreedomPath" 
+             BackgroundImageSource="bluesky">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Created" Style="{StaticResource switchLabelStyle}"></Label>
+                <Switch/>
+                <Label Text="Registered" Style="{StaticResource switchLabelStyle}"></Label>
+                <Switch/>
+            </StackLayout>
+
+
+            <ListView x:Name="lstItems" ItemsSource="{Binding Routes}" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Style="{StaticResource baseFrameStyle}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="50"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.Padding>0,20,0,0</Grid.Padding>
+
+                                    <StackLayout Orientation="Horizontal" Padding="15" Grid.Column="0" Grid.Row="1">
+                                        <Frame Style="{StaticResource baseImageFrameStyle}">
+                                            <Image Source="https://source.unsplash.com/user/c_v_r/1900x800" Style="{StaticResource baseImageStyle}"></Image>
+                                        </Frame>
+                                    </StackLayout>
+
+                                    <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Title}" FontSize="20" Padding="25,0,0,0" TextDecorations="Underline" Style="{StaticResource baseLabelStyle}"></Label>
+                                    <Label Grid.Row="1" Grid.Column="1"  Text="{Binding Description}" FontSize="Subtitle" Style="{StaticResource baseLabelStyle}"></Label>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
