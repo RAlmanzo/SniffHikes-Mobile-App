@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace MDE.Project.Rosseel_Almanzo.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RoutesPage : ContentPage
+    public partial class RoutesPage : TabbedPage
     {
         public RoutesPage()
         {
