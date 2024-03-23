@@ -1,12 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MDE.Project.Rosseel_Almanzo.Pages.RoutesPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="MDE.Project.Rosseel_Almanzo.Pages.RoutesPage"
+            xmlns:local="clr-namespace:MDE.Project.Rosseel_Almanzo.Pages"
+            NavigationPage.HasNavigationBar="true"
+            BarBackgroundColor="Black"
+            SelectedTabColor="LimeGreen"
+            UnselectedTabColor="White"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom">       
+    <ContentPage Title="Routes" 
+             IconImageSource="AFreedomPath" 
+             BackgroundImageSource="bluesky">
+        <ListView x:Name="lstItems" ItemsSource="{Binding Routes}" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame Style="{StaticResource baseFrameStyle}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.Padding>0,20,0,0</Grid.Padding>
+
+                                <StackLayout Orientation="Horizontal" Padding="15" Grid.Column="0" Grid.Row="1">
+                                    <Frame Style="{StaticResource baseImageFrameStyle}">
+                                        <Image Source="loooogin" Style="{StaticResource baseImageStyle}"></Image>
+                                    </Frame>
+                                </StackLayout>
+
+                                <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Title}" Style="{StaticResource baseLabelStyle}" FontSize="20" Padding="25,0,0,0" TextDecorations="Underline"></Label>
+                                <Label Grid.Row="1" Grid.Column="1"  Text="{Binding Description}" FontSize="Subtitle" Style="{StaticResource baseLabelStyle}"></Label>
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage>
+
+    <!--
+    <local:MyRoutesPage></local:MyRoutesPage>
+    <local:CreateRoutePage></local:CreateRoutePage>
+    -->
+
 </TabbedPage>
