@@ -4,13 +4,13 @@
     x:Class="MDE.Project.Rosseel_Almanzo.Pages.MyEventsPage"
     Title="MyEvents" 
     IconImageSource="AFreedomPath" 
-    BackgroundColor="Black">
+    BackgroundImageSource="bluesky">
     <StackLayout>
         <StackLayout Orientation="Horizontal">
-            <Label Text="Created" TextColor="LimeGreen"></Label>
-            <Switch IsToggled="False" ThumbColor="White" OnColor="LimeGreen"/>
-            <Label Text="Registered" TextColor="LimeGreen"></Label>
-            <Switch IsToggled="False" ThumbColor="White" OnColor="LimeGreen"/>
+            <Label Text="Created" Style="{StaticResource switchLabelStyle}"></Label>
+            <Switch/>
+            <Label Text="Registered" Style="{StaticResource switchLabelStyle}"></Label>
+            <Switch/>
         </StackLayout>
 
 
@@ -18,7 +18,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Frame BorderColor="LimeGreen" BackgroundColor="Black" CornerRadius="50" Padding="0" Margin="10" HasShadow="True">
+                        <Frame Style="{StaticResource baseFrameStyle}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="150" />
@@ -31,13 +31,13 @@
                                 <Grid.Padding>0,20,0,0</Grid.Padding>
 
                                 <StackLayout Orientation="Horizontal" Padding="15" Grid.Column="0" Grid.Row="1">
-                                    <Frame Padding="0" CornerRadius="50" IsClippedToBounds="True" WidthRequest="120">
-                                        <Image Source="https://source.unsplash.com/user/c_v_r/1900x800" HeightRequest="150"></Image>
+                                    <Frame Style="{StaticResource baseImageFrameStyle}">
+                                        <Image Source="https://source.unsplash.com/user/c_v_r/1900x800" Style="{StaticResource baseImageStyle}"></Image>
                                     </Frame>
                                 </StackLayout>
 
-                                <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Title}" FontSize="20" Padding="25,0,0,0" TextDecorations="Underline" TextColor="LimeGreen"></Label>
-                                <Label Grid.Row="1" Grid.Column="1"  Text="{Binding Description}" FontSize="Subtitle" TextColor="LimeGreen"></Label>
+                                <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Title}" FontSize="20" Padding="25,0,0,0" TextDecorations="Underline" Style="{StaticResource baseLabelStyle}"></Label>
+                                <Label Grid.Row="1" Grid.Column="1"  Text="{Binding Description}" FontSize="Subtitle" Style="{StaticResource baseLabelStyle}"></Label>
                             </Grid>
                         </Frame>
                     </ViewCell>

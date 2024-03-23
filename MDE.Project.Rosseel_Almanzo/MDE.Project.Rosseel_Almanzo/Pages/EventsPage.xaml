@@ -17,7 +17,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Frame BorderColor="LimeGreen" BackgroundColor="#70FFFFFF" CornerRadius="50" Padding="0" Margin="10" HasShadow="True">
+                        <Frame Style="{StaticResource baseFrameStyle}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="150" />
@@ -30,13 +30,13 @@
                                 <Grid.Padding>0,20,0,0</Grid.Padding>
 
                                 <StackLayout Orientation="Horizontal" Padding="15" Grid.Column="0" Grid.Row="1">
-                                    <Frame Padding="0" CornerRadius="50" IsClippedToBounds="True" WidthRequest="120">
-                                        <Image Source="loooogin" HeightRequest="150"></Image>
+                                    <Frame Style="{StaticResource baseImageFrameStyle}">
+                                        <Image Source="loooogin" Style="{StaticResource baseImageStyle}"></Image>
                                     </Frame>
                                 </StackLayout>
 
-                                <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Title}" FontSize="20" Padding="25,0,0,0" TextDecorations="Underline" TextColor="Black"></Label>
-                                <Label Grid.Row="1" Grid.Column="1"  Text="{Binding Description}" FontSize="Subtitle" TextColor="Black"></Label>
+                                <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Title}" Style="{StaticResource baseLabelStyle}" FontSize="20" Padding="25,0,0,0" TextDecorations="Underline"></Label>
+                                <Label Grid.Row="1" Grid.Column="1"  Text="{Binding Description}" FontSize="Subtitle" Style="{StaticResource baseLabelStyle}"></Label>
                             </Grid>
                         </Frame>
                     </ViewCell>
