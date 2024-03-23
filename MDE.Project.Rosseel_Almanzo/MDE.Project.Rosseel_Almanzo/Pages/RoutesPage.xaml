@@ -45,9 +45,5 @@
     </ContentPage>
 
     <local:MyRoutesPage></local:MyRoutesPage>
-    <!--
-    
     <local:CreateRoutePage></local:CreateRoutePage>
-    -->
-
 </TabbedPage>
