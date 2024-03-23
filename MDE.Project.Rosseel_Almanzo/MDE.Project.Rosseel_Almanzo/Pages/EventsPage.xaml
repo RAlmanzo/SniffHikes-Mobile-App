@@ -12,12 +12,12 @@
     <!--Pages can be added as references or inline-->
     <ContentPage Title="Events" 
                  IconImageSource="AFreedomPath" 
-                 BackgroundColor="Black">
+                 BackgroundImageSource="bluesky">
         <ListView x:Name="lstItems" ItemsSource="{Binding Events}" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Frame BorderColor="LimeGreen" BackgroundColor="Black" CornerRadius="50" Padding="0" Margin="10" HasShadow="True">
+                        <Frame BorderColor="LimeGreen" BackgroundColor="#70FFFFFF" CornerRadius="50" Padding="0" Margin="10" HasShadow="True">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="150" />
@@ -35,8 +35,8 @@
                                     </Frame>
                                 </StackLayout>
 
-                                <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Title}" FontSize="20" Padding="25,0,0,0" TextDecorations="Underline" TextColor="LimeGreen"></Label>
-                                <Label Grid.Row="1" Grid.Column="1"  Text="{Binding Description}" FontSize="Subtitle" TextColor="LimeGreen"></Label>
+                                <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Title}" FontSize="20" Padding="25,0,0,0" TextDecorations="Underline" TextColor="Black"></Label>
+                                <Label Grid.Row="1" Grid.Column="1"  Text="{Binding Description}" FontSize="Subtitle" TextColor="Black"></Label>
                             </Grid>
                         </Frame>
                     </ViewCell>
