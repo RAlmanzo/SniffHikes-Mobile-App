@@ -1,19 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MDE.Project.Rosseel_Almanzo.Pages.EventsPage"
-             xmlns:local="clr-namespace:MDE.Project.Rosseel_Almanzo.Pages"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="MDE.Project.Rosseel_Almanzo.Pages.RoutesPage"
+            xmlns:local="clr-namespace:MDE.Project.Rosseel_Almanzo.Pages"
             NavigationPage.HasNavigationBar="true"
             BarBackgroundColor="Black"
             SelectedTabColor="LimeGreen"
             UnselectedTabColor="White"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-            android:TabbedPage.ToolbarPlacement="Bottom">
-    <!--Pages can be added as references or inline-->
-    <ContentPage Title="Events" 
-                 IconImageSource="AFreedomPath" 
-                 BackgroundImageSource="bluesky.jpg">
-        <ListView x:Name="lstItems" ItemsSource="{Binding Events}" HasUnevenRows="True">
+            android:TabbedPage.ToolbarPlacement="Bottom">       
+    <ContentPage Title="Routes" 
+             IconImageSource="AFreedomPath" 
+             BackgroundImageSource="bluesky">
+        <ListView x:Name="lstItems" ItemsSource="{Binding Routes}" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -31,7 +30,7 @@
 
                                 <StackLayout Orientation="Horizontal" Padding="15" Grid.Column="0" Grid.Row="1">
                                     <Frame Style="{StaticResource baseImageFrameStyle}">
-                                        <Image Source="loooogin.jpg" Style="{StaticResource baseImageStyle}"></Image>
+                                        <Image Source="dog.jpg" Style="{StaticResource baseImageStyle}"></Image>
                                     </Frame>
                                 </StackLayout>
 
@@ -45,6 +44,6 @@
         </ListView>
     </ContentPage>
 
-    <local:MyEventsPage></local:MyEventsPage>
-    <local:CreateEventPage></local:CreateEventPage>
+    <local:MyRoutesPage></local:MyRoutesPage>
+    <local:CreateRoutePage></local:CreateRoutePage>
 </TabbedPage>
