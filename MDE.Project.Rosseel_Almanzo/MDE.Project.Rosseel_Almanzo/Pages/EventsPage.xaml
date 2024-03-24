@@ -12,7 +12,7 @@
     <!--Pages can be added as references or inline-->
     <ContentPage Title="Events" 
                  IconImageSource="AFreedomPath" 
-                 BackgroundImageSource="bluesky">
+                 BackgroundImageSource="bluesky.jpg">
         <ListView x:Name="lstItems" ItemsSource="{Binding Events}" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -31,7 +31,7 @@
 
                                 <StackLayout Orientation="Horizontal" Padding="15" Grid.Column="0" Grid.Row="1">
                                     <Frame Style="{StaticResource baseImageFrameStyle}">
-                                        <Image Source="loooogin" Style="{StaticResource baseImageStyle}"></Image>
+                                        <Image Source="loooogin.jpg" Style="{StaticResource baseImageStyle}"></Image>
                                     </Frame>
                                 </StackLayout>
 
