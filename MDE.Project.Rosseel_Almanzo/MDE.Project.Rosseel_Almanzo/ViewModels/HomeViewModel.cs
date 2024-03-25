@@ -20,8 +20,18 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
             if (!Application.Current.Properties.ContainsKey(ISLOGGED))
             {
+
                 CoreMethods.PushPageModel<LoginViewModel>();
             }
+            else
+            {
+                bool isLoggedIn = Convert.ToBoolean(Application.Current.Properties[ISLOGGED]);
+                if(!isLoggedIn)
+                {
+                    CoreMethods.PushPageModel<LoginViewModel>();
+                }
+            }
+
         }
 
         public ICommand HomeCommand
@@ -52,6 +62,17 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command(async () =>
                 {
                     await CoreMethods.PushPageModel<RoutesViewModel>();
+                });
+            }
+        }
+
+        public ICommand ZonesCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<ZonesViewModel>();
                 });
             }
         }
