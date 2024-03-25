@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace MDE.Project.Rosseel_Almanzo.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ZonesPage : TabbedPage
+    public partial class ZonesPage : ContentPage
     {
         public ZonesPage()
         {
