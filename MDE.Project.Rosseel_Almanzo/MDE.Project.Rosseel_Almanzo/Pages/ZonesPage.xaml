@@ -43,12 +43,4 @@
             </ListView.ItemTemplate>
         </ListView>
     </ContentPage>
-
-    <local:MyZonesPage></local:MyZonesPage>
-
-    <!--
-        
-        <local:CreateRoutePage></local:CreateRoutePage>
-    -->
-    
 </TabbedPage>
