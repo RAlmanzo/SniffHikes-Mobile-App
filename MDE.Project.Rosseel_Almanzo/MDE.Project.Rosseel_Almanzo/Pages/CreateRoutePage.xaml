@@ -4,7 +4,7 @@
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.CreateRoutePage"
              Title="Create"
              IconImageSource="AFreedomPath" 
-             BackgroundImageSource="bluesky">
+             BackgroundImageSource="bluesky.jpg">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>

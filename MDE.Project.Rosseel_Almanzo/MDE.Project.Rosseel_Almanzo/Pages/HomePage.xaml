@@ -4,7 +4,7 @@
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.HomePage"
              NavigationPage.HasBackButton="False"
              Title="Home"
-             BackgroundImageSource="treeriver">
+             BackgroundImageSource="login.jpg">
     <ContentPage.Content>
         <StackLayout>
             <ScrollView>
