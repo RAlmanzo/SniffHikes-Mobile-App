@@ -4,7 +4,7 @@
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.MyRoutesPage"
              Title="MyRoutes" 
              IconImageSource="AFreedomPath" 
-             BackgroundImageSource="bluesky">
+             BackgroundImageSource="bluesky.jpg">
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Horizontal">

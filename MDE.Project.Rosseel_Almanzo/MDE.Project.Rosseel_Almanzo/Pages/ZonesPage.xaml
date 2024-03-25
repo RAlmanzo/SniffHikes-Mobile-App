@@ -1,18 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            x:Class="MDE.Project.Rosseel_Almanzo.Pages.RoutesPage"
-            xmlns:local="clr-namespace:MDE.Project.Rosseel_Almanzo.Pages"
-            NavigationPage.HasNavigationBar="true"
-            BarBackgroundColor="Black"
-            SelectedTabColor="LimeGreen"
-            UnselectedTabColor="White"
-            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-            android:TabbedPage.ToolbarPlacement="Bottom">       
-    <ContentPage Title="Routes" 
-             IconImageSource="AFreedomPath" 
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDE.Project.Rosseel_Almanzo.Pages.ZonesPage"
+             Title="Zones"
              BackgroundImageSource="bluesky.jpg">
-        <ListView x:Name="lstItems" ItemsSource="{Binding Routes}" HasUnevenRows="True">
+    <ContentPage.Content>
+        <ListView x:Name="lstItems" ItemsSource="{Binding Zones}" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -42,8 +35,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </ContentPage>
-
-    <local:MyRoutesPage></local:MyRoutesPage>
-    <local:CreateRoutePage></local:CreateRoutePage>
-</TabbedPage>
+    </ContentPage.Content>
+</ContentPage>
