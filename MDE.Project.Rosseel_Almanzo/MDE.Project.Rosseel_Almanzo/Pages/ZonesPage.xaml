@@ -2,6 +2,7 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             x:Class="MDE.Project.Rosseel_Almanzo.Pages.ZonesPage"
+            xmlns:local="clr-namespace:MDE.Project.Rosseel_Almanzo.Pages"
             NavigationPage.HasNavigationBar="true"
             BarBackgroundColor="Black"
             SelectedTabColor="LimeGreen"
@@ -11,7 +12,7 @@
     <ContentPage Title="Zones" 
          IconImageSource="AFreedomPath" 
          BackgroundImageSource="bluesky.jpg">
-        <ListView x:Name="lstItems" ItemsSource="{Binding Routes}" HasUnevenRows="True">
+        <ListView x:Name="lstItems" ItemsSource="{Binding Zones}" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -43,8 +44,10 @@
         </ListView>
     </ContentPage>
 
+    <local:MyZonesPage></local:MyZonesPage>
+
     <!--
-        <local:MyRoutesPage></local:MyRoutesPage>
+        
         <local:CreateRoutePage></local:CreateRoutePage>
     -->
     

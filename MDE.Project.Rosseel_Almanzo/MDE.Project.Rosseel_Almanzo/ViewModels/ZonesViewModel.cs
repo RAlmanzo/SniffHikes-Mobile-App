@@ -15,7 +15,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     {
         private readonly IEventsService _eventsService;
 
-        private ObservableCollection<Event> routes;
+        private ObservableCollection<Event> zones;
         private ObservableCollection<Domain.Models.Image> images;
         //private Event selectedEvent;
 
@@ -29,13 +29,13 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public ObservableCollection<Event> Routes
+        public ObservableCollection<Event> Zones
         {
-            get => routes;
+            get => zones;
             set
             {
-                routes = value;
-                RaisePropertyChanged(nameof(Routes));
+                zones = value;
+                RaisePropertyChanged(nameof(Zones));
             }
         }
 
@@ -58,7 +58,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 {
                     //List<Domain.Models.Image> images = await _eventsService.GetEventImagesByEventIdAsync();
                     List<Event> fetchedEvents = await _eventsService.GetAllEvents();
-                    Routes = new ObservableCollection<Event>(fetchedEvents);
+                    Zones = new ObservableCollection<Event>(fetchedEvents);
                 });
             }
         }
