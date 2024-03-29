@@ -13,6 +13,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     public class HomeViewModel : FreshBasePageModel
     {
         private const string ISLOGGED = "islogged";
+        private readonly bool isLogged = false;
 
         protected override void ViewIsAppearing(object sender, EventArgs e)
         {
@@ -25,8 +26,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
             else
             {
-                bool isLoggedIn = Convert.ToBoolean(Application.Current.Properties[ISLOGGED]);
-                if(!isLoggedIn)
+                if (Convert.ToBoolean(Application.Current.Properties[ISLOGGED]) == isLogged)
                 {
                     CoreMethods.PushPageModel<LoginViewModel>();
                 }
