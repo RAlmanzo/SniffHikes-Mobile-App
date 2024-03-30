@@ -13,11 +13,23 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
     public class ZonesViewModel : FreshBasePageModel
     {
-        private readonly IEventsService _eventsService;
+        private readonly IZonesService _zonesService;
 
-        private ObservableCollection<Event> zones;
+        private ObservableCollection<Zone> zones;
         private ObservableCollection<Domain.Models.Image> images;
-        //private Event selectedEvent;
+        private Zone selectedZone;
+
+        public Zone SelectedZone
+        {
+            get => selectedZone;
+            set
+            {
+                selectedZone = value;
+
+                // RaisePropertyChanged(nameof(SelectedItem));
+                GoToDetailPage.Execute(null);
+            }
+        }
 
         public ObservableCollection<Domain.Models.Image> Images
         {
@@ -29,7 +41,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public ObservableCollection<Event> Zones
+        public ObservableCollection<Zone> Zones
         {
             get => zones;
             set
@@ -41,7 +53,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
         public ZonesViewModel()
         {
-            _eventsService = new MockEventsService();
+            _zonesService = new MockZonesService();
         }
 
         public override void Init(object initData)
@@ -57,8 +69,20 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command(async () =>
                 {
                     //List<Domain.Models.Image> images = await _eventsService.GetEventImagesByEventIdAsync();
-                    List<Event> fetchedEvents = await _eventsService.GetAllEventsAsync();
-                    Zones = new ObservableCollection<Event>(fetchedEvents);
+                    List<Zone> fetchedEvents = await _zonesService.GetAllZonesAsync();
+                    Zones = new ObservableCollection<Zone>(fetchedEvents);
+                });
+            }
+        }
+
+        public ICommand GoToDetailPage
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (SelectedZone != null)
+                        await CoreMethods.PushPageModel<ZoneDetailsViewModel>(SelectedZone.Id, false, true);
                 });
             }
         }
