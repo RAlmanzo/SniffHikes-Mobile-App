@@ -17,7 +17,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
         private ObservableCollection<Event> events;
         private ObservableCollection<Domain.Models.Image> images;
-        //private Event selectedEvent;
+        private Event selectedEvent;
 
         public ObservableCollection<Domain.Models.Image> Images 
         { 
@@ -56,9 +56,33 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    //List<Domain.Models.Image> images = await _eventsService.GetEventImagesByEventIdAsync();
+                    //Images = await _eventsService.GetEventImagesByEventIdAsync();
                     List<Event> fetchedEvents = await _eventsService.GetAllEvents();
                     Events = new ObservableCollection<Event>(fetchedEvents);
+                });
+            }
+        }
+
+        public Event SelectedEvent
+        {
+            get => selectedEvent;
+            set
+            {
+                selectedEvent = value;
+
+                // RaisePropertyChanged(nameof(SelectedItem));
+                GoToDetailPage.Execute(null);
+            }
+        }
+
+        public ICommand GoToDetailPage
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (SelectedEvent != null)
+                        await CoreMethods.PushPageModel<EventDetailViewModel>(SelectedEvent.Id, false, true);
                 });
             }
         }
