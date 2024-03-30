@@ -14,5 +14,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Models
         public string City { get; set; }
         public string Country { get; set; }
         public DateTime DateEvent { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
     }
 }
