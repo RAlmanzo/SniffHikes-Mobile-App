@@ -13,11 +13,23 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
     public class RoutesViewModel : FreshBasePageModel
     {
-        private readonly IEventsService _eventsService;
+        private readonly IRoutesService _routesService;
 
-        private ObservableCollection<Event> routes;
+        private ObservableCollection<Route> routes;
         private ObservableCollection<Domain.Models.Image> images;
-        //private Event selectedEvent;
+        private Route selectedRoute;
+
+        public Route SelectedRoute
+        {
+            get => selectedRoute;
+            set
+            {
+                selectedRoute = value;
+
+                // RaisePropertyChanged(nameof(SelectedItem));
+                GoToDetailPage.Execute(null);
+            }
+        }
 
         public ObservableCollection<Domain.Models.Image> Images
         {
@@ -29,7 +41,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public ObservableCollection<Event> Routes
+        public ObservableCollection<Route> Routes
         {
             get => routes;
             set
@@ -41,7 +53,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
         public RoutesViewModel()
         {
-            _eventsService = new MockEventsService();
+            _routesService = new MockRoutesService();
         }
 
         public override void Init(object initData)
@@ -50,15 +62,26 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             RefreshData.Execute(null);
         }
 
+        public ICommand GoToDetailPage
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (SelectedRoute != null)
+                        await CoreMethods.PushPageModel<RouteDetailsViewModel>(SelectedRoute.Id, false, true);
+                });
+            }
+        }
+
         public ICommand RefreshData
         {
             get
             {
                 return new Command(async () =>
                 {
-                    //List<Domain.Models.Image> images = await _eventsService.GetEventImagesByEventIdAsync();
-                    List<Event> fetchedEvents = await _eventsService.GetAllEventsAsync();
-                    Routes = new ObservableCollection<Event>(fetchedEvents);
+                    List<Route> fetchedRoutes = await _routesService.GetAllRoutesAsync();
+                    Routes = new ObservableCollection<Route>(fetchedRoutes);
                 });
             }
         }
