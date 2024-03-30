@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
-    internal class CreateRouteViewModel : FreshBasePageModel
+    public class CreateRouteViewModel : FreshBasePageModel
     {
     }
 }
