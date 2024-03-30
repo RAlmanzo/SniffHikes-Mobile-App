@@ -5,7 +5,7 @@
              Title="Zones"
              BackgroundImageSource="sky.jpg">
     <ContentPage.Content>
-        <ListView x:Name="lstItems" ItemsSource="{Binding Zones}" HasUnevenRows="True">
+        <ListView x:Name="lstItems" ItemsSource="{Binding Zones}" HasUnevenRows="True" SelectedItem="{Binding SelectedZone}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
