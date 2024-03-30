@@ -15,7 +15,7 @@
             </StackLayout>
 
 
-            <ListView x:Name="lstItems" ItemsSource="{Binding Routes}" HasUnevenRows="True">
+            <ListView x:Name="lstItems" ItemsSource="{Binding Routes}" HasUnevenRows="True" SelectedItem="{Binding SelectedRoute}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

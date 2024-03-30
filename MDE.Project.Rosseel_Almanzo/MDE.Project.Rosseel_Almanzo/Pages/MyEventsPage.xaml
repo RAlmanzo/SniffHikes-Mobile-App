@@ -14,7 +14,7 @@
         </StackLayout>
 
 
-        <ListView x:Name="lstItems" ItemsSource="{Binding MyEvents}" HasUnevenRows="True">
+        <ListView x:Name="lstItems" ItemsSource="{Binding MyEvents}" HasUnevenRows="True" SelectedItem="{Binding SelectedEvent}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

@@ -19,7 +19,7 @@
                 </StackLayout>
                 <StackLayout Style="{StaticResource baseFormStyle}">
                     <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GetRouteDescription}" />
+                        <TapGestureRecognizer Command="{Binding GetEventDescription}" />
                     </StackLayout.GestureRecognizers>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="{Binding Street}" Style="{StaticResource baseLabelStyle}"></Label>
