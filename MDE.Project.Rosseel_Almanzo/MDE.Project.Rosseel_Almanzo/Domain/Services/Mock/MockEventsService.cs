@@ -19,6 +19,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 new Event
                 {
                     Id = 1,
+                    OrginazerId = 1,
                     Title = "Ardennen Boswandeling",
                     Description = "Verken de prachtige bossen van de Ardennen.Verken de prachtige bossen van de Ardennen.Verken de prachtige bossen van de Ardennen.Verken de prachtige bossen van de Ardennen.",
                     Street = "Ardennenstraat 123",
@@ -44,6 +45,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 new Event
                 {
                     Id = 2,
+                    OrginazerId = 1,
                     Title = "Kustpad Ontdekkingstocht",
                     Description = "Wandel langs de schilderachtige kustpaden en geniet van de zeebries.",
                     Street = "Zeepromenade 456",
@@ -69,6 +71,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 new Event
                 {
                     Id = 3,
+                    OrginazerId = 2,
                     Title = "Hoge Venen Natuurwandeling",
                     Description = "Ontdek de unieke flora en fauna van de Hoge Venen.",
                     Street = "Venengebied 789",
@@ -94,6 +97,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 new Event
                 {
                     Id = 4,
+                    OrginazerId = 3,
                     Title = "Groene Kempen Tocht",
                     Description = "Wandel door de groene landschappen van de Kempen-regio.",
                     Street = "Kempenweg 101",
@@ -119,14 +123,27 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             };
         }
 
+        public Task<bool> CreateEventAsync(Event newEvent)
+        {
+            try
+            {
+                _events.Add(newEvent);
+                return Task.FromResult(true);
+            }
+            catch
+            {
+                return Task.FromResult(false);
+            }
+        }
+
         public async Task<List<Event>> GetAllEventsAsync()
         {
             return await Task.FromResult(_events);
         }
 
-        public Task<List<Event>> GetAllEventsByUserId(int id)
+        public async Task<List<Event>> GetAllEventsByUserId(int id)
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(_events.Where(e => e.OrginazerId == id).ToList());
         }
 
         public async Task<Event> GetEventByIdAsync(int id)
