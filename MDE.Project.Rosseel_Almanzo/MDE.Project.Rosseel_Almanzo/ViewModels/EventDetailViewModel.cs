@@ -40,6 +40,8 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         public EventDetailViewModel(IEventsService eventsService)
         {
             _eventsService = eventsService;
+            Images = new ObservableCollection<Domain.Models.Image>();
+            Comments = new ObservableCollection<Comment>();
         }
 
         public ObservableCollection<Domain.Models.Image> Images

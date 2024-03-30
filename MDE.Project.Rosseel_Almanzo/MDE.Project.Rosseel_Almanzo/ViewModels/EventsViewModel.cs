@@ -53,6 +53,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         public EventsViewModel()
         {
             _eventsService = new MockEventsService();
+            myEvents = new ObservableCollection<Event>();
         }
 
         public override void Init(object initData)
@@ -96,6 +97,17 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 {
                     if (SelectedEvent != null)
                         await CoreMethods.PushPageModel<EventDetailViewModel>(SelectedEvent.Id, false, true);
+                });
+            }
+        }
+
+        public ICommand GoToCreateEventsPage
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<CreateEventViewModel>();
                 });
             }
         }
