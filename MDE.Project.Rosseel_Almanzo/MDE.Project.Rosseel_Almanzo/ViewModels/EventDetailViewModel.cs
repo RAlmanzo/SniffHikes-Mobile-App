@@ -152,7 +152,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public ICommand GetRouteDescription
+        public ICommand GetEventDescription
         {
             get
             {
