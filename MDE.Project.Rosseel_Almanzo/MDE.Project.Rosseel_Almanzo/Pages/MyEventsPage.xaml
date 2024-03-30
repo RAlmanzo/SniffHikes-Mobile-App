@@ -4,7 +4,7 @@
     x:Class="MDE.Project.Rosseel_Almanzo.Pages.MyEventsPage"
     Title="MyEvents" 
     IconImageSource="AFreedomPath" 
-    BackgroundImageSource="bluesky.jpg">
+    BackgroundImageSource="sky.jpg">
     <StackLayout>
         <StackLayout Orientation="Horizontal">
             <Label Text="Created" Style="{StaticResource switchLabelStyle}"></Label>

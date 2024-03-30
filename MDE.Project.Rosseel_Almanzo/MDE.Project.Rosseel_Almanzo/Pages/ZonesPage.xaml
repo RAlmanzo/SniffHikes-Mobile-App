@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.ZonesPage"
              Title="Zones"
-             BackgroundImageSource="bluesky.jpg">
+             BackgroundImageSource="sky.jpg">
     <ContentPage.Content>
         <ListView x:Name="lstItems" ItemsSource="{Binding Zones}" HasUnevenRows="True">
             <ListView.ItemTemplate>

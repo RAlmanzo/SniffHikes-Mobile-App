@@ -11,7 +11,7 @@
             android:TabbedPage.ToolbarPlacement="Bottom">       
     <ContentPage Title="Routes" 
              IconImageSource="AFreedomPath" 
-             BackgroundImageSource="bluesky.jpg">
+             BackgroundImageSource="sky.jpg">
         <ListView x:Name="lstItems" ItemsSource="{Binding Routes}" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
