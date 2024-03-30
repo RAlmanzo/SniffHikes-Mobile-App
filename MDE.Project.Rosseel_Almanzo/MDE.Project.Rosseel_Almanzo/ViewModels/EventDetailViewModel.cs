@@ -144,8 +144,8 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     City = item.City;
                     Country = item.Country;
                     DateEvent = item.DateEvent;
-                    Images = new ObservableCollection<Domain.Models.Image>(item.Images);
-                    comments = new ObservableCollection<Comment>(item.Comments);
+                    Images = item.Images != null ? new ObservableCollection<Domain.Models.Image>(item.Images) : new ObservableCollection<Domain.Models.Image>();
+                    comments = item.Comments != null ? new ObservableCollection<Comment>(item.Comments) : new ObservableCollection<Comment>();
                 });
             }
         }
