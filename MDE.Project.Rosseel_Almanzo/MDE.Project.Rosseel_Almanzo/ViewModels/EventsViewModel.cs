@@ -16,6 +16,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private readonly IEventsService _eventsService;
 
         private ObservableCollection<Event> events;
+        private ObservableCollection<Event> myEvents;
         private ObservableCollection<Domain.Models.Image> images;
         private Event selectedEvent;
 
@@ -27,6 +28,16 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 images = value;
                 RaisePropertyChanged(nameof(Images));
             } 
+        }
+
+        public ObservableCollection<Event> MyEvents
+        {
+            get => myEvents;
+            set
+            {
+                myEvents = value;
+                RaisePropertyChanged(nameof(MyEvents));
+            }
         }
 
         public ObservableCollection<Event> Events 
@@ -57,8 +68,10 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command(async () =>
                 {
                     //Images = await _eventsService.GetEventImagesByEventIdAsync();
-                    List<Event> fetchedEvents = await _eventsService.GetAllEvents();
+                    List<Event> fetchedEvents = await _eventsService.GetAllEventsAsync();
                     Events = new ObservableCollection<Event>(fetchedEvents);
+                    //List<Event> myEvents = await _eventsService.GetAllEventsByUserId(id);
+                    //Events = new ObservableCollection<Event>(fetchedEvents);
                 });
             }
         }
