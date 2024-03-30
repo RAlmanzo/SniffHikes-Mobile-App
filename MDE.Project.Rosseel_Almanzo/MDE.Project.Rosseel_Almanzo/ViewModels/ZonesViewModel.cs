@@ -57,7 +57,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command(async () =>
                 {
                     //List<Domain.Models.Image> images = await _eventsService.GetEventImagesByEventIdAsync();
-                    List<Event> fetchedEvents = await _eventsService.GetAllEvents();
+                    List<Event> fetchedEvents = await _eventsService.GetAllEventsAsync();
                     Zones = new ObservableCollection<Event>(fetchedEvents);
                 });
             }
