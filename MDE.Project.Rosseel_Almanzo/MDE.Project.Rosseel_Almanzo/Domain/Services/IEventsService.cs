@@ -9,7 +9,9 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
     public interface IEventsService
     {
         Task<Event> GetEventByIdAsync(int id);
-        Task<List<Event>> GetAllEvents();
-        Task<List<Image>> GetEventImagesAsync(int id);
+        Task<List<Event>> GetAllEventsAsync();
+        //Task<List<Image>> GetEventImagesAsync(int id);
+        Task<List<Event>> GetAllEventsByUserId(int id);
+        Task<bool> CreateEventAsync(Event newEvent);
     }
 }

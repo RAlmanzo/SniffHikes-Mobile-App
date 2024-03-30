@@ -4,7 +4,7 @@
     x:Class="MDE.Project.Rosseel_Almanzo.Pages.MyEventsPage"
     Title="MyEvents" 
     IconImageSource="AFreedomPath" 
-    BackgroundImageSource="bluesky.jpg">
+    BackgroundImageSource="sky.jpg">
     <StackLayout>
         <StackLayout Orientation="Horizontal">
             <Label Text="Created" Style="{StaticResource switchLabelStyle}"></Label>
@@ -14,7 +14,7 @@
         </StackLayout>
 
 
-        <ListView x:Name="lstItems" ItemsSource="{Binding Events}" HasUnevenRows="True">
+        <ListView x:Name="lstItems" ItemsSource="{Binding MyEvents}" HasUnevenRows="True" SelectedItem="{Binding SelectedEvent}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

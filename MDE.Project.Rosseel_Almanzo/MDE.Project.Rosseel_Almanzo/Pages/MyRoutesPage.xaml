@@ -4,7 +4,7 @@
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.MyRoutesPage"
              Title="MyRoutes" 
              IconImageSource="AFreedomPath" 
-             BackgroundImageSource="bluesky.jpg">
+             BackgroundImageSource="sky.jpg">
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Horizontal">
@@ -15,7 +15,7 @@
             </StackLayout>
 
 
-            <ListView x:Name="lstItems" ItemsSource="{Binding Routes}" HasUnevenRows="True">
+            <ListView x:Name="lstItems" ItemsSource="{Binding Routes}" HasUnevenRows="True" SelectedItem="{Binding SelectedRoute}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

@@ -7,13 +7,13 @@
             BarBackgroundColor="Black"
             SelectedTabColor="LimeGreen"
             UnselectedTabColor="White"
-            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core" 
             android:TabbedPage.ToolbarPlacement="Bottom">
     <!--Pages can be added as references or inline-->
     <ContentPage Title="Events" 
                  IconImageSource="AFreedomPath" 
-                 BackgroundImageSource="bluesky.jpg">
-        <ListView x:Name="lstItems" ItemsSource="{Binding Events}" HasUnevenRows="True">
+                 BackgroundImageSource="sky.jpg">
+        <ListView x:Name="lstItems" ItemsSource="{Binding Events}" HasUnevenRows="True" SelectedItem="{Binding SelectedEvent}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MDE.Project.Rosseel_Almanzo.Domain.Models
 {
-    public class Event
+    public class Route
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -15,6 +15,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Models
         public string Country { get; set; }
         public DateTime DateEvent { get; set; }
         public IEnumerable<Comment> Comments { get; set; }
-        public int OrginazerId { get; set; }
+        public int OrganizerId { get; set; }
     }
 }

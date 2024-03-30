@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDE.Project.Rosseel_Almanzo.Pages.ZoneDetailsPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="0,10,0,0">
+                <FlexLayout BindableLayout.ItemsSource="{Binding Images}" Wrap="Wrap" JustifyContent="Center">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImagePath}" Aspect="AspectFill" WidthRequest="100" HeightRequest="100" Margin="5"/>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </FlexLayout>
+                <StackLayout Style="{StaticResource baseFormStyle}">
+                    <Label HorizontalOptions="CenterAndExpand" Text="{Binding Title}" Style="{StaticResource formLabelStyle}"></Label>
+                    <Label Text="{Binding Description}" Padding="0,5,0,0" HorizontalOptions="CenterAndExpand" Style="{StaticResource formLabelStyle}"></Label>
+                </StackLayout>
+                <StackLayout Style="{StaticResource baseFormStyle}">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GetRouteDescription}" />
+                    </StackLayout.GestureRecognizers>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{Binding Street}" Style="{StaticResource baseLabelStyle}"></Label>
+                        <Label Text="{Binding City}" Style="{StaticResource baseLabelStyle}"></Label>
+                        <Label Text="{Binding Country}" Style="{StaticResource baseLabelStyle}"></Label>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Date: " Style="{StaticResource baseLabelStyle}"></Label>
+                        <Label Text="{Binding DateEvent}" Style="{StaticResource baseLabelStyle}"></Label>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" BackgroundColor="{StaticResource transparantWhite}">
+                    <Label Text="100" VerticalOptions="CenterAndExpand" Margin="5" FontSize="Medium" TextColor="Black"></Label>
+                    <Label Text=" :Attending people" VerticalOptions="CenterAndExpand" FontSize="Medium" TextColor="Black"></Label>
+                    <Button Text="Sign up" WidthRequest="100" HeightRequest="40" Margin="5,5,0,5" HorizontalOptions="EndAndExpand"></Button>
+                </StackLayout>
+
+                <ListView x:Name="lstItems" ItemsSource="{Binding Comments}" HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame BackgroundColor="{StaticResource transparantWhite}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="50"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.Padding>0,20,0,0</Grid.Padding>
+
+                                        <Label Grid.Row="0" Text="{Binding Content}" FontSize="Subtitle" Style="{StaticResource baseLabelStyle}"></Label>
+                                    </Grid>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

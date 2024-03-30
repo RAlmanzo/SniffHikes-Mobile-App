@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MDE.Project.Rosseel_Almanzo.Domain.Models
 {
-    public class Event
+    public class Zone
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -13,8 +13,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Models
         public string Street { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public DateTime DateEvent { get; set; }
         public IEnumerable<Comment> Comments { get; set; }
-        public int OrginazerId { get; set; }
     }
 }

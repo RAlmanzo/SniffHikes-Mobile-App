@@ -2,30 +2,28 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reactive.Threading.Tasks;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
 {
-    public class MockEventsService : IEventsService
+    public class MockRoutesService : IRoutesService
     {
-        private static List<Event> _events;
-
-        public MockEventsService()
+        public static List<Route> _routes;
+        public MockRoutesService()
         {
-            _events = new List<Event> 
+            _routes = new List<Route>
             {
-                new Event
+                new Route
                 {
                     Id = 1,
-                    OrginazerId = 1,
-                    Title = "Ardennen Boswandeling",
-                    Description = "Verken de prachtige bossen van de Ardennen.Verken de prachtige bossen van de Ardennen.Verken de prachtige bossen van de Ardennen.Verken de prachtige bossen van de Ardennen.",
-                    Street = "Ardennenstraat 123",
+                    Title = "Ardennen Avontuur",
+                    Description = "Verken de prachtige natuur van de Ardennen tijdens deze avontuurlijke wandelroute.",
+                    Street = "Ardennenweg 1",
                     City = "La Roche-en-Ardenne",
                     Country = "België",
-                    DateEvent = DateTime.Now.AddDays(7),
+                    DateEvent = new DateTime(2024, 4, 1),
+                    OrganizerId = 2,
                     Images = new List<Image>
                     {
                         new Image{Title="first image", ImagePath ="AFreedomPath"},
@@ -42,16 +40,16 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                         new Comment { Content = "Wat een fantastisch honden event! Ik heb zoveel leuke mensen ontmoet en mijn hond heeft zich geen moment verveeld. Bedankt aan iedereen die heeft geholpen om dit mogelijk te maken!" },
                     }
                 },
-                new Event
+                new Route
                 {
                     Id = 2,
-                    OrginazerId = 1,
-                    Title = "Kustpad Ontdekkingstocht",
-                    Description = "Wandel langs de schilderachtige kustpaden en geniet van de zeebries.",
-                    Street = "Zeepromenade 456",
-                    City = "Oostende",
+                    Title = "Brugse Binnenstad",
+                    Description = "Ontdek de historische binnenstad van Brugge tijdens deze sfeervolle wandeling langs grachten en middeleeuwse gebouwen.",
+                    Street = "Markt 1",
+                    City = "Brugge",
                     Country = "België",
-                    DateEvent = DateTime.Now.AddDays(14),
+                    DateEvent = new DateTime(2024, 4, 5),
+                    OrganizerId = 3,
                     Images = new List<Image>
                     {
                         new Image{Title="first image", ImagePath ="AFreedomPath"},
@@ -68,16 +66,16 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                         new Comment { Content = "Wat een fantastisch honden event! Ik heb zoveel leuke mensen ontmoet en mijn hond heeft zich geen moment verveeld. Bedankt aan iedereen die heeft geholpen om dit mogelijk te maken!" },
                     }
                 },
-                new Event
+                new Route
                 {
                     Id = 3,
-                    OrginazerId = 2,
-                    Title = "Hoge Venen Natuurwandeling",
-                    Description = "Ontdek de unieke flora en fauna van de Hoge Venen.",
-                    Street = "Venengebied 789",
-                    City = "Eupen",
+                    Title = "Ardennen Uitzicht",
+                    Description = "Geniet van adembenemende uitzichten tijdens deze panoramische wandelroute door de Ardennen.",
+                    Street = "Uitzichtweg 5",
+                    City = "Durbuy",
                     Country = "België",
-                    DateEvent = DateTime.Now.AddDays(21),
+                    DateEvent = new DateTime(2024, 4, 10),
+                    OrganizerId = 4,
                     Images = new List<Image>
                     {
                         new Image{Title="first image", ImagePath ="AFreedomPath"},
@@ -94,16 +92,16 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                         new Comment { Content = "Wat een fantastisch honden event! Ik heb zoveel leuke mensen ontmoet en mijn hond heeft zich geen moment verveeld. Bedankt aan iedereen die heeft geholpen om dit mogelijk te maken!" },
                     }
                 },
-                new Event
+                new Route
                 {
                     Id = 4,
-                    OrginazerId = 3,
-                    Title = "Groene Kempen Tocht",
-                    Description = "Wandel door de groene landschappen van de Kempen-regio.",
-                    Street = "Kempenweg 101",
-                    City = "Turnhout",
+                    Title = "Kustwandeling Oostende",
+                    Description = "Maak een ontspannende wandeling langs de kustlijn van Oostende en geniet van de frisse zeelucht.",
+                    Street = "Zeedijk 1",
+                    City = "Oostende",
                     Country = "België",
-                    DateEvent = DateTime.Now.AddDays(28),
+                    DateEvent = new DateTime(2024, 4, 15),
+                    OrganizerId = 5,
                     Images = new List<Image>
                     {
                         new Image{Title="first image", ImagePath ="AFreedomPath"},
@@ -120,14 +118,40 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                         new Comment { Content = "Wat een fantastisch honden event! Ik heb zoveel leuke mensen ontmoet en mijn hond heeft zich geen moment verveeld. Bedankt aan iedereen die heeft geholpen om dit mogelijk te maken!" },
                     }
                 },
+                new Route
+                {
+                    Id = 5,
+                    Title = "Maasvallei Verkenning",
+                    Description = "Verken de prachtige natuur langs de Maasvallei tijdens deze gevarieerde wandelroute.",
+                    Street = "Maasdijk 10",
+                    City = "Dinant",
+                    Country = "België",
+                    DateEvent = new DateTime(2024, 4, 20),
+                    OrganizerId = 5,
+                    Images = new List<Image>
+                    {
+                        new Image{Title="first image", ImagePath ="AFreedomPath"},
+                        new Image{Title="first image", ImagePath ="AFreedomPath"},
+                        new Image{Title="first image", ImagePath ="AFreedomPath"},
+                        new Image{Title="Second image", ImagePath="https://source.unsplash.com/user/c_v_r/1900x800"}
+                    },
+                    Comments = new List<Comment>
+                    {
+                        new Comment { Content = "Ik vond het honden event echt geweldig! Mijn hond en ik hebben genoten van de leuke activiteiten en de gezellige sfeer. Hopelijk volgend jaar weer!" },
+                        new Comment { Content = "Het honden event was zo leuk! Mijn harige vriend heeft nieuwe vrienden gemaakt en we hebben samen veel plezier gehad. Bedankt aan iedereen die het heeft georganiseerd!" },
+                        new Comment { Content = "Dit honden event was precies wat mijn viervoeter nodig had. Hij heeft zoveel plezier gehad en we hebben allebei genoten van de dag vol activiteiten en leuke ontmoetingen!" },
+                        new Comment { Content = "Het honden event was een geweldige ervaring! Mijn hond en ik hebben genoten van de gezelligheid en de leuke dingen om te doen. Een fantastische dag voor ons beiden!" },
+                        new Comment { Content = "Wat een fantastisch honden event! Ik heb zoveel leuke mensen ontmoet en mijn hond heeft zich geen moment verveeld. Bedankt aan iedereen die heeft geholpen om dit mogelijk te maken!" },
+                    }
+                }
             };
         }
 
-        public Task<bool> CreateEventAsync(Event newEvent)
+        public Task<bool> CreateRouteAsync(Route newRoute)
         {
             try
             {
-                _events.Add(newEvent);
+                _routes.Add(newRoute);
                 return Task.FromResult(true);
             }
             catch
@@ -136,25 +160,19 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             }
         }
 
-        public async Task<List<Event>> GetAllEventsAsync()
+        public async Task<List<Route>> GetAllRoutesAsync()
         {
-            return await Task.FromResult(_events);
+            return await Task.FromResult(_routes);
         }
 
-        public async Task<List<Event>> GetAllEventsByUserId(int id)
+        public async Task<List<Route>> GetAllRoutesByUserId(int id)
         {
-            return await Task.FromResult(_events.Where(e => e.OrginazerId == id).ToList());
+            return await Task.FromResult(_routes.Where(r => r.OrganizerId == id).ToList());
         }
 
-        public async Task<Event> GetEventByIdAsync(int id)
+        public async Task<Route> GetRouteByIdAsync(int id)
         {
-            return await Task.FromResult(_events.FirstOrDefault(e => e.Id == id));
+            return await Task.FromResult(_routes.FirstOrDefault(r => r.Id == id));
         }
-
-        //public async Task<List<Image>> GetEventImagesAsync(int id)
-        //{
-        //    var selectedEvent = await GetEventByIdAsync(id);
-        //    return (List<Image>)await Task.FromResult(selectedEvent.Images);
-        //}
     }
 }
