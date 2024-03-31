@@ -5,13 +5,20 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="0,10,0,0">
-                <FlexLayout BindableLayout.ItemsSource="{Binding Images}" Wrap="Wrap" JustifyContent="Center">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding ImagePath}" Aspect="AspectFill" WidthRequest="100" HeightRequest="100" Margin="5"/>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </FlexLayout>
+                <StackLayout>
+                    <CollectionView ItemsSource="{Binding Images}" HeightRequest="250" BackgroundColor="{StaticResource transparantWhite}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"></LinearItemsLayout>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame>
+                                    <Image Source="{Binding ImagePath}" Aspect="AspectFill" HeightRequest="450" BackgroundColor="{StaticResource transparantWhite}"/>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
                 <StackLayout Style="{StaticResource baseFormStyle}">
                     <Label HorizontalOptions="CenterAndExpand" Text="{Binding Title}" Style="{StaticResource formLabelStyle}"></Label>
                     <Label Text="{Binding Description}" Padding="0,5,0,0" HorizontalOptions="CenterAndExpand" Style="{StaticResource formLabelStyle}"></Label>
