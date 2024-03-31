@@ -1,6 +1,7 @@
 ﻿using MDE.Project.Rosseel_Almanzo.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -94,6 +95,11 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         public async Task<List<User>> GetAllUsersAsync()
         {
             return await Task.FromResult(_users);
+        }
+
+        public async Task<User> GetUserByIdAsync(int id)
+        {
+            return await Task.FromResult(_users.FirstOrDefault(r => r.Id == id));
         }
     }
 }
