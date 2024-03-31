@@ -225,7 +225,9 @@
     <AndroidResource Include="Resources\drawable\icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AndroidResource>
-    <Content Include="Resources\drawable\screen.png" />
+    <AndroidResource Include="Resources\drawable\screen.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AndroidResource>
     <AndroidResource Include="Resources\drawable\sky.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AndroidResource>

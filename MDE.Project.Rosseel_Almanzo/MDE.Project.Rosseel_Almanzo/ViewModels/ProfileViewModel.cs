@@ -128,6 +128,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         public ProfileViewModel()
         {
             _usersService = new MockUsersService();
+            dogs = new ObservableCollection<Dog>();
         }
 
         public override void Init(object initData)
@@ -156,6 +157,18 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     Gender = currentUser.Gender;
                     DateOfBirth = currentUser.DateOfBirth;
                     Password = currentUser.Password;
+                    Dogs = currentUser.Dogs != null ? new ObservableCollection<Dog>(currentUser.Dogs) : new ObservableCollection<Dog>();
+                });
+            }
+        }
+
+        public ICommand GoToAddDogPageCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<AddDogViewModel>();
                 });
             }
         }

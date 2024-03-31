@@ -50,20 +50,21 @@
                     <Entry IsPassword="True" Text="{Binding Password}"></Entry>
                 </StackLayout>
                 <StackLayout>
-                    <CollectionView ItemsSource="{Binding Images}" HeightRequest="100" BackgroundColor="{StaticResource transparantWhite}">
+                    <CollectionView ItemsSource="{Binding Dogs}" HeightRequest="100" BackgroundColor="{StaticResource transparantWhite}">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"></LinearItemsLayout>
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Frame>
-                                    <Image Source="{Binding ImagePath}" Aspect="AspectFill" HeightRequest="450" BackgroundColor="{StaticResource transparantWhite}"/>
-                                </Frame>
+                                <StackLayout>
+                                    <Image Source="login.jpg" Aspect="AspectFill" HeightRequest="150" WidthRequest="150" BackgroundColor="{StaticResource transparantWhite}"/>
+                                    <Label Text="{Binding Name}"></Label>
+                                </StackLayout>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </StackLayout>
-                <Button Text="Add dog" Margin="0,0,0,25" Command="{Binding AddDogCommand}"></Button>
+                <Button Text="Add dog" Margin="0,0,0,25" Command="{Binding GoToAddDogPageCommand}"></Button>
                 <Button Text="Update" Margin="0,5,0,25" Command="{Binding UpdateProfileCommand}"></Button>
                 <Button Text="Delete account" Margin="0,5,0,25" Command="{Binding DeleteAccountCommand}"></Button>
             </StackLayout>
