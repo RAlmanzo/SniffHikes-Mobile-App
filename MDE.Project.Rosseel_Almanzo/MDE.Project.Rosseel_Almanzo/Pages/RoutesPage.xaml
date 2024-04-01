@@ -3,6 +3,7 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             x:Class="MDE.Project.Rosseel_Almanzo.Pages.RoutesPage"
             xmlns:local="clr-namespace:MDE.Project.Rosseel_Almanzo.Pages"
+            Title="Routes"
             NavigationPage.HasNavigationBar="true"
             BarBackgroundColor="Black"
             SelectedTabColor="LimeGreen"
@@ -10,7 +11,7 @@
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom">       
     <ContentPage Title="Routes" 
-             IconImageSource="AFreedomPath" 
+             IconImageSource="login.jpg" 
              BackgroundImageSource="sky.jpg">
         <ListView x:Name="lstItems" ItemsSource="{Binding Routes}" HasUnevenRows="True" SelectedItem="{Binding SelectedRoute}">
             <ListView.ItemTemplate>
@@ -23,19 +24,20 @@
                                     <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="150"/>
                                     <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
                                 <Grid.Padding>0,20,0,0</Grid.Padding>
 
                                 <StackLayout Orientation="Horizontal" Padding="15" Grid.Column="0" Grid.Row="1">
                                     <Frame Style="{StaticResource baseImageFrameStyle}">
-                                        <Image Source="dog.jpg" Style="{StaticResource baseImageStyle}"></Image>
+                                        <Image Source="loooogin.jpg" Style="{StaticResource baseImageStyle}"></Image>
                                     </Frame>
                                 </StackLayout>
 
                                 <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Title}" Style="{StaticResource baseLabelStyle}" FontSize="20" Padding="25,0,0,0" TextDecorations="Underline"></Label>
-                                <Label Grid.Row="1" Grid.Column="1"  Text="{Binding Description}" FontSize="Subtitle" Style="{StaticResource baseLabelStyle}"></Label>
+                                <Label Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"  Text="{Binding Description}" FontSize="Subtitle" Style="{StaticResource baseLabelStyle}" Padding="10"></Label>
                             </Grid>
                         </Frame>
                     </ViewCell>
