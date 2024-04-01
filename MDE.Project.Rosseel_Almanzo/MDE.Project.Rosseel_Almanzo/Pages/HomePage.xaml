@@ -6,18 +6,18 @@
              Title="Home"
              BackgroundImageSource="login.jpg">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
             <ScrollView>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="300"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="200"></RowDefinition>
-                        <RowDefinition Height="100"></RowDefinition>
-                        <RowDefinition Height="100"></RowDefinition>
-                        <RowDefinition Height="100"></RowDefinition>
+                        <RowDefinition Height="150"></RowDefinition>
+                        <RowDefinition Height="150"></RowDefinition>
+                        <RowDefinition Height="150"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.Padding>20,0,0,0</Grid.Padding>
 
@@ -25,23 +25,24 @@
                         <Label Text="SniffHikes" FontSize="50" HorizontalOptions="CenterAndExpand" TextColor="LimeGreen" ></Label>
                     </Frame>
 
-                    <StackLayout Grid.Column="0" Grid.Row="1">
-                        <Frame Padding="0" CornerRadius="75" IsClippedToBounds="True" HeightRequest="200" BorderColor="Black">
-                            <Image Source="inca"></Image>
+                    <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal" Padding="15">
+                        <Frame Style="{StaticResource baseImageFrameStyle}">
+                            <Image Source="bluesky.jpg" Style="{StaticResource baseImageStyle}"></Image>
                         </Frame>
                     </StackLayout>
-                    <Button Grid.Column="1" Grid.Row="1" Text="Evenementen" Command="{Binding EventsCommand}"></Button>
+                    <Button Grid.Column="1" Grid.Row="1" Text="Evenementen" Command="{Binding EventsCommand}" ></Button>
 
-                    <StackLayout Grid.Column="0" Grid.Row="2">
-                        <Frame Padding="0" CornerRadius="75" IsClippedToBounds="True" HeightRequest="200" BorderColor="White">
-                            <Image Source="login"></Image>
+
+                    <StackLayout Grid.Column="0" Grid.Row="2" Orientation="Horizontal" Padding="15">
+                        <Frame Style="{StaticResource baseImageFrameStyle}">
+                            <Image Source="login.jpg" Style="{StaticResource baseImageStyle}"></Image>
                         </Frame>
                     </StackLayout>
                     <Button Grid.Column="1" Grid.Row="2" Text="Wandelroutes" Command="{Binding RoutesCommand}"></Button>
 
-                    <StackLayout Grid.Column="0" Grid.Row="3">
-                        <Frame Padding="0" CornerRadius="75" IsClippedToBounds="True" HeightRequest="200">
-                            <Image Source="Apanorama"></Image>
+                    <StackLayout Grid.Column="0" Grid.Row="3" Orientation="Horizontal" Padding="15">
+                        <Frame Style="{StaticResource baseImageFrameStyle}">
+                            <Image Source="loooogin.jpg" Style="{StaticResource baseImageStyle}"></Image>
                         </Frame>
                     </StackLayout>
                     <Button Grid.Column="1" Grid.Row="3" Text="Losloopzone's" Command="{Binding ZonesCommand}"></Button>
