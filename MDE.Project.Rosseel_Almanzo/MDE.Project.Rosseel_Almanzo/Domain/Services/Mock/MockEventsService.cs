@@ -21,16 +21,16 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                     Id = 1,
                     OrginazerId = 1,
                     Title = "Ardennen Boswandeling",
-                    Description = "Verken de prachtige bossen van de Ardennen.Verken de prachtige bossen van de Ardennen.Verken de prachtige bossen van de Ardennen.Verken de prachtige bossen van de Ardennen.",
+                    Description = "Verken de prachtige bossen van de Ik vond het honden event  bossen van de Ik vond het honden event  bossen van de Ik vond het honden event echt geweldig! Mijn hond en ik hebbe Ik vond het honden event echt geweldig! Mijn hond en ik hebbe Ik vond het honden event echt geweldig! Mijn hond en ik hebbe Ardennen.Verken de prachtige bossen van de Ardennen.Verken de prachtige bossen van de Ardennen.Verken de prachtige bossen van de Ardennen." ,
                     Street = "Ardennenstraat 123",
                     City = "La Roche-en-Ardenne",
                     Country = "België",
                     DateEvent = DateTime.Now.AddDays(7),
                     Images = new List<Image>
                     {
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
+                        new Image{Title="first image", ImagePath ="login.jpg"},
+                        new Image{Title="first image", ImagePath ="loooogin.jpg"},
+                        new Image{Title="first image", ImagePath ="dog.jpg"},
                         new Image{Title="Second image", ImagePath="https://source.unsplash.com/user/c_v_r/1900x800"}
                     },
                     Comments = new List<Comment>
@@ -54,10 +54,9 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                     DateEvent = DateTime.Now.AddDays(14),
                     Images = new List<Image>
                     {
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="Second image", ImagePath="https://source.unsplash.com/user/c_v_r/1900x800"}
+                        new Image{Title="first image", ImagePath ="login.jpg"},
+                        new Image{Title="first image", ImagePath ="loooogin.jpg"},
+                        new Image{Title="first image", ImagePath ="dog.jpg"},
                     },
                     Comments = new List<Comment>
                     {
@@ -80,10 +79,9 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                     DateEvent = DateTime.Now.AddDays(21),
                     Images = new List<Image>
                     {
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="Second image", ImagePath="https://source.unsplash.com/user/c_v_r/1900x800"}
+                        new Image{Title="first image", ImagePath ="login.jpg"},
+                        new Image{Title="first image", ImagePath ="loooogin.jpg"},
+                        new Image{Title="first image", ImagePath ="dog.jpg"},
                     },
                     Comments = new List<Comment>
                     {
@@ -106,10 +104,9 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                     DateEvent = DateTime.Now.AddDays(28),
                     Images = new List<Image>
                     {
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="Second image", ImagePath="https://source.unsplash.com/user/c_v_r/1900x800"}
+                        new Image{Title="first image", ImagePath ="login.jpg"},
+                        new Image{Title="first image", ImagePath ="loooogin.jpg"},
+                        new Image{Title="first image", ImagePath ="dog.jpg"},
                     },
                     Comments = new List<Comment>
                     {
