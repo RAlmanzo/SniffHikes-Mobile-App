@@ -20,11 +20,18 @@
         <Setter Property="BorderColor" Value="{StaticResource border}"></Setter>
         <Setter Property="FontSize" Value="17"></Setter>
     </Style>
+    <Style TargetType="Button" x:Key="formButtonStye">
+        <Setter Property="WidthRequest" Value="100"></Setter>
+        <Setter Property="HeightRequest" Value="40"></Setter>
+        <Setter Property="Margin" Value="10"></Setter>
+        <Setter Property="HorizontalOptions" Value="EndAndExpand"></Setter>
+        <Setter Property="FontSize" Value="Caption"></Setter>
+    </Style>
 
     <!--frameStyle-->
     <Style TargetType="Frame" x:Key="baseFrameStyle">
         <Setter Property="BorderColor" Value="{StaticResource border}"></Setter>
-        <Setter Property="BackgroundColor" Value="{StaticResource transparantWhite}"></Setter>
+        <Setter Property="BackgroundColor" Value="{StaticResource framebackgroundcolor}"></Setter>
         <Setter Property="CornerRadius" Value="50"></Setter>
         <Setter Property="HasShadow" Value="True"></Setter>
         <Setter Property="Margin" Value="10"></Setter>
@@ -32,20 +39,17 @@
     </Style>
     <Style TargetType="Frame" x:Key="baseImageFrameStyle">
         <Setter Property="CornerRadius" Value="50"></Setter>
-        <Setter Property="IsClippedToBounds" Value="True"></Setter>
         <Setter Property="WidthRequest" Value="120"></Setter>
         <Setter Property="Padding" Value="0"></Setter>
     </Style>
 
     <!--imageStyle-->
     <Style TargetType="Image" x:Key="baseImageStyle">
-        <Setter Property="HeightRequest" Value="150"></Setter>
+       
     </Style>
-    <Style TargetType="Image">
+    <Style TargetType="Image" x:Key="collectionImages">
         <Setter Property="Aspect" Value="AspectFill"></Setter>
-        <Setter Property="HorizontalOptions" Value="Center"></Setter>
-        <Setter Property="VerticalOptions" Value="Center"></Setter>
-        <Setter Property="HeightRequest" Value="100"></Setter>
+        <Setter Property="HeightRequest" Value="250"></Setter>
     </Style>
 
     <!--labelStyle-->
@@ -58,8 +62,11 @@
     <Style TargetType="Label" x:Key="switchLabelStyle" BasedOn="{StaticResource baseLabelStyle}">
         <Setter Property="FontSize" Value="20"></Setter>
     </Style>
-    <Style TargetType="Label" x:Key="formLabelStyle" BasedOn="{StaticResource switchLabelStyle}">
-        
+    <Style TargetType="Label" x:Key="formLabelStyle">
+        <Setter Property="VerticalOptions" Value="CenterAndExpand"></Setter>
+        <Setter Property="Margin" Value="5"></Setter>
+        <Setter Property="FontSize" Value="Medium"></Setter>
+        <Setter Property="TextColor" Value="{StaticResource text}"></Setter>
     </Style>
 
     <!--switchStyle-->
@@ -70,9 +77,13 @@
     </Style>
 
     <Style TargetType="StackLayout" x:Key="baseFormStyle">
-        <Setter Property="WidthRequest" Value="350"></Setter>
-        <Setter Property="HorizontalOptions" Value="Center"></Setter>
-        <Setter Property="Padding" Value="0,10,0,0"></Setter>
+        <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
+        <Setter Property="Padding" Value="25"></Setter>
+        <Setter Property="BackgroundColor" Value="{StaticResource framebackgroundcolor}"></Setter>
+    </Style>
+
+    <Style TargetType="StackLayout" x:Key="createFormStyle">
+        <Setter Property="Padding" Value="25"></Setter>
         <Setter Property="BackgroundColor" Value="{StaticResource transparantWhite}"></Setter>
     </Style>
 </ResourceDictionary>
