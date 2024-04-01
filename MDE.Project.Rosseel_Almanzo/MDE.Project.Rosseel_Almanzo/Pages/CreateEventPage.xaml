@@ -18,27 +18,27 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <StackLayout Style="{StaticResource baseFormStyle}">
+                <StackLayout Style="{StaticResource createFormStyle}">
                     <Label Text="Title" Style="{StaticResource formLabelStyle}"></Label>
                     <Entry Text="{Binding Title}"></Entry>
                 </StackLayout>
-                <StackLayout Style="{StaticResource baseFormStyle}">
-                    <Label Text="Description" Padding="0,25,0,0" Style="{StaticResource formLabelStyle}"></Label>
+                <StackLayout Style="{StaticResource createFormStyle}">
+                    <Label Text="Description" Style="{StaticResource formLabelStyle}"></Label>
                     <Entry Text="{Binding Description}"></Entry>
                 </StackLayout>
-                <StackLayout Style="{StaticResource baseFormStyle}">
+                <StackLayout Style="{StaticResource createFormStyle}">
                     <Label Text="Street" Style="{StaticResource formLabelStyle}"></Label>
                     <Entry Text="{Binding Street}"></Entry>
                 </StackLayout>
-                <StackLayout Style="{StaticResource baseFormStyle}">
+                <StackLayout Style="{StaticResource createFormStyle}">
                     <Label Text="City" Style="{StaticResource formLabelStyle}"></Label>
                     <Entry Text="{Binding City}"></Entry>
                 </StackLayout>
-                <StackLayout Style="{StaticResource baseFormStyle}">
+                <StackLayout Style="{StaticResource createFormStyle}">
                     <Label Text="Country" Style="{StaticResource formLabelStyle}"></Label>
                     <Entry Text="{Binding Country}"></Entry>
                 </StackLayout>
-                <StackLayout Style="{StaticResource baseFormStyle}">
+                <StackLayout Style="{StaticResource createFormStyle}">
                     <Label Text="Date of event" Style="{StaticResource formLabelStyle}"></Label>
                     <DatePicker Date="{Binding DateEvent}" Format="dd-MM-yyyy"></DatePicker>
                 </StackLayout>
