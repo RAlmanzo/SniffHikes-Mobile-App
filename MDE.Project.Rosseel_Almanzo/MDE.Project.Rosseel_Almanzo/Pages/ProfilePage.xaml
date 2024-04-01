@@ -4,70 +4,75 @@
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.ProfilePage"
              BackgroundImageSource="sky.jpg">
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout>
-                <StackLayout HeightRequest="200" Orientation="Horizontal" Padding="0,25,0,0" HorizontalOptions="CenterAndExpand">
-                    <Frame Padding="0" CornerRadius="100" IsClippedToBounds="True">
-                        <Image Source="https://source.unsplash.com/user/c_v_r/1900x800" WidthRequest="200" HeightRequest="200"></Image>
-                    </Frame>
-                </StackLayout>
-                <StackLayout Padding="0,25,0,0" WidthRequest="350" HorizontalOptions="Center">
-                    <Label Text="FirstName"></Label>
-                    <Entry Text="{Binding FirstName}"></Entry>
-                </StackLayout>
-                <StackLayout WidthRequest="350" HorizontalOptions="Center">
-                    <Label Text="LastName" Padding="0,25,0,0"></Label>
-                    <Entry Text="{Binding LastName}"></Entry>
-                </StackLayout>
-                <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
-                    <Label Text="Email"></Label>
-                    <Entry Text="{Binding Email}"></Entry>
-                </StackLayout>
-                <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
-                    <Label Text="City"></Label>
-                    <Entry Text="{Binding City}"></Entry>
-                </StackLayout>
-                <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
-                    <Label Text="Country"></Label>
-                    <Entry Text="{Binding Country}"></Entry>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal" WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
-                    <Picker Title="Gender" SelectedItem="{Binding Gender}">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>Male</x:String>
-                                <x:String>Female</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
-                </StackLayout>
-                <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
-                    <Label Text="Birthday"></Label>
-                    <DatePicker Date="{Binding DateOfBirth}" Format="dd-MM-yyyy"></DatePicker>
-                </StackLayout>
-                <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
-                    <Label Text="Password"></Label>
-                    <Entry IsPassword="True" Text="{Binding Password}"></Entry>
-                </StackLayout>
+        <StackLayout>
+            <ScrollView>
                 <StackLayout>
-                    <CollectionView ItemsSource="{Binding Dogs}" HeightRequest="100" BackgroundColor="{StaticResource transparantWhite}">
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"></LinearItemsLayout>
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout>
-                                    <Image Source="login.jpg" Aspect="AspectFill" HeightRequest="150" WidthRequest="150" BackgroundColor="{StaticResource transparantWhite}"/>
-                                    <Label Text="{Binding Name}"></Label>
-                                </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                    <StackLayout HeightRequest="200" Orientation="Horizontal" Padding="0,25,0,0" HorizontalOptions="CenterAndExpand">
+                        <Frame Padding="0" CornerRadius="100" IsClippedToBounds="True">
+                            <Image Source="loooogin.jpg" WidthRequest="200" HeightRequest="200"></Image>
+                        </Frame>
+                    </StackLayout>
+                    <StackLayout Padding="0,25,0,0" WidthRequest="350" HorizontalOptions="Center">
+                        <Label Text="FirstName"></Label>
+                        <Entry Text="{Binding FirstName}"></Entry>
+                    </StackLayout>
+                    <StackLayout WidthRequest="350" HorizontalOptions="Center">
+                        <Label Text="LastName" Padding="0,25,0,0"></Label>
+                        <Entry Text="{Binding LastName}"></Entry>
+                    </StackLayout>
+                    <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
+                        <Label Text="Email"></Label>
+                        <Entry Text="{Binding Email}"></Entry>
+                    </StackLayout>
+                    <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
+                        <Label Text="City"></Label>
+                        <Entry Text="{Binding City}"></Entry>
+                    </StackLayout>
+                    <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
+                        <Label Text="Country"></Label>
+                        <Entry Text="{Binding Country}"></Entry>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
+                        <Picker Title="Gender" SelectedItem="{Binding Gender}">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Male</x:String>
+                                    <x:String>Female</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </StackLayout>
+                    <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
+                        <Label Text="Birthday"></Label>
+                        <DatePicker Date="{Binding DateOfBirth}" Format="dd-MM-yyyy"></DatePicker>
+                    </StackLayout>
+                    <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
+                        <Label Text="Password"></Label>
+                        <Entry IsPassword="True" Text="{Binding Password}"></Entry>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="My Dogs:" Style="{StaticResource formLabelStyle}" TextDecorations="Underline"></Label>
+                        <CollectionView ItemsSource="{Binding Dogs}" HeightRequest="100" BackgroundColor="{StaticResource transparantWhite}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"></LinearItemsLayout>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <Image Source="login.jpg" Aspect="AspectFill" HeightRequest="150" WidthRequest="150" BackgroundColor="{StaticResource transparantWhite}"/>
+                                        <Label Text="{Binding Name}"></Label>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
                 </StackLayout>
-                <Button Text="Add dog" Margin="0,0,0,25" Command="{Binding GoToAddDogPageCommand}"></Button>
-                <Button Text="Update" Margin="0,5,0,25" Command="{Binding UpdateProfileCommand}"></Button>
-                <Button Text="Delete account" Margin="0,5,0,25" Command="{Binding DeleteAccountCommand}"></Button>
+            </ScrollView>
+            <StackLayout Orientation="Horizontal" BackgroundColor="Black">
+                <Button Text="Add dog" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding GoToAddDogPageCommand}"></Button>
+                <Button Text="Update" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding UpdateProfileCommand}"></Button>
+                <Button Text="Delete" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding DeleteAccountCommand}"></Button>
             </StackLayout>
-        </ScrollView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
