@@ -139,7 +139,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public ICommand GetRouteDescription
+        public ICommand GetZoneDirections
         {
             get
             {
