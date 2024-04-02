@@ -55,7 +55,18 @@
 
     <!--labelStyle-->
     <Style TargetType="Label" x:Key="h1">
-        <Setter Property="FontSize" Value="32"></Setter>
+        <Setter Property="FontSize" Value="80"></Setter>
+        <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+        <Setter Property="Padding" Value="0,0,0,50"></Setter>
+        <Setter Property="TextColor" Value="{StaticResource border}"></Setter>
+        <Setter Property="FontFamily">
+            <Setter.Value>
+                <OnPlatform>
+                    <On Platform="UWP">/Fonts/GrenzeGotisch-Regular.ttf</On>
+                    <On Platform="Android">GrenzeGotisch-Regular.ttf</On>
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
     </Style>
     <Style TargetType="Label" x:Key="baseLabelStyle">
         <Setter Property="TextColor" Value="{StaticResource text}"></Setter>
