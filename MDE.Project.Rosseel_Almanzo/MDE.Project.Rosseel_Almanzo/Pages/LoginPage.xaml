@@ -9,7 +9,7 @@
             <Grid>
                 <StackLayout>
                     <Frame BackgroundColor="Transparent">
-                        <Label Text="Login" FontSize="80" HorizontalTextAlignment="Center" Padding="0,0,0,50" TextColor="LimeGreen" FontFamily="bolt"></Label>
+                        <Label Text="Login" Style="{StaticResource h1}" ></Label>
                     </Frame>
                     <StackLayout WidthRequest="350" HorizontalOptions="Center">
                         <Label Text="Email" TextColor="white" FontSize="25"></Label>
