@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:MDE.Project.Rosseel_Almanzo.ViewModels" x:DataType="viewmodels:CreateEventViewModel"
+             x:Class="MDE.Project.Rosseel_Almanzo.Pages.CreateEventPage"
+             Title="Create"
+             IconImageSource="addicon.png" 
+             BackgroundImageSource="sky.jpg"
+             NavigationPage.HasBackButton="False">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout >
+                    <Button Text="Add picture" HorizontalOptions="EndAndExpand" Margin="0,20,0,0" Command="{Binding AddImage}"></Button>
+                    <ListView HorizontalOptions="CenterAndExpand" HeightRequest="150" BackgroundColor="#70FFFFFF" ItemsSource="{Binding Images}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <StackLayout Style="{StaticResource createFormStyle}">
+                        <Label Text="Title" Style="{StaticResource formLabelStyle}"></Label>
+                        <Entry Text="{Binding Title}"></Entry>
+                        <Label Text="{Binding TitleError}" TextColor="red"></Label>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource createFormStyle}">
+                        <Label Text="Description" Style="{StaticResource formLabelStyle}"></Label>
+                        <Entry Text="{Binding Description}"></Entry>
+                        <Label Text="{Binding DescriptionError}" TextColor="red"></Label>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource createFormStyle}">
+                        <Label Text="Street" Style="{StaticResource formLabelStyle}"></Label>
+                        <Entry Text="{Binding Street}"></Entry>
+                        <Label Text="{Binding StreetError}" TextColor="red"></Label>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource createFormStyle}">
+                        <Label Text="City" Style="{StaticResource formLabelStyle}"></Label>
+                        <Entry Text="{Binding City}"></Entry>
+                        <Label Text="{Binding CityError}" TextColor="red"></Label>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource createFormStyle}">
+                        <Label Text="Country" Style="{StaticResource formLabelStyle}"></Label>
+                        <Entry Text="{Binding Country}"></Entry>
+                        <Label Text="{Binding CountryError}" TextColor="red"></Label>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource createFormStyle}">
+                        <Label Text="Date of event" Style="{StaticResource formLabelStyle}"></Label>
+                        <DatePicker Date="{Binding DateEvent}" Format="dd-MM-yyyy"></DatePicker>
+                        <Label Text="{Binding DateError}" TextColor="red"></Label>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout Orientation="Horizontal" BackgroundColor="Black">
+                <Button Text="Create" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding CreateEventCommand}"></Button>
+                <Button Text="Cancel" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding CancelCommand}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

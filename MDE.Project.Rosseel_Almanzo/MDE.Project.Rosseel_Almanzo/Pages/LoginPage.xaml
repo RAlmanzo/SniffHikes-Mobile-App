@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="MDE.Project.Rosseel_Almanzo.Pages.LoginPage"
+             BackgroundImageSource="loooogin.jpg"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <StackLayout>
+                    <Frame BackgroundColor="Transparent">
+                        <Label Text="Login" Style="{StaticResource h1}" ></Label>
+                    </Frame>
+                    <StackLayout WidthRequest="350" HorizontalOptions="Center">
+                        <Label Text="Email" TextColor="white" FontSize="25"></Label>
+                        <Entry Text="{Binding Email}" TextColor="LimeGreen" Placeholder="example@gmail.com" PlaceholderColor="White"></Entry>
+                        <Label Text="{Binding EmailError}" TextColor="Red"></Label>
+                    </StackLayout>
+                    <StackLayout WidthRequest="350" HorizontalOptions="Center">
+                        <Label Text="Password" Padding="0,25,0,0" TextColor="White" FontSize="25"></Label>
+                        <Entry IsPassword="True" Text="{Binding Password}" TextColor="LimeGreen" Placeholder="............." PlaceholderColor="White"></Entry>
+                        <Label Text="{Binding PasswordError}" TextColor="Red"></Label>
+                    </StackLayout>
+
+                    <StackLayout Margin="50,150,50,0">
+                        <Button Text="Login" Command="{Binding LoginCommand}"></Button>
+                        <Button Text="Register" Command="{Binding RegisterCommand}" Style="{StaticResource btnPrimary}"></Button>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

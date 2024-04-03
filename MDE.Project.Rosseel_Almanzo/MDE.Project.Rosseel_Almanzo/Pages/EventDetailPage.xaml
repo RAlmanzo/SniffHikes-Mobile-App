@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="MDE.Project.Rosseel_Almanzo.Pages.EventDetailPage"
+             Title="{Binding Title}"
+             NavigationPage.HasBackButton="False"
+             BackgroundImageSource="sky.jpg">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout Padding="0,10,0,0">
+                    <StackLayout>
+                        <CollectionView ItemsSource="{Binding Images}" HeightRequest="250" BackgroundColor="{StaticResource transparantWhite}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"></LinearItemsLayout>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame Padding="2">
+                                        <Image Source="{Binding ImagePath}" Style="{StaticResource collectionImages}"/>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                    <Frame Style="{StaticResource baseFrameStyle}">
+                        <StackLayout Style="{StaticResource baseFormStyle}">
+                            <Label HorizontalOptions="CenterAndExpand" Text="{Binding Title}" Style="{StaticResource formLabelStyle}" TextDecorations="Underline"></Label>
+                            <Label Text="{Binding Description}" Padding="0,5,0,0" HorizontalOptions="CenterAndExpand" Style="{StaticResource formLabelStyle}"></Label>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource baseFrameStyle}">
+                        <StackLayout Style="{StaticResource baseFormStyle}">
+                            <Label Text="Address" TextDecorations="Underline" Style="{StaticResource baseLabelStyle}"></Label>
+                            <StackLayout Orientation="Vertical">
+                                <Label Text="{Binding Street}" Style="{StaticResource baseLabelStyle}"></Label>
+                                <Label Text="{Binding City}" Style="{StaticResource baseLabelStyle}"></Label>
+                                <Label Text="{Binding Country}" Style="{StaticResource baseLabelStyle}"></Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Date: " Style="{StaticResource baseLabelStyle}"></Label>
+                                <Label Text="{Binding DateEvent}" Style="{StaticResource baseLabelStyle}"></Label>
+                            </StackLayout>
+                            <Label Text="CLICK for directions" TextDecorations="Underline" HorizontalOptions="CenterAndExpand">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding GetEventDirections}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                    </Frame>
+                    <StackLayout Orientation="Horizontal" Style="{StaticResource baseFormStyle}">
+                        <Frame HeightRequest="40" CornerRadius="20" BorderColor="{StaticResource border}" BackgroundColor="{StaticResource framebackgroundcolor}">
+                            <Label Text="100" Style="{StaticResource formLabelStyle}"></Label>
+                        </Frame>
+                        <Label Text=":Attending" Style="{StaticResource formLabelStyle}"></Label>
+                        <Button Text="Sign up" Style="{StaticResource formButtonStye}"></Button>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Share your experience here" Style="{StaticResource formLabelStyle}"></Label>
+                        <Button Text="Comment" Style="{StaticResource formButtonStye}"></Button>
+                    </StackLayout>
+                    <ListView x:Name="lstItems" ItemsSource="{Binding Comments}" HasUnevenRows="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame Style="{StaticResource baseFrameStyle}">
+                                        <StackLayout Style="{StaticResource baseFormStyle}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="30"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.Padding>5</Grid.Padding>
+                                                <Label Grid.Row="0" Text="{Binding Content}" Style="{StaticResource formLabelStyle}"></Label>
+                                                <Label Grid.Row="1" Text="Created by: Almanzo Rosseel"></Label>
+                                            </Grid>
+                                        </StackLayout>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout Orientation="Horizontal" BackgroundColor="Black">
+                <Button Text="Back" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding BackCommand}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,176 @@
+﻿using FreshMvvm;
+using MDE.Project.Rosseel_Almanzo.Domain.Models;
+using MDE.Project.Rosseel_Almanzo.Domain.Services;
+using MDE.Project.Rosseel_Almanzo.Domain.Services.Mock;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
+
+namespace MDE.Project.Rosseel_Almanzo.ViewModels
+{
+    public class ProfileViewModel : FreshBasePageModel
+    {
+        private readonly IUsersService _usersService;
+
+        private string errorText;
+        private string firstName;
+        private string lastName;
+        private string email;
+        private string city;
+        private string country;
+        private DateTime dateOfBirth;
+        private string password;
+        private string gender;
+        private ObservableCollection<Dog> dogs;
+
+        public ObservableCollection<Dog> Dogs 
+        {
+            get => dogs;
+            set
+            {
+                dogs = value;
+                RaisePropertyChanged(nameof(Dogs));
+            } 
+        }
+
+        public string Gender
+        {
+            get => gender;
+            set
+            {
+                gender = value;
+                RaisePropertyChanged(nameof(Gender));
+            }
+        }
+
+        public string Password
+        {
+            get => password;
+            set
+            {
+                password = value;
+                RaisePropertyChanged(nameof(Password));
+            }
+        }
+
+        public DateTime DateOfBirth
+        {
+            get => dateOfBirth;
+            set
+            {
+                dateOfBirth = value;
+                RaisePropertyChanged(nameof(DateOfBirth));
+            }
+        }
+
+        public string Country
+        {
+            get => country;
+            set
+            {
+                country = value;
+                RaisePropertyChanged(nameof(Country));
+            }
+        }
+
+        public string City
+        {
+            get => city;
+            set
+            {
+                city = value;
+                RaisePropertyChanged(nameof(City));
+            }
+        }
+
+        public string Email
+        {
+            get => email;
+            set
+            {
+                email = value;
+                RaisePropertyChanged(nameof(Email));
+            }
+        }
+
+        public string LastName
+        {
+            get => lastName;
+            set
+            {
+                lastName = value;
+                RaisePropertyChanged(nameof(LastName));
+            }
+        }
+
+        public string FirstName
+        {
+            get => firstName;
+            set
+            {
+                firstName = value;
+                RaisePropertyChanged(nameof(FirstName));
+            }
+        }
+
+        public string ErrorText
+        {
+            get { return errorText; }
+            set { errorText = value; RaisePropertyChanged(nameof(ErrorText)); }
+        }
+
+        public int Id { get; set; }
+
+        public ProfileViewModel()
+        {
+            _usersService = new MockUsersService();
+            dogs = new ObservableCollection<Dog>();
+        }
+
+        public override void Init(object initData)
+        {
+            base.Init(initData);
+
+            //Id = (int)initData;
+
+            LoadData.Execute(null);
+        }
+
+        public ICommand LoadData
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    //var currentUser = await _usersService.GetUserByIdAsync(Id);
+                    var users = await _usersService.GetAllUsersAsync();
+                    var currentUser = users.FirstOrDefault();
+                    FirstName = currentUser.FirstName;
+                    LastName = currentUser.LastName;
+                    Email = currentUser.Email;
+                    City = currentUser.City;
+                    Country = currentUser.Country;
+                    Gender = currentUser.Gender;
+                    DateOfBirth = currentUser.DateOfBirth;
+                    Password = currentUser.Password;
+                    Dogs = currentUser.Dogs != null ? new ObservableCollection<Dog>(currentUser.Dogs) : new ObservableCollection<Dog>();
+                });
+            }
+        }
+
+        public ICommand GoToAddDogPageCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<AddDogViewModel>();
+                });
+            }
+        }
+    }
+}

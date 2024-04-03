@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Color x:Key="primary">#6080FF00</Color>
+    <Color x:Key="secondary">blue</Color>
+    <Color x:Key="text">black</Color>
+    <Color x:Key="border">#55ee55</Color>
+    <Color x:Key="transparantWhite">#60FFFFFF</Color>
+    <Color x:Key="framebackgroundcolor">#10FFFFFF</Color>
+
+    <SolidColorBrush Color="{StaticResource primary}" x:Key="primaryBrush"></SolidColorBrush>
+    <SolidColorBrush Color="{StaticResource secondary}" x:Key="secondaryBrush"></SolidColorBrush>
+</ResourceDictionary>

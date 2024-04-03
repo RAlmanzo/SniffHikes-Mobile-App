@@ -1,0 +1,94 @@
+﻿<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <!--buttonStyle-->
+    <Style TargetType="Button" x:Key="baseButtonStyle">
+        <Setter Property="BorderWidth" Value="2"></Setter>
+        <Setter Property="CornerRadius" Value="50"></Setter>
+        <Setter Property="FontSize" Value="Medium"></Setter>
+        <Setter Property="WidthRequest" Value="200"></Setter>
+        <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
+        <Setter Property="VerticalOptions" Value="CenterAndExpand"></Setter>
+    </Style>
+    <Style TargetType="Button" BasedOn="{StaticResource baseButtonStyle}">
+        <Setter Property="BackgroundColor" Value="{StaticResource primary}"></Setter>
+        <Setter Property="TextColor" Value="{StaticResource text}"></Setter>
+        <Setter Property="BorderColor" Value="{StaticResource border}"></Setter>
+    </Style>
+    <Style TargetType="Button" x:Key="btnPrimary" BasedOn="{StaticResource baseButtonStyle}">
+        <Setter Property="BackgroundColor" Value="{StaticResource transparantWhite}"></Setter>
+        <Setter Property="TextColor" Value="{StaticResource text}"></Setter>
+        <Setter Property="BorderColor" Value="{StaticResource border}"></Setter>
+        <Setter Property="FontSize" Value="17"></Setter>
+    </Style>
+    <Style TargetType="Button" x:Key="formButtonStye">
+        <Setter Property="BackgroundColor" Value="#9900FF00"></Setter>
+        <Setter Property="WidthRequest" Value="100"></Setter>
+        <Setter Property="HeightRequest" Value="40"></Setter>
+        <Setter Property="Margin" Value="10"></Setter>
+        <Setter Property="HorizontalOptions" Value="EndAndExpand"></Setter>
+        <Setter Property="FontSize" Value="Caption"></Setter>
+    </Style>
+
+    <!--frameStyle-->
+    <Style TargetType="Frame" x:Key="baseFrameStyle">
+        <Setter Property="BorderColor" Value="{StaticResource border}"></Setter>
+        <Setter Property="BackgroundColor" Value="{StaticResource framebackgroundcolor}"></Setter>
+        <Setter Property="CornerRadius" Value="50"></Setter>
+        <Setter Property="HasShadow" Value="True"></Setter>
+        <Setter Property="Margin" Value="10"></Setter>
+        <Setter Property="Padding" Value="0"></Setter>
+    </Style>
+    <Style TargetType="Frame" x:Key="baseImageFrameStyle">
+        <Setter Property="CornerRadius" Value="50"></Setter>
+        <Setter Property="WidthRequest" Value="120"></Setter>
+        <Setter Property="Padding" Value="0"></Setter>
+    </Style>
+
+    <!--imageStyle-->
+    <Style TargetType="Image" x:Key="baseImageStyle">
+       
+    </Style>
+    <Style TargetType="Image" x:Key="collectionImages">
+        <Setter Property="Aspect" Value="AspectFill"></Setter>
+        <Setter Property="HeightRequest" Value="250"></Setter>
+    </Style>
+
+    <!--labelStyle-->
+    <Style TargetType="Label" x:Key="h1">
+        <Setter Property="FontSize" Value="100"></Setter>
+        <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+        <Setter Property="Padding" Value="0,0,0,50"></Setter>
+        <Setter Property="TextColor" Value="{StaticResource border}"></Setter>
+        <Setter Property="FontFamily" Value="GrenzeGotisch-Regular.ttf"></Setter>
+    </Style>
+    <Style TargetType="Label" x:Key="baseLabelStyle">
+        <Setter Property="TextColor" Value="{StaticResource text}"></Setter>
+    </Style>
+    <Style TargetType="Label" x:Key="switchLabelStyle" BasedOn="{StaticResource baseLabelStyle}">
+        <Setter Property="FontSize" Value="20"></Setter>
+    </Style>
+    <Style TargetType="Label" x:Key="formLabelStyle">
+        <Setter Property="VerticalOptions" Value="CenterAndExpand"></Setter>
+        <Setter Property="Margin" Value="5"></Setter>
+        <Setter Property="FontSize" Value="Medium"></Setter>
+        <Setter Property="TextColor" Value="{StaticResource text}"></Setter>
+    </Style>
+
+    <!--switchStyle-->
+    <Style TargetType="Switch">
+        <Setter Property="IsToggled" Value="False"></Setter>
+        <Setter Property="ThumbColor" Value="White"></Setter>
+        <Setter Property="OnColor" Value="LimeGreen"></Setter>
+    </Style>
+
+    <Style TargetType="StackLayout" x:Key="baseFormStyle">
+        <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
+        <Setter Property="Padding" Value="25"></Setter>
+        <Setter Property="BackgroundColor" Value="{StaticResource framebackgroundcolor}"></Setter>
+    </Style>
+
+    <Style TargetType="StackLayout" x:Key="createFormStyle">
+        <Setter Property="Padding" Value="25"></Setter>
+        <Setter Property="BackgroundColor" Value="{StaticResource transparantWhite}"></Setter>
+    </Style>
+</ResourceDictionary>
