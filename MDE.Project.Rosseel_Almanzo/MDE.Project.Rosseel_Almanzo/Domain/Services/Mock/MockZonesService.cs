@@ -25,15 +25,16 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                     Country = "België",
                     Images = new List<Image>
                     {
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
+                        new Image{Title="first image", ImagePath ="login.jpg"},
+                        new Image{Title="Second image", ImagePath="https://source.unsplash.com/user/c_v_r/1900x800"},
+                        new Image{Title="first image", ImagePath ="loooogin.jpg"},
+                        new Image{Title="first image", ImagePath ="bluesky.jpg"},
                         new Image{Title="Second image", ImagePath="https://source.unsplash.com/user/c_v_r/1900x800"}
                     },
                     Comments = new List<Comment>
                     {
-                        new Comment { Content = "Een geweldige plek voor honden om te ravotten!" },
-                        new Comment { Content = "Mijn hond houdt van deze losloopzone!" }
+                        new Comment { Content = "Een geweldige plek voor honden om te ravotten!Een geweldige plek voor honden om te ravotten!Een geweldige plek voor honden om te ravotten!" },
+                        new Comment { Content = "Mijn hond houdt van deze losloopzone! Een geweldige plek voor honden om te ravotten!" }
                     }
                 },
                 new Zone
@@ -46,9 +47,9 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                     Country = "België",
                     Images = new List<Image>
                     {
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
+                        new Image{Title="first image", ImagePath ="login.jpg"},
+                        new Image{Title="first image", ImagePath ="loooogin.jpg"},
+                        new Image{Title="first image", ImagePath ="bluesky.jpg"},
                         new Image{Title="Second image", ImagePath="https://source.unsplash.com/user/c_v_r/1900x800"}
                     },
                     Comments = new List<Comment>
@@ -67,9 +68,9 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                     Country = "België",
                     Images = new List<Image>
                     {
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
+                        new Image{Title="first image", ImagePath ="login.jpg"},
+                        new Image{Title="first image", ImagePath ="loooogin.jpg"},
+                        new Image{Title="first image", ImagePath ="bluesky.jpg"},
                         new Image{Title="Second image", ImagePath="https://source.unsplash.com/user/c_v_r/1900x800"}
                     },
                     Comments = new List<Comment>
@@ -88,9 +89,9 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                     Country = "België",
                     Images = new List<Image>
                     {
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
+                        new Image{Title="first image", ImagePath ="login.jpg"},
+                        new Image{Title="first image", ImagePath ="loooogin.jpg"},
+                        new Image{Title="first image", ImagePath ="bluesky.jpg"},
                         new Image{Title="Second image", ImagePath="https://source.unsplash.com/user/c_v_r/1900x800"}
                     },
                     Comments = new List<Comment>
@@ -109,9 +110,9 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                     Country = "België",
                     Images = new List<Image>
                     {
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
+                        new Image{Title="first image", ImagePath ="login.jpg"},
+                        new Image{Title="first image", ImagePath ="loooogin.jpg"},
+                        new Image{Title="first image", ImagePath ="bluesky.jpg"},
                         new Image{Title="Second image", ImagePath="https://source.unsplash.com/user/c_v_r/1900x800"}
                     },
                     Comments = new List<Comment>
@@ -130,9 +131,9 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                     Country = "België",
                     Images = new List<Image>
                     {
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
+                        new Image{Title="first image", ImagePath ="login.jpg"},
+                        new Image{Title="first image", ImagePath ="loooogin.jpg"},
+                        new Image{Title="first image", ImagePath ="bluesky.jpg"},
                         new Image{Title="Second image", ImagePath="https://source.unsplash.com/user/c_v_r/1900x800"}
                     },
                     Comments = new List<Comment>
@@ -151,9 +152,9 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                     Country = "België",
                     Images = new List<Image>
                     {
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
-                        new Image{Title="first image", ImagePath ="AFreedomPath"},
+                        new Image{Title="first image", ImagePath ="login.jpg"},
+                        new Image{Title="first image", ImagePath ="loooogin.jpg"},
+                        new Image{Title="first image", ImagePath ="bluesky.jpg"},
                         new Image{Title="Second image", ImagePath="https://source.unsplash.com/user/c_v_r/1900x800"}
                     },
                     Comments = new List<Comment>
