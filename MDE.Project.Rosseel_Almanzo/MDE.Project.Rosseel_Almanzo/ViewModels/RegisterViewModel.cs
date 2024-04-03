@@ -114,6 +114,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         public RegisterViewModel(IUsersService usersService)
         {
             _usersService = usersService;
+            dateOfBirth = DateTime.Now;
         }
 
         public ICommand RegisterCommand 
