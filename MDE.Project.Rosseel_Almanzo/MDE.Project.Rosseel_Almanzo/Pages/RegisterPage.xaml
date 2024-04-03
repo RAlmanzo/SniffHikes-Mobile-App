@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:MDE.Project.Rosseel_Almanzo.ViewModels" x:DataType="viewmodels:RegisterViewModel"
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.RegisterPage"
-             BackgroundImageSource="sky.jpg">
+             BackgroundImageSource="sky.jpg"
+             Title="Register">
     <ContentPage.Content>
         <StackLayout>
             <ScrollView>
@@ -11,7 +12,7 @@
                         <Frame Padding="0" CornerRadius="100" IsClippedToBounds="True">
                             <Image Source="loooogin.jpg" WidthRequest="200" HeightRequest="200"></Image>
                         </Frame>
-                        <Button Text="Add picture" Style="{StaticResource formButtonStye}"></Button>
+                        <Button Text="Add picture" HeightRequest="50" Style="{StaticResource formButtonStye}"></Button>
                     </StackLayout>
                     <StackLayout Padding="0,25,0,0" WidthRequest="350" HorizontalOptions="Center">
                         <Label Text="FirstName"></Label>
