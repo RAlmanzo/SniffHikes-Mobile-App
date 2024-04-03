@@ -1,6 +1,7 @@
 ﻿using FreshMvvm;
 using MDE.Project.Rosseel_Almanzo.Domain.Models;
 using MDE.Project.Rosseel_Almanzo.Domain.Services;
+using MDE.Project.Rosseel_Almanzo.Domain.Services.Validators;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,6 +23,61 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private DateTime dateOfBirth;
         private string password;
         private string gender;
+        private string firstNameError;
+        private string lastNameError;
+        private string emailError;
+        private string passwordError;
+        private string dateOfBirthError;
+
+        public string FirstNameError
+        {
+            get => firstNameError;
+            set
+            {
+                firstNameError = value;
+                RaisePropertyChanged(nameof(FirstNameError));
+            }
+        }
+
+        public string LastNameError
+        {
+            get => lastNameError;
+            set
+            {
+                lastNameError = value;
+                RaisePropertyChanged(nameof(LastNameError));
+            }
+        }
+
+        public string EmailError
+        {
+            get => emailError;
+            set
+            {
+                emailError = value;
+                RaisePropertyChanged(nameof(EmailError));
+            }
+        }
+
+        public string PasswordError
+        {
+            get => passwordError;
+            set
+            {
+                passwordError = value;
+                RaisePropertyChanged(nameof(PasswordError));
+            }
+        }
+
+        public string DateOfBirthError
+        {
+            get => dateOfBirthError;
+            set
+            {
+                dateOfBirthError = value;
+                RaisePropertyChanged(nameof(DateOfBirthError));
+            }
+        }
 
         public string Gender
         {
@@ -138,10 +194,50 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         Password = Password,
                     };
 
-                    await _usersService.CreateUserAsync(newUser);
-                    await CoreMethods.PushPageModel<LoginViewModel>();
+                    if (Validate(newUser))
+                    {
+                        await _usersService.CreateUserAsync(newUser);
+                        await CoreMethods.PushPageModel<LoginViewModel>();
+                    }                   
                 });
             }
+        }
+
+        private bool Validate(User user)
+        {
+
+            var validator = new UsersValidator();
+
+            var result = validator.Validate(user);
+
+            foreach (var error in result.Errors)
+            {
+                if (error.PropertyName == nameof(FirstName))
+                {
+                    FirstNameError = error.ErrorMessage;
+                }
+
+                if (error.PropertyName == nameof(LastName))
+                {
+                    LastNameError = error.ErrorMessage;
+                }
+
+                if (error.PropertyName == nameof(Email))
+                {
+                    EmailError = error.ErrorMessage;
+                }
+
+                if (error.PropertyName == nameof(Password))
+                {
+                    PasswordError = error.ErrorMessage;
+                }
+
+                if (error.PropertyName == nameof(DateOfBirth))
+                {
+                    DateOfBirthError = error.ErrorMessage;
+                }
+            }
+            return result.IsValid;
         }
     }
 }

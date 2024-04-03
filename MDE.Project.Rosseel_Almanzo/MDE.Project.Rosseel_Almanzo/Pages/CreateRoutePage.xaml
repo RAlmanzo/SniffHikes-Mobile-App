@@ -10,34 +10,39 @@
         <StackLayout>
             <ScrollView>
                 <StackLayout>
-                        <Button Text="Add picture" HorizontalOptions="EndAndExpand" Margin="0,20,0,0" Command="{Binding AddImage}"></Button>
-                        <ListView HorizontalOptions="CenterAndExpand" WidthRequest="350" HeightRequest="150" BackgroundColor="#70FFFFFF" ItemsSource="{Binding Images}">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <ViewCell>
-                                    </ViewCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                        <StackLayout Style="{StaticResource createFormStyle}">
-                            <Label Text="Title" Style="{StaticResource formLabelStyle}"></Label>
-                            <Entry Text="{Binding Title}"></Entry>
-                        </StackLayout>
-                        <StackLayout Style="{StaticResource createFormStyle}">
-                            <Label Text="Description" Style="{StaticResource formLabelStyle}"></Label>
-                            <Entry Text="{Binding Description}"></Entry>
-                        </StackLayout>
-                        <StackLayout Style="{StaticResource createFormStyle}">
-                            <Label Text="Street" Style="{StaticResource formLabelStyle}"></Label>
-                            <Entry Text="{Binding Street}"></Entry>
-                        </StackLayout>
-                        <StackLayout Style="{StaticResource createFormStyle}">
-                            <Label Text="City" Style="{StaticResource formLabelStyle}"></Label>
-                            <Entry Text="{Binding City}"></Entry>
-                        </StackLayout>
+                    <Button Text="Add picture" HorizontalOptions="EndAndExpand" Margin="0,20,0,0" Command="{Binding AddImage}"></Button>
+                    <ListView HorizontalOptions="CenterAndExpand" WidthRequest="350" HeightRequest="150" BackgroundColor="#70FFFFFF" ItemsSource="{Binding Images}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <StackLayout Style="{StaticResource createFormStyle}">
+                        <Label Text="Title" Style="{StaticResource formLabelStyle}"></Label>
+                        <Entry Text="{Binding Title}"></Entry>
+                        <Label Text="{Binding TitleError}" TextColor="red"></Label>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource createFormStyle}">
+                        <Label Text="Description" Style="{StaticResource formLabelStyle}"></Label>
+                        <Entry Text="{Binding Description}"></Entry>
+                        <Label Text="{Binding DescriptionError}" TextColor="red"></Label>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource createFormStyle}">
+                        <Label Text="Street" Style="{StaticResource formLabelStyle}"></Label>
+                        <Entry Text="{Binding Street}"></Entry>
+                        <Label Text="{Binding StreetError}" TextColor="red"></Label>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource createFormStyle}">
+                        <Label Text="City" Style="{StaticResource formLabelStyle}"></Label>
+                        <Entry Text="{Binding City}"></Entry>
+                        <Label Text="{Binding CityError}" TextColor="red"></Label>
+                    </StackLayout>
                     <StackLayout Style="{StaticResource createFormStyle}">
                         <Label Text="Country" Style="{StaticResource formLabelStyle}"></Label>
                         <Entry Text="{Binding Country}"></Entry>
+                        <Label Text="{Binding CountryError}" TextColor="red"></Label>
                     </StackLayout>
                 </StackLayout>
             </ScrollView>
