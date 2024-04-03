@@ -17,14 +17,17 @@
                     <StackLayout Padding="0,25,0,0" WidthRequest="350" HorizontalOptions="Center">
                         <Label Text="FirstName"></Label>
                         <Entry Text="{Binding FirstName}"></Entry>
+                        <Label Text="{Binding FirstNameError}" TextColor="red"></Label>
                     </StackLayout>
                     <StackLayout WidthRequest="350" HorizontalOptions="Center">
                         <Label Text="LastName" Padding="0,25,0,0"></Label>
                         <Entry Text="{Binding LastName}"></Entry>
+                        <Label Text="{Binding LastNameError}" TextColor="Red"></Label>
                     </StackLayout>
                     <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
                         <Label Text="Email"></Label>
                         <Entry Text="{Binding Email}"></Entry>
+                        <Label Text="{Binding EmailError}" TextColor="Red"></Label>
                     </StackLayout>
                     <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
                         <Label Text="City"></Label>
@@ -47,10 +50,12 @@
                     <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
                         <Label Text="Birthday"></Label>
                         <DatePicker Date="{Binding DateOfBirth}" Format="dd-MM-yyyy"></DatePicker>
+                        <Label Text="{Binding DateOfBirthError}" TextColor="Red"></Label>
                     </StackLayout>
                     <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
                         <Label Text="Password"></Label>
                         <Entry IsPassword="True" Text="{Binding Password}"></Entry>
+                        <Label Text="{Binding PasswordError}" TextColor="Red"></Label>
                     </StackLayout>
                 </StackLayout>
             </ScrollView>
