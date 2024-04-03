@@ -9,6 +9,8 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System.Linq;
+using MDE.Project.Rosseel_Almanzo.Domain.Services.Validators;
+using Xamarin.Essentials;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
@@ -16,14 +18,35 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     {
         private readonly IUsersService _usersService;
 
-        private string errorText;
         private string name;
         private DateTime dateOfBirth;
         private string gender;
         private string race;
         private List<Dog> dogs;
+        private string nameError;
+        private string dateOfBirthError;
 
         public int Id { get; set; }
+
+        public string NameError
+        {
+            get => nameError;
+            set
+            {
+                nameError = value;
+                RaisePropertyChanged(nameof(NameError));
+            }
+        }
+
+        public string DateOfBirthError
+        {
+            get => dateOfBirthError;
+            set
+            {
+                dateOfBirthError = value;
+                RaisePropertyChanged(nameof(DateOfBirthError));
+            }
+        }
 
         public List<Dog> Dogs
         {
@@ -75,12 +98,6 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public string ErrorText
-        {
-            get { return errorText; }
-            set { errorText = value; RaisePropertyChanged(nameof(ErrorText)); }
-        }
-
         public AddDogViewModel(IUsersService usersService)
         {
             _usersService = usersService;
@@ -111,14 +128,40 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         Gender = Gender,
                         DateOfBirth = DateOfBirth,
                     };
-                    Dogs = currentUser.Dogs.ToList();
-                    Dogs.Add(dog);
-                                      
-                    currentUser.Dogs = Dogs;
+                    
+                    if (Validate(dog))
+                    {
+                        Dogs = currentUser.Dogs.ToList();
+                        Dogs.Add(dog);
 
-                    await CoreMethods.PushPageModel<ProfileViewModel>();
+                        currentUser.Dogs = Dogs;
+
+                        await CoreMethods.PushPageModel<ProfileViewModel>();
+                    }                   
                 });
             }
+        }
+
+        private bool Validate(Dog dog)
+        {
+
+            var validator = new DogsValidator();
+
+            var result = validator.Validate(dog);
+
+            foreach (var error in result.Errors)
+            {
+                if (error.PropertyName == nameof(Name))
+                {
+                    NameError = error.ErrorMessage;
+                }
+
+                if (error.PropertyName == nameof(DateOfBirth))
+                {
+                    DateOfBirthError = error.ErrorMessage;
+                }
+            }
+            return result.IsValid;
         }
     }
 }
