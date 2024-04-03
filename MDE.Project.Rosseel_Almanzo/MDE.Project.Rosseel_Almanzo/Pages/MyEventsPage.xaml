@@ -3,8 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="MDE.Project.Rosseel_Almanzo.Pages.MyEventsPage"
     Title="MyEvents" 
-    IconImageSource="AFreedomPath" 
-    BackgroundImageSource="sky.jpg">
+    IconImageSource="righticon.png" 
+    BackgroundImageSource="sky.jpg"
+    NavigationPage.HasBackButton="False">
     <StackLayout>
         <StackLayout Orientation="Horizontal">
             <Label Text="Created" Style="{StaticResource switchLabelStyle}"></Label>
