@@ -4,14 +4,15 @@
              xmlns:viewmodels="clr-namespace:MDE.Project.Rosseel_Almanzo.ViewModels" x:DataType="viewmodels:CreateEventViewModel"
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.CreateEventPage"
              Title="Create"
-             IconImageSource="AFreedomPath" 
-             BackgroundImageSource="sky.jpg">
+             IconImageSource="addicon.png" 
+             BackgroundImageSource="sky.jpg"
+             NavigationPage.HasBackButton="False">
     <ContentPage.Content>
         <StackLayout>
             <ScrollView>
-                <StackLayout>
+                <StackLayout >
                     <Button Text="Add picture" HorizontalOptions="EndAndExpand" Margin="0,20,0,0" Command="{Binding AddImage}"></Button>
-                    <ListView HorizontalOptions="CenterAndExpand" WidthRequest="350" HeightRequest="150" BackgroundColor="#70FFFFFF" ItemsSource="{Binding Images}">
+                    <ListView HorizontalOptions="CenterAndExpand" HeightRequest="150" BackgroundColor="#70FFFFFF" ItemsSource="{Binding Images}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -45,8 +46,9 @@
                         </StackLayout>
                     </StackLayout>
             </ScrollView>
-            <StackLayout BackgroundColor="Black" HeightRequest="75">
-                <Button Text="Create" Margin="0,20,0,25" Command="{Binding CreateEventCommand}"></Button>
+            <StackLayout Orientation="Horizontal" BackgroundColor="Black">
+                <Button Text="Create" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding CreateEventCommand}"></Button>
+                <Button Text="Cancel" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding CancelCommand}"></Button>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
