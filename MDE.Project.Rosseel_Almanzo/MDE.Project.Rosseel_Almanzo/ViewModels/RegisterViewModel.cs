@@ -210,7 +210,6 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
             var result = validator.Validate(user);
 
-            ErrorText = "";
             foreach (var error in result.Errors)
             {
                 if (error.PropertyName == nameof(FirstName))

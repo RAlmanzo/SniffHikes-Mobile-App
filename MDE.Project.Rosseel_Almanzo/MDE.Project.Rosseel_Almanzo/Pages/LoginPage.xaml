@@ -14,10 +14,12 @@
                     <StackLayout WidthRequest="350" HorizontalOptions="Center">
                         <Label Text="Email" TextColor="white" FontSize="25"></Label>
                         <Entry Text="{Binding Email}" TextColor="White" Placeholder="example@gmail.com" PlaceholderColor="White"></Entry>
+                        <Label Text="{Binding EmailError}" TextColor="Red"></Label>
                     </StackLayout>
                     <StackLayout WidthRequest="350" HorizontalOptions="Center">
                         <Label Text="Password" Padding="0,25,0,0" TextColor="White" FontSize="25"></Label>
                         <Entry IsPassword="True" Text="{Binding Password}" TextColor="White" Placeholder="............." PlaceholderColor="White"></Entry>
+                        <Label Text="{Binding PasswordError}" TextColor="Red"></Label>
                     </StackLayout>
 
                     <StackLayout Margin="50,150,50,0">
