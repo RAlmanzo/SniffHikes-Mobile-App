@@ -153,9 +153,9 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         {
             get
             {
-                return new Command(() =>
+                return new Command(async () =>
                 {
-
+                    await CoreMethods.PushPageModel<RecordRouteViewModel>();
                 });
             }
         }
