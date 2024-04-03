@@ -152,7 +152,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public ICommand GetEventDescription
+        public ICommand GetEventDirections
         {
             get
             {
@@ -191,6 +191,17 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     {
                         // Handle exception that may have occurred in geocoding
                     }
+                });
+            }
+        }
+
+        public ICommand BackCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<EventsViewModel>();
                 });
             }
         }

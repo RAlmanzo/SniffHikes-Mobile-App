@@ -151,7 +151,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public ICommand GetRouteDescription
+        public ICommand GetRouteDirections
         {
             get
             {
@@ -190,6 +190,17 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     {
                         // Handle exception that may have occurred in geocoding
                     }
+                });
+            }
+        }
+
+        public ICommand BackCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<RoutesViewModel>();
                 });
             }
         }

@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewmodels="clr-namespace:MDE.Project.Rosseel_Almanzo.ViewModels" x:DataType="viewmodels:LogoutViewModel"
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.LogoutPage"
-             BackgroundImageSource="login.jpg">
+             BackgroundImageSource="logout.jpg">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="See you soon again!"></Label>
+            <Label Text="See you soon!" FontSize="60" HorizontalOptions="CenterAndExpand" TextColor="GreenYellow" FontFamily="GrenzeGotisch-Regular.ttf"></Label>
             <Button Text="Logout" Command="{Binding LogoutCommand}"></Button>
         </StackLayout>
     </ContentPage.Content>

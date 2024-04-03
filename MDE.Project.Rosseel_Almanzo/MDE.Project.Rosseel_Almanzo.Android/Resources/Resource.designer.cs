@@ -16487,61 +16487,61 @@ namespace MDE.Project.Rosseel_Almanzo.Droid
 			public const int abc_vector_test = 2131165268;
 			
 			// aapt resource value: 0x7F070055
-			public const int AFreedomPath = 2131165269;
+			public const int addicon = 2131165269;
 			
 			// aapt resource value: 0x7F070056
-			public const int Apanorama = 2131165270;
+			public const int avd_hide_password = 2131165270;
 			
 			// aapt resource value: 0x7F070057
-			public const int avd_hide_password = 2131165271;
+			public const int avd_show_password = 2131165271;
 			
 			// aapt resource value: 0x7F070058
-			public const int avd_show_password = 2131165272;
+			public const int bluesky = 2131165272;
 			
 			// aapt resource value: 0x7F070059
-			public const int bluesky = 2131165273;
+			public const int btn_checkbox_checked_mtrl = 2131165273;
 			
 			// aapt resource value: 0x7F07005A
-			public const int btn_checkbox_checked_mtrl = 2131165274;
+			public const int btn_checkbox_checked_to_unchecked_mtrl_animation = 2131165274;
 			
 			// aapt resource value: 0x7F07005B
-			public const int btn_checkbox_checked_to_unchecked_mtrl_animation = 2131165275;
+			public const int btn_checkbox_unchecked_mtrl = 2131165275;
 			
 			// aapt resource value: 0x7F07005C
-			public const int btn_checkbox_unchecked_mtrl = 2131165276;
+			public const int btn_checkbox_unchecked_to_checked_mtrl_animation = 2131165276;
 			
 			// aapt resource value: 0x7F07005D
-			public const int btn_checkbox_unchecked_to_checked_mtrl_animation = 2131165277;
+			public const int btn_radio_off_mtrl = 2131165277;
 			
 			// aapt resource value: 0x7F07005E
-			public const int btn_radio_off_mtrl = 2131165278;
+			public const int btn_radio_off_to_on_mtrl_animation = 2131165278;
 			
 			// aapt resource value: 0x7F07005F
-			public const int btn_radio_off_to_on_mtrl_animation = 2131165279;
+			public const int btn_radio_on_mtrl = 2131165279;
 			
 			// aapt resource value: 0x7F070060
-			public const int btn_radio_on_mtrl = 2131165280;
+			public const int btn_radio_on_to_off_mtrl_animation = 2131165280;
 			
 			// aapt resource value: 0x7F070061
-			public const int btn_radio_on_to_off_mtrl_animation = 2131165281;
+			public const int design_fab_background = 2131165281;
 			
 			// aapt resource value: 0x7F070062
-			public const int design_fab_background = 2131165282;
+			public const int design_ic_visibility = 2131165282;
 			
 			// aapt resource value: 0x7F070063
-			public const int design_ic_visibility = 2131165283;
+			public const int design_ic_visibility_off = 2131165283;
 			
 			// aapt resource value: 0x7F070064
-			public const int design_ic_visibility_off = 2131165284;
+			public const int design_password_eye = 2131165284;
 			
 			// aapt resource value: 0x7F070065
-			public const int design_password_eye = 2131165285;
+			public const int design_snackbar_background = 2131165285;
 			
 			// aapt resource value: 0x7F070066
-			public const int design_snackbar_background = 2131165286;
+			public const int events = 2131165286;
 			
 			// aapt resource value: 0x7F070067
-			public const int dog = 2131165287;
+			public const int homep = 2131165287;
 			
 			// aapt resource value: 0x7F07006F
 			public const int icon = 2131165295;
@@ -16568,13 +16568,13 @@ namespace MDE.Project.Rosseel_Almanzo.Droid
 			public const int ic_mtrl_chip_close_circle = 2131165294;
 			
 			// aapt resource value: 0x7F070070
-			public const int inca = 2131165296;
+			public const int lefticon = 2131165296;
 			
 			// aapt resource value: 0x7F070071
 			public const int login = 2131165297;
 			
 			// aapt resource value: 0x7F070072
-			public const int LoginImage = 2131165298;
+			public const int logout = 2131165298;
 			
 			// aapt resource value: 0x7F070073
 			public const int loooogin = 2131165299;
@@ -16682,7 +16682,7 @@ namespace MDE.Project.Rosseel_Almanzo.Droid
 			public const int preference_list_divider_material = 2131165333;
 			
 			// aapt resource value: 0x7F070096
-			public const int river = 2131165334;
+			public const int righticon = 2131165334;
 			
 			// aapt resource value: 0x7F070097
 			public const int screen = 2131165335;
@@ -16700,10 +16700,7 @@ namespace MDE.Project.Rosseel_Almanzo.Droid
 			public const int tooltip_frame_light = 2131165339;
 			
 			// aapt resource value: 0x7F07009C
-			public const int tree = 2131165340;
-			
-			// aapt resource value: 0x7F07009D
-			public const int treeriver = 2131165341;
+			public const int zones = 2131165340;
 			
 			static Drawable()
 			{

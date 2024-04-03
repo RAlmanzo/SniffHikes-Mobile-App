@@ -148,5 +148,27 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 });
             }
         }
+
+        public ICommand RecordRouteCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<RecordRouteViewModel>();
+                });
+            }
+        }
+
+        public ICommand CancelCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<RoutesViewModel>();
+                });
+            }
+        }
     }
 }

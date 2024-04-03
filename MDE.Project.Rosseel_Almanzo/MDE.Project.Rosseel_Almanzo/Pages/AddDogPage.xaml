@@ -4,38 +4,45 @@
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.AddDogPage"
              BackgroundImageSource="sky.jpg">
     <ContentPage.Content>
-        <ScrollView>
+        <StackLayout HorizontalOptions="FillAndExpand">
             <StackLayout>
-                <StackLayout HeightRequest="200" Orientation="Horizontal" Padding="0,25,0,0">
-                    <Frame Padding="0" CornerRadius="100" IsClippedToBounds="True">
-                        <Image Source="https://source.unsplash.com/user/c_v_r/1900x800" WidthRequest="200" HeightRequest="200"></Image>
-                    </Frame>
-                    <Button Text="Add picture" HorizontalOptions="EndAndExpand" Margin="0,20,0,0"></Button>
+                <ScrollView>
+                    <StackLayout>
+                        <StackLayout HeightRequest="200" Orientation="Horizontal" Padding="0,25,0,0" HorizontalOptions="CenterAndExpand">
+                            <Frame Padding="0" CornerRadius="100" IsClippedToBounds="True">
+                                <Image Source="loooogin.jpg" WidthRequest="200" HeightRequest="200"></Image>
+                            </Frame>
+                            <Button Text="Add picture" HeightRequest="50" Style="{StaticResource formButtonStye}"></Button>
+                        </StackLayout>
+                        <StackLayout Padding="0,25,0,0" WidthRequest="350" HorizontalOptions="Center">
+                            <Label Text="FirstName"></Label>
+                            <Entry Text="{Binding Name}"></Entry>
+                        </StackLayout>
+                        <StackLayout WidthRequest="350" HorizontalOptions="Center">
+                            <Label Text="LastName" Padding="0,25,0,0"></Label>
+                            <Entry Text="{Binding Race}"></Entry>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
+                            <Picker Title="Gender" SelectedItem="{Binding Gender}">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Male</x:String>
+                                        <x:String>Female</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
+                            <Label Text="Birthday"></Label>
+                            <DatePicker Date="{Binding DateOfBirth}" Format="dd-MM-yyyy"></DatePicker>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+                <StackLayout>
+                    <Button Text="Add Dog" Style="{StaticResource formButtonStye}" Command="{Binding AddDogCommand}" />
                 </StackLayout>
-                <StackLayout Padding="0,25,0,0" WidthRequest="350" HorizontalOptions="Center">
-                    <Label Text="FirstName"></Label>
-                    <Entry Text="{Binding Name}"></Entry>
-                </StackLayout>
-                <StackLayout WidthRequest="350" HorizontalOptions="Center">
-                    <Label Text="LastName" Padding="0,25,0,0"></Label>
-                    <Entry Text="{Binding Race}"></Entry>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal" WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
-                    <Picker Title="Gender" SelectedItem="{Binding Gender}">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>Male</x:String>
-                                <x:String>Female</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
-                </StackLayout>
-                <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
-                    <Label Text="Birthday"></Label>
-                    <DatePicker Date="{Binding DateOfBirth}" Format="dd-MM-yyyy"></DatePicker>
-                </StackLayout>
-                <Button Text="Add Dog" Margin="0,50,0,25" Command="{Binding AddDogCommand}"></Button>
             </StackLayout>
-        </ScrollView>
+        </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>

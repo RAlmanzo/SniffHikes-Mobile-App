@@ -2,56 +2,61 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:MDE.Project.Rosseel_Almanzo.ViewModels" x:DataType="viewmodels:RegisterViewModel"
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.RegisterPage"
-             BackgroundImageSource="sky.jpg">
+             BackgroundImageSource="sky.jpg"
+             Title="Register">
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout>
-                <StackLayout HeightRequest="200" Orientation="Horizontal" Padding="0,25,0,0">
-                    <Frame Padding="0" CornerRadius="100" IsClippedToBounds="True">
-                        <Image Source="https://source.unsplash.com/user/c_v_r/1900x800" WidthRequest="200" HeightRequest="200"></Image>
-                    </Frame>
-                    <Button Text="Add picture" HorizontalOptions="EndAndExpand" Margin="0,20,0,0"></Button>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout>
+                    <StackLayout HeightRequest="200" Orientation="Horizontal" Padding="0,25,0,0" HorizontalOptions="CenterAndExpand">
+                        <Frame Padding="0" CornerRadius="100" IsClippedToBounds="True">
+                            <Image Source="loooogin.jpg" WidthRequest="200" HeightRequest="200"></Image>
+                        </Frame>
+                        <Button Text="Add picture" HeightRequest="50" Style="{StaticResource formButtonStye}"></Button>
+                    </StackLayout>
+                    <StackLayout Padding="0,25,0,0" WidthRequest="350" HorizontalOptions="Center">
+                        <Label Text="FirstName"></Label>
+                        <Entry Text="{Binding FirstName}"></Entry>
+                    </StackLayout>
+                    <StackLayout WidthRequest="350" HorizontalOptions="Center">
+                        <Label Text="LastName" Padding="0,25,0,0"></Label>
+                        <Entry Text="{Binding LastName}"></Entry>
+                    </StackLayout>
+                    <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
+                        <Label Text="Email"></Label>
+                        <Entry Text="{Binding Email}"></Entry>
+                    </StackLayout>
+                    <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
+                        <Label Text="City"></Label>
+                        <Entry Text="{Binding City}"></Entry>
+                    </StackLayout>
+                    <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
+                        <Label Text="Country"></Label>
+                        <Entry Text="{Binding Country}"></Entry>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
+                        <Picker Title="Gender" SelectedItem="{Binding Gender}">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Male</x:String>
+                                    <x:String>Female</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </StackLayout>
+                    <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
+                        <Label Text="Birthday"></Label>
+                        <DatePicker Date="{Binding DateOfBirth}" Format="dd-MM-yyyy"></DatePicker>
+                    </StackLayout>
+                    <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
+                        <Label Text="Password"></Label>
+                        <Entry IsPassword="True" Text="{Binding Password}"></Entry>
+                    </StackLayout>
                 </StackLayout>
-                <StackLayout Padding="0,25,0,0" WidthRequest="350" HorizontalOptions="Center">
-                    <Label Text="FirstName"></Label>
-                    <Entry Text="{Binding FirstName}"></Entry>
-                </StackLayout>
-                <StackLayout WidthRequest="350" HorizontalOptions="Center">
-                    <Label Text="LastName" Padding="0,25,0,0"></Label>
-                    <Entry Text="{Binding LastName}"></Entry>
-                </StackLayout>
-                <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
-                    <Label Text="Email"></Label>
-                    <Entry Text="{Binding Email}"></Entry>
-                </StackLayout>
-                <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
-                    <Label Text="City"></Label>
-                    <Entry Text="{Binding City}"></Entry>
-                </StackLayout>
-                <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
-                    <Label Text="Country"></Label>
-                    <Entry Text="{Binding Country}"></Entry>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal" WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
-                    <Picker Title="Gender" SelectedItem="{Binding Gender}">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>Male</x:String>
-                                <x:String>Female</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
-                </StackLayout>
-                <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
-                    <Label Text="Birthday"></Label>
-                    <DatePicker Date="{Binding DateOfBirth}" Format="dd-MM-yyyy"></DatePicker>
-                </StackLayout>
-                <StackLayout WidthRequest="350" HorizontalOptions="Center" Padding="0,10,0,0">
-                    <Label Text="Password"></Label>
-                    <Entry IsPassword="True" Text="{Binding Password}"></Entry>
-                </StackLayout>
-                <Button Text="Register" Margin="0,50,0,25" Command="{Binding RegisterCommand}"></Button>
+            </ScrollView>
+            <StackLayout Orientation="Horizontal" BackgroundColor="Black">
+                <Button Text="Register" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding RegisterCommand}"></Button>
             </StackLayout>
-        </ScrollView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

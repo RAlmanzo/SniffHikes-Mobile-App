@@ -107,6 +107,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             _eventsService = eventsService;
             Images = new ObservableCollection<Domain.Models.Image>();
             Comments = new ObservableCollection<Comment>();
+            DateEvent = DateTime.Now;
         }
 
         public ICommand CreateEventCommand
@@ -145,6 +146,17 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command( () =>
                 {
                     
+                });
+            }
+        }
+
+        public ICommand CancelCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<EventsViewModel>();
                 });
             }
         }

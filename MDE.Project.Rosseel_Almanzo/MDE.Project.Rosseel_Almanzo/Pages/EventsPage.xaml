@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.EventsPage"
              xmlns:local="clr-namespace:MDE.Project.Rosseel_Almanzo.Pages"
+            Title="Events"
+            NavigationPage.HasBackButton="False"
             NavigationPage.HasNavigationBar="true"
             BarBackgroundColor="Black"
             SelectedTabColor="LimeGreen"
@@ -11,7 +13,7 @@
             android:TabbedPage.ToolbarPlacement="Bottom">
     <!--Pages can be added as references or inline-->
     <ContentPage Title="Events" 
-                 IconImageSource="AFreedomPath" 
+                 IconImageSource="lefticon.png" 
                  BackgroundImageSource="sky.jpg">
         <ListView x:Name="lstItems" ItemsSource="{Binding Events}" HasUnevenRows="True" SelectedItem="{Binding SelectedEvent}">
             <ListView.ItemTemplate>
@@ -24,7 +26,8 @@
                                     <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="150"/>
                                     <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
                                 <Grid.Padding>0,20,0,0</Grid.Padding>
@@ -36,7 +39,7 @@
                                 </StackLayout>
 
                                 <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Title}" Style="{StaticResource baseLabelStyle}" FontSize="20" Padding="25,0,0,0" TextDecorations="Underline"></Label>
-                                <Label Grid.Row="1" Grid.Column="1"  Text="{Binding Description}" FontSize="Subtitle" Style="{StaticResource baseLabelStyle}"></Label>
+                                <Label Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"  Text="{Binding Description}" FontSize="Subtitle" Style="{StaticResource baseLabelStyle}" Padding="10"></Label>
                             </Grid>
                         </Frame>
                     </ViewCell>
@@ -44,7 +47,6 @@
             </ListView.ItemTemplate>
         </ListView>
     </ContentPage>
-
-    <local:MyEventsPage></local:MyEventsPage>
     <local:CreateEventPage></local:CreateEventPage>
+    <local:MyEventsPage></local:MyEventsPage>
 </TabbedPage>
