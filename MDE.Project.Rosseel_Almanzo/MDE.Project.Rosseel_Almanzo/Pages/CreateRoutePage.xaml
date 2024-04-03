@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.CreateRoutePage"
              Title="Create"
-             IconImageSource="AFreedomPath" 
+             NavigationPage.HasBackButton="False"
+             IconImageSource="addicon.png" 
              BackgroundImageSource="sky.jpg">
     <ContentPage.Content>
         <StackLayout>
@@ -43,6 +44,7 @@
             <StackLayout Orientation="Horizontal" BackgroundColor="Black">
                 <Button Text="Record" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding RecordRouteCommand}"></Button>
                 <Button Text="Create" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding CreateRouteCommand}"></Button>
+                <Button Text="Cancel" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding CancelCommand}"></Button>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

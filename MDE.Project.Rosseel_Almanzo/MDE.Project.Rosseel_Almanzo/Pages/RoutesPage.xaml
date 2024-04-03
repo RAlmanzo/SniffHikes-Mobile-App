@@ -4,14 +4,14 @@
             x:Class="MDE.Project.Rosseel_Almanzo.Pages.RoutesPage"
             xmlns:local="clr-namespace:MDE.Project.Rosseel_Almanzo.Pages"
             Title="Routes"
-            NavigationPage.HasNavigationBar="true"
+            NavigationPage.HasBackButton="False"
             BarBackgroundColor="Black"
             SelectedTabColor="LimeGreen"
             UnselectedTabColor="White"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-            android:TabbedPage.ToolbarPlacement="Bottom">       
+            android:TabbedPage.ToolbarPlacement="Bottom">
     <ContentPage Title="Routes" 
-             IconImageSource="login.jpg" 
+             IconImageSource="lefticon.png" 
              BackgroundImageSource="sky.jpg">
         <ListView x:Name="lstItems" ItemsSource="{Binding Routes}" HasUnevenRows="True" SelectedItem="{Binding SelectedRoute}">
             <ListView.ItemTemplate>
@@ -45,7 +45,6 @@
             </ListView.ItemTemplate>
         </ListView>
     </ContentPage>
-
-    <local:MyRoutesPage></local:MyRoutesPage>
     <local:CreateRoutePage></local:CreateRoutePage>
+    <local:MyRoutesPage></local:MyRoutesPage>
 </TabbedPage>
