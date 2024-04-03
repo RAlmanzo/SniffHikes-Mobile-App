@@ -1,6 +1,7 @@
 ﻿using FreshMvvm;
 using MDE.Project.Rosseel_Almanzo.Domain.Models;
 using MDE.Project.Rosseel_Almanzo.Domain.Services;
+using MDE.Project.Rosseel_Almanzo.Domain.Services.Validators;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,6 +22,61 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private DateTime dateCreated;
         private ObservableCollection<Domain.Models.Image> images;
         private ObservableCollection<Comment> comments;
+        private string titleError;
+        private string descriptionError;
+        private string streetError;
+        private string cityError;
+        private string countryError;
+
+        public string TitleError
+        {
+            get => titleError;
+            set
+            {
+                titleError = value;
+                RaisePropertyChanged(nameof(TitleError));
+            }
+        }
+
+        public string DescriptionError
+        {
+            get => descriptionError;
+            set
+            {
+                descriptionError = value;
+                RaisePropertyChanged(nameof(DescriptionError));
+            }
+        }
+
+        public string StreetError
+        {
+            get => streetError;
+            set
+            {
+                streetError = value;
+                RaisePropertyChanged(nameof(StreetError));
+            }
+        }
+
+        public string CityError
+        {
+            get => cityError;
+            set
+            {
+                cityError = value;
+                RaisePropertyChanged(nameof(CityError));
+            }
+        }
+
+        public string CountryError
+        {
+            get => countryError;
+            set
+            {
+                countryError = value;
+                RaisePropertyChanged(nameof(CountryError));
+            }
+        }
 
         public ObservableCollection<Comment> Comments
         {
@@ -129,11 +185,14 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         Comments = Comments ?? new ObservableCollection<Comment>(),
                     };
 
-                    await _routesService.CreateRouteAsync(newRoute);
-                    //var eventsViewModel = new EventsViewModel();
-                    //eventsViewModel.MyEvents.Add(newEvent);
-                    //await CoreMethods.PushPageModel<EventsViewModel>(eventsViewModel);
-                    await CoreMethods.PushPageModel<RoutesViewModel>();
+                    if (Validate(newRoute))
+                    {
+                        await _routesService.CreateRouteAsync(newRoute);
+                        //var eventsViewModel = new EventsViewModel();
+                        //eventsViewModel.MyEvents.Add(newEvent);
+                        //await CoreMethods.PushPageModel<EventsViewModel>(eventsViewModel);
+                        await CoreMethods.PushPageModel<RoutesViewModel>();
+                    }                 
                 });
             }
         }
@@ -169,6 +228,43 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     await CoreMethods.PushPageModel<RoutesViewModel>();
                 });
             }
+        }
+
+        private bool Validate(Route route)
+        {
+
+            var validator = new RoutesValidator();
+
+            var result = validator.Validate(route);
+
+            foreach (var error in result.Errors)
+            {
+                if (error.PropertyName == nameof(Title))
+                {
+                    TitleError = error.ErrorMessage;
+                }
+
+                if (error.PropertyName == nameof(Description))
+                {
+                    DescriptionError = error.ErrorMessage;
+                }
+
+                if (error.PropertyName == nameof(Street))
+                {
+                    StreetError = error.ErrorMessage;
+                }
+
+                if (error.PropertyName == nameof(City))
+                {
+                    CityError = error.ErrorMessage;
+                }
+
+                if (error.PropertyName == nameof(Country))
+                {
+                    CountryError = error.ErrorMessage;
+                }
+            }
+            return result.IsValid;
         }
     }
 }

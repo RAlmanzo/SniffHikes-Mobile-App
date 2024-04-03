@@ -6,9 +6,9 @@ using System.Text;
 
 namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Validators
 {
-    public class EventsValidator : AbstractValidator<Event>
+    public class RoutesValidator : AbstractValidator<Route>
     {
-        public EventsValidator()
+        public RoutesValidator()
         {
             RuleFor(x => x.Title)
                 .NotEmpty()
@@ -35,16 +35,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Validators
             RuleFor(x => x.Country)
                 .NotEmpty()
                 .WithMessage("Country is required");
-
-            RuleFor(x => x.DateEvent)
-                .NotNull()
-                .Must(BeValidDate)
-                .WithMessage("DateEvent cant be in de past");
-        }
-
-        private bool BeValidDate(DateTime dateOfBirth)
-        {
-            return dateOfBirth > DateTime.Now;
         }
     }
 }
