@@ -20,31 +20,37 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                        <StackLayout Style="{StaticResource createFormStyle}">
-                            <Label Text="Title" Style="{StaticResource formLabelStyle}"></Label>
-                            <Entry Text="{Binding Title}"></Entry>
-                        </StackLayout>
-                        <StackLayout Style="{StaticResource createFormStyle}">
-                            <Label Text="Description" Style="{StaticResource formLabelStyle}"></Label>
-                            <Entry Text="{Binding Description}"></Entry>
-                        </StackLayout>
-                        <StackLayout Style="{StaticResource createFormStyle}">
-                            <Label Text="Street" Style="{StaticResource formLabelStyle}"></Label>
-                            <Entry Text="{Binding Street}"></Entry>
-                        </StackLayout>
-                        <StackLayout Style="{StaticResource createFormStyle}">
-                            <Label Text="City" Style="{StaticResource formLabelStyle}"></Label>
-                            <Entry Text="{Binding City}"></Entry>
-                        </StackLayout>
-                        <StackLayout Style="{StaticResource createFormStyle}">
-                            <Label Text="Country" Style="{StaticResource formLabelStyle}"></Label>
-                            <Entry Text="{Binding Country}"></Entry>
-                        </StackLayout>
-                        <StackLayout Style="{StaticResource createFormStyle}">
-                            <Label Text="Date of event" Style="{StaticResource formLabelStyle}"></Label>
-                            <DatePicker Date="{Binding DateEvent}" Format="dd-MM-yyyy"></DatePicker>
-                        </StackLayout>
+                    <StackLayout Style="{StaticResource createFormStyle}">
+                        <Label Text="Title" Style="{StaticResource formLabelStyle}"></Label>
+                        <Entry Text="{Binding Title}"></Entry>
+                        <Label Text="{Binding TitleError}" TextColor="red"></Label>
                     </StackLayout>
+                    <StackLayout Style="{StaticResource createFormStyle}">
+                        <Label Text="Description" Style="{StaticResource formLabelStyle}"></Label>
+                        <Entry Text="{Binding Description}"></Entry>
+                        <Label Text="{Binding DescriptionError}" TextColor="red"></Label>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource createFormStyle}">
+                        <Label Text="Street" Style="{StaticResource formLabelStyle}"></Label>
+                        <Entry Text="{Binding Street}"></Entry>
+                        <Label Text="{Binding StreetError}" TextColor="red"></Label>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource createFormStyle}">
+                        <Label Text="City" Style="{StaticResource formLabelStyle}"></Label>
+                        <Entry Text="{Binding City}"></Entry>
+                        <Label Text="{Binding CityError}" TextColor="red"></Label>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource createFormStyle}">
+                        <Label Text="Country" Style="{StaticResource formLabelStyle}"></Label>
+                        <Entry Text="{Binding Country}"></Entry>
+                        <Label Text="{Binding CountryError}" TextColor="red"></Label>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource createFormStyle}">
+                        <Label Text="Date of event" Style="{StaticResource formLabelStyle}"></Label>
+                        <DatePicker Date="{Binding DateEvent}" Format="dd-MM-yyyy"></DatePicker>
+                        <Label Text="{Binding DateError}" TextColor="red"></Label>
+                    </StackLayout>
+                </StackLayout>
             </ScrollView>
             <StackLayout Orientation="Horizontal" BackgroundColor="Black">
                 <Button Text="Create" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding CreateEventCommand}"></Button>

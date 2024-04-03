@@ -22,9 +22,9 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Validators
 
             RuleFor(x => x.Email)
                 .NotEmpty()
-                .WithMessage("Email is verplicht")
+                .WithMessage("Email is required")
                 .EmailAddress()
-                .WithMessage("Email moet een geldig formaat hebben");
+                .WithMessage("Must be valid emailaddress");
 
             RuleFor(x => x.Password)
                 .NotEmpty()
@@ -34,7 +34,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Validators
             RuleFor(x => x.DateOfBirth)
                 .NotNull()
                 .Must(BeValidDateOfBirth)
-                .WithMessage("DateOfBirth mag niet in de toekomst liggen");
+                .WithMessage("DateOfBirth cant be in the future");
         }
 
         private bool BeValidDateOfBirth(DateTime dateOfBirth)

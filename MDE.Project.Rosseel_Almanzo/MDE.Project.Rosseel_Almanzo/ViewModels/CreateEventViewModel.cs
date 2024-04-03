@@ -1,11 +1,13 @@
 ﻿using FreshMvvm;
 using MDE.Project.Rosseel_Almanzo.Domain.Models;
 using MDE.Project.Rosseel_Almanzo.Domain.Services;
+using MDE.Project.Rosseel_Almanzo.Domain.Services.Validators;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
@@ -21,6 +23,72 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private DateTime dateEvent;
         private ObservableCollection<Domain.Models.Image> images;
         private ObservableCollection<Comment> comments;
+        private string titleError;
+        private string descriptionError;
+        private string streetError;
+        private string cityError;
+        private string countryError;
+        private string dateError;
+
+        public string TitleError
+        {
+            get => titleError;
+            set
+            {
+                titleError = value;
+                RaisePropertyChanged(nameof(TitleError));
+            }
+        }
+
+        public string DescriptionError
+        {
+            get => descriptionError;
+            set
+            {
+                descriptionError = value;
+                RaisePropertyChanged(nameof(DescriptionError));
+            }
+        }
+
+        public string StreetError
+        {
+            get => streetError;
+            set
+            {
+                streetError = value;
+                RaisePropertyChanged(nameof(StreetError));
+            }
+        }
+
+        public string CityError
+        {
+            get => cityError;
+            set
+            {
+                cityError = value;
+                RaisePropertyChanged(nameof(CityError));
+            }
+        }
+
+        public string CountryError
+        {
+            get => countryError;
+            set
+            {
+                countryError = value;
+                RaisePropertyChanged(nameof(CountryError));
+            }
+        }
+
+        public string DateError
+        {
+            get => dateError;
+            set
+            {
+                dateError = value;
+                RaisePropertyChanged(nameof(DateError));
+            }
+        }
 
         public ObservableCollection<Comment> Comments
         {
@@ -130,11 +198,14 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         Comments = Comments ?? new ObservableCollection<Comment>(),
                     };
 
-                    await _eventsService.CreateEventAsync(newEvent);
-                    //var eventsViewModel = new EventsViewModel();
-                    //eventsViewModel.MyEvents.Add(newEvent);
-                    //await CoreMethods.PushPageModel<EventsViewModel>(eventsViewModel);
-                    await CoreMethods.PushPageModel<EventsViewModel>();
+                    if (Validate(newEvent))
+                    {
+                        await _eventsService.CreateEventAsync(newEvent);
+                        //var eventsViewModel = new EventsViewModel();
+                        //eventsViewModel.MyEvents.Add(newEvent);
+                        //await CoreMethods.PushPageModel<EventsViewModel>(eventsViewModel);
+                        await CoreMethods.PushPageModel<EventsViewModel>();
+                    }                  
                 });
             }
         }
@@ -159,6 +230,48 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     await CoreMethods.PushPageModel<EventsViewModel>();
                 });
             }
+        }
+
+        private bool Validate(Event currentEvent)
+        {
+
+            var validator = new EventsValidator();
+
+            var result = validator.Validate(currentEvent);
+
+            foreach (var error in result.Errors)
+            {
+                if (error.PropertyName == nameof(Title))
+                {
+                    TitleError = error.ErrorMessage;
+                }
+
+                if (error.PropertyName == nameof(Description))
+                {
+                    DescriptionError = error.ErrorMessage;
+                }
+
+                if (error.PropertyName == nameof(Street))
+                {
+                    StreetError = error.ErrorMessage;
+                }
+
+                if (error.PropertyName == nameof(City))
+                {
+                    CityError = error.ErrorMessage;
+                }
+
+                if (error.PropertyName == nameof(Country))
+                {
+                    CountryError = error.ErrorMessage;
+                }
+
+                if (error.PropertyName == nameof(DateEvent))
+                {
+                    DateError = error.ErrorMessage;
+                }
+            }
+            return result.IsValid;
         }
     }
 }
