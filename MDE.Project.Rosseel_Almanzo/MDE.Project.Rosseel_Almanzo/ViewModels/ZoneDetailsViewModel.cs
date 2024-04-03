@@ -181,5 +181,16 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 });
             }
         }
+
+        public ICommand BackCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<ZonesViewModel>();
+                });
+            }
+        }
     }
 }
