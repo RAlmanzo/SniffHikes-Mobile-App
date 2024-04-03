@@ -4,6 +4,7 @@
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.EventsPage"
              xmlns:local="clr-namespace:MDE.Project.Rosseel_Almanzo.Pages"
             Title="Events"
+            NavigationPage.HasBackButton="False"
             NavigationPage.HasNavigationBar="true"
             BarBackgroundColor="Black"
             SelectedTabColor="LimeGreen"
@@ -12,7 +13,7 @@
             android:TabbedPage.ToolbarPlacement="Bottom">
     <!--Pages can be added as references or inline-->
     <ContentPage Title="Events" 
-                 IconImageSource="login.jpg" 
+                 IconImageSource="lefticon.png" 
                  BackgroundImageSource="sky.jpg">
         <ListView x:Name="lstItems" ItemsSource="{Binding Events}" HasUnevenRows="True" SelectedItem="{Binding SelectedEvent}">
             <ListView.ItemTemplate>
@@ -46,7 +47,6 @@
             </ListView.ItemTemplate>
         </ListView>
     </ContentPage>
-
-    <local:MyEventsPage></local:MyEventsPage>
     <local:CreateEventPage></local:CreateEventPage>
+    <local:MyEventsPage></local:MyEventsPage>
 </TabbedPage>
