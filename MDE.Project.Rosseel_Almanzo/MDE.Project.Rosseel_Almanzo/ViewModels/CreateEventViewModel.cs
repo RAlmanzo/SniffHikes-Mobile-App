@@ -149,5 +149,16 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 });
             }
         }
+
+        public ICommand CancelCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<EventsViewModel>();
+                });
+            }
+        }
     }
 }
