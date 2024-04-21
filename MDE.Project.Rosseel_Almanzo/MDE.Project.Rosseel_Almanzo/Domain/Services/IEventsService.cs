@@ -8,10 +8,12 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
 {
     public interface IEventsService
     {
-        Task<Event> GetEventByIdAsync(int id);
-        Task<List<Event>> GetAllEventsAsync();
+        Task<Event> GetEventByIdAsync(string id);
+        Task <List<BaseModel<Event>>> GetAllEventsAsync();
         //Task<List<Image>> GetEventImagesAsync(int id);
         Task<List<Event>> GetAllEventsByUserId(int id);
         Task<bool> CreateEventAsync(Event newEvent);
+        Task<bool> AddCommentAsync(string id, Comment comment);
+
     }
 }
