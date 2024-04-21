@@ -184,10 +184,8 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    var events = await _eventsService.GetAllEventsAsync();
                     var newEvent = new Event
                     {
-                        Id = events.Count + 1,
                         Title = Title,
                         Description = Description,
                         Street = Street,
