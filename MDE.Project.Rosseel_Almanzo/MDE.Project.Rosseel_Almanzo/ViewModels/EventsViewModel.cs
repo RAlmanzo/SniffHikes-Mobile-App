@@ -15,10 +15,10 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     {
         private readonly IEventsService _eventsService;
 
-        private ObservableCollection<Event> events;
+        private ObservableCollection<BaseModel<Event>> events;
         private ObservableCollection<Event> myEvents;
         private ObservableCollection<Domain.Models.Image> images;
-        private Event selectedEvent;
+        private BaseModel<Event> selectedEvent;
 
         public ObservableCollection<Domain.Models.Image> Images 
         { 
@@ -40,7 +40,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public ObservableCollection<Event> Events 
+        public ObservableCollection<BaseModel<Event>> Events 
         { 
             get => events; 
             set
@@ -69,15 +69,15 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command(async () =>
                 {
                     //Images = await _eventsService.GetEventImagesByEventIdAsync();
-                    List<Event> fetchedEvents = await _eventsService.GetAllEventsAsync();
-                    Events = new ObservableCollection<Event>(fetchedEvents);
+                    List<BaseModel<Event>> fetchedEvents = await _eventsService.GetAllEventsAsync();
+                    Events = new ObservableCollection<BaseModel<Event>>(fetchedEvents);
                     //List<Event> myEvents = await _eventsService.GetAllEventsByUserId(id);
                     //Events = new ObservableCollection<Event>(fetchedEvents);
                 });
             }
         }
 
-        public Event SelectedEvent
+        public BaseModel<Event> SelectedEvent
         {
             get => selectedEvent;
             set
@@ -96,7 +96,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command(async () =>
                 {
                     if (SelectedEvent != null)
-                        await CoreMethods.PushPageModel<EventDetailViewModel>(SelectedEvent.Id, false, true);
+                        await CoreMethods.PushPageModel<EventDetailViewModel>(SelectedEvent.Key, false, true);
                 });
             }
         }
