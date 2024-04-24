@@ -15,19 +15,16 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
     {
         private static List<Event> _events;
         private readonly FirebaseClient _client;
-        private readonly FirebaseClient _storageClient;
 
         public MockEventsService()
         {
             _client = new FirebaseClient("https://sniffhikes-8e9a6-default-rtdb.europe-west1.firebasedatabase.app/");
-            _storageClient = new FirebaseClient("gs://sniffhikes-8e9a6.appspot.com");
         }
 
         public async Task<bool> CreateEventAsync(Event newEvent)
         {
             try
             {
-                var image = _storageClient.Child("APowertraining.jpeg");
                 //_events.Add(newEvent);
                 await _client.Child("Events")
                     .PostAsync(newEvent);
