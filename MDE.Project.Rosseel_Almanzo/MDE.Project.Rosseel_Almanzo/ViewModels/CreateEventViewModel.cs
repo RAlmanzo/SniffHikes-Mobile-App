@@ -15,6 +15,8 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     public class CreateEventViewModel : FreshBasePageModel
     {
         private readonly IEventsService _eventsService;
+        private readonly IImageService _imageService;
+
         private string title;
         private string description;
         private string street;
@@ -170,12 +172,13 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public CreateEventViewModel(IEventsService eventsService)
+        public CreateEventViewModel(IEventsService eventsService, IImageService imageService)
         {
             _eventsService = eventsService;
             Images = new ObservableCollection<Domain.Models.Image>();
             Comments = new ObservableCollection<Comment>();
             DateEvent = DateTime.Now;
+            _imageService = imageService;
         }
 
         public ICommand CreateEventCommand
@@ -208,12 +211,32 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public ICommand AddImage
+        public ICommand AddImageCommand
         {
             get
             {
-                return new Command( () =>
+                return new Command( async () =>
                 {
+                    string action = await CoreMethods.DisplayActionSheet("Select an option", "Annuleren", null, "Take picture", "Select picture");
+
+                    if (action == "Take picture")
+                    {
+                        var imageUrl = await _imageService.TakePhotoAsync();
+                        var image = new Domain.Models.Image
+                        {
+                            ImagePath = imageUrl,
+                        };
+                        Images.Add(image);
+                    }
+                    else
+                    {
+                        var imageUrl = await _imageService.PickPhotoAsync();
+                        var image = new Domain.Models.Image
+                        {
+                            ImagePath = imageUrl,
+                        };
+                        Images.Add(image);
+                    }
                     
                 });
             }

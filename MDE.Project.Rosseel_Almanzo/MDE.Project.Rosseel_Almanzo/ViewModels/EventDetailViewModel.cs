@@ -174,7 +174,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                                 await Map.OpenAsync(locationCoordinates, new MapLaunchOptions
                                 {
                                     Name = item.Title,
-                                    NavigationMode = NavigationMode.None,
+                                    NavigationMode = NavigationMode.Driving,
                                 });
                             }
                             catch (Exception ex)
