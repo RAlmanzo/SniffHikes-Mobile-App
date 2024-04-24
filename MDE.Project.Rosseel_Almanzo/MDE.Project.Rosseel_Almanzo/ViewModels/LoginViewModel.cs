@@ -20,6 +20,15 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private string emailError;
         private string passwordError;
 
+        private bool isLoggedIn;
+
+        public bool IsLoggedIn
+        {
+            get { return isLoggedIn; }
+            set { isLoggedIn = value; RaisePropertyChanged(nameof(IsLoggedIn)); }
+        }
+
+
         public string EmailError
         {
             get => emailError;
@@ -77,10 +86,20 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     {
                         var isLogged = true;
                         Application.Current.Properties[ISLOGGED] = isLogged;
-                        await CoreMethods.PushPageModel<HomeViewModel>();
+                        await CoreMethods.PopPageModel();
+                        
                     }                 
                 });
             }
+        }
+
+        public override void Init(object initData)
+        {
+            base.Init(initData);
+
+            //Id = (int)initData;
+            IsLoggedIn = !Application.Current.Properties.ContainsKey(ISLOGGED) || !Convert.ToBoolean(Application.Current.Properties[ISLOGGED]) ? false : true;
+
         }
 
         public ICommand RegisterCommand

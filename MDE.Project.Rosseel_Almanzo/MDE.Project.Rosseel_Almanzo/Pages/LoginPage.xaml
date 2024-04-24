@@ -8,6 +8,7 @@
         <ScrollView>
             <Grid>
                 <StackLayout>
+                    <Label Text="{Binding IsLoggedIn}" TextColor="White"></Label>
                     <Frame BackgroundColor="Transparent">
                         <Label Text="Login" Style="{StaticResource h1}" ></Label>
                     </Frame>

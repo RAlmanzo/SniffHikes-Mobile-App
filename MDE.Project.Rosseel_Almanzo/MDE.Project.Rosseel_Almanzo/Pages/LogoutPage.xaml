@@ -6,8 +6,7 @@
              BackgroundImageSource="logout.jpg">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="See you soon!" FontSize="60" HorizontalOptions="CenterAndExpand" TextColor="GreenYellow" FontFamily="GrenzeGotisch-Regular.ttf"></Label>
-            <Button Text="Logout" Command="{Binding LogoutCommand}"></Button>
+            <Label Text="Je bent nu afgemeld. See you soon!" FontSize="60" HorizontalOptions="CenterAndExpand" TextColor="GreenYellow" FontFamily="GrenzeGotisch-Regular.ttf"></Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

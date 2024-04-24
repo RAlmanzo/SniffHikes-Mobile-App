@@ -28,6 +28,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             }
             catch (FeatureNotSupportedException fnsEx)
             {
+                throw;
                 return fnsEx.Message;
                 // Feature is not supported on the device
             }
@@ -38,8 +39,9 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             }
             catch (Exception ex)
             {
+                //Console.WriteLine($"CapturePhotoAsync THREW: {ex.Message}");µ
+                throw;
                 return ex.Message;
-                //Console.WriteLine($"CapturePhotoAsync THREW: {ex.Message}");
             }
         }
 

@@ -12,6 +12,7 @@ namespace MDE.Project.Rosseel_Almanzo.Pages
 	{
         public LogoutPage ()
 		{
+			
 			InitializeComponent ();
 		}
     }

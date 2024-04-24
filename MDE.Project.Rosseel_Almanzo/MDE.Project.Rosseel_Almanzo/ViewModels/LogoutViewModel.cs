@@ -12,6 +12,19 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private const string ISLOGGED = "islogged";
         private bool isLogged = true;
 
+        public override void Init(object initData)
+        {
+            base.Init(initData);
+
+           
+        }
+
+        protected override void ViewIsAppearing(object sender, EventArgs e)
+        {
+            base.ViewIsAppearing(sender, e);
+
+            LogoutCommand.Execute(null);
+        }
         public ICommand LogoutCommand
         {
             //get
@@ -40,24 +53,12 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    bool confirmed = await CoreMethods.DisplayAlert("Logout", "Are you sure you want to sign out?", "Yes", "Cancel");
-                    if (confirmed)
+
+                    if (Application.Current.Properties.ContainsKey(ISLOGGED)
+                    && Convert.ToBoolean(Application.Current.Properties[ISLOGGED]) == true)
                     {
-                        if (!Application.Current.Properties.ContainsKey(ISLOGGED))
-                        {
-                            await CoreMethods.PushPageModel<LoginViewModel>();
-                        }
-                        else
-                        {
-                            var result = Convert.ToBoolean(Application.Current.Properties[ISLOGGED]);
-                            if (Convert.ToBoolean(Application.Current.Properties[ISLOGGED]) == isLogged)
-                            {
-                                isLogged = false;
-                                //Application.Current.Properties.Remove(ISLOGGED);
-                                Application.Current.Properties[ISLOGGED] = isLogged;
-                                await CoreMethods.PushPageModel<LoginViewModel>();
-                            }
-                        }
+                        Application.Current.Properties[ISLOGGED] = false;
+                        await Application.Current.SavePropertiesAsync();
                     }
                 });
             }
