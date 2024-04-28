@@ -53,8 +53,9 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                             if (Convert.ToBoolean(Application.Current.Properties[ISLOGGED]) == isLogged)
                             {
                                 isLogged = false;
-                                //Application.Current.Properties.Remove(ISLOGGED);
-                                Application.Current.Properties[ISLOGGED] = isLogged;
+                                Application.Current.Properties.Remove(ISLOGGED);
+                                //Application.Current.Properties[ISLOGGED] = isLogged;
+                                await Application.Current.SavePropertiesAsync();
                                 await CoreMethods.PushPageModel<LoginViewModel>();
                             }
                         }
