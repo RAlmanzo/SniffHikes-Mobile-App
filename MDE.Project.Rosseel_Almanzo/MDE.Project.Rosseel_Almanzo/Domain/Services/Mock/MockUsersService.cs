@@ -18,7 +18,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             {
                 new User
                 {
-                    Id = 1,
                     FirstName = "John",
                     LastName = "Doe",
                     Email = "john.doe@example.com",
@@ -57,7 +56,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 },
                 new User
                 {
-                    Id = 2,
                     FirstName = "Jane",
                     LastName = "Smith",
                     Email = "jane.smith@example.com",
@@ -69,7 +67,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 },
                 new User
                 {
-                    Id = 3,
                     FirstName = "Michael",
                     LastName = "Johnson",
                     Email = "michael.johnson@example.com",
@@ -81,7 +78,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 },
                 new User
                 {
-                    Id = 4,
                     FirstName = "Emily",
                     LastName = "Brown",
                     Email = "emily.brown@example.com",
@@ -93,7 +89,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 },
                 new User
                 {
-                    Id = 5,
                     FirstName = "William",
                     LastName = "Taylor",
                     Email = "william.taylor@example.com",
@@ -126,7 +121,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
 
         public async Task<User> GetUserByIdAsync(int id)
         {
-            return await Task.FromResult(_users.FirstOrDefault(r => r.Id == id));
+            return await Task.FromResult(_users.FirstOrDefault());
         }
     }
 }
