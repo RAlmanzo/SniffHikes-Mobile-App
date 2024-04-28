@@ -14,28 +14,6 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
         public ICommand LogoutCommand
         {
-            //get
-            //{
-            //    return new Command(async () =>
-            //    {
-            //        if (!Application.Current.Properties.ContainsKey(ISLOGGED))
-            //        {
-
-            //            await CoreMethods.PushPageModel<LoginViewModel>();
-            //        }
-            //        else
-            //        {
-            //            var result = Convert.ToBoolean(Application.Current.Properties[ISLOGGED]);
-            //            if (Convert.ToBoolean(Application.Current.Properties[ISLOGGED]) == isLogged)
-            //            {
-            //                isLogged = false;
-            //                //Application.Current.Properties.Remove(ISLOGGED);
-            //                Application.Current.Properties[ISLOGGED] = isLogged;
-            //                await CoreMethods.PushPageModel<LoginViewModel>();
-            //            }
-            //        }
-            //    });
-            //}
             get
             {
                 return new Command(async () =>
