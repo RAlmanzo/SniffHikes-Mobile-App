@@ -1,4 +1,5 @@
 ﻿using Firebase.Storage;
+using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
-namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
+namespace MDE.Project.Rosseel_Almanzo.Domain.Services
 {
     public class ImageService : IImageService
     {

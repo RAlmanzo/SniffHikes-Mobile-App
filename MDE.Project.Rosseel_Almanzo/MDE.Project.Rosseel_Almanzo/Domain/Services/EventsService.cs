@@ -1,6 +1,7 @@
 ﻿using Firebase.Database;
 using Firebase.Database.Query;
 using MDE.Project.Rosseel_Almanzo.Domain.Models;
+using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
