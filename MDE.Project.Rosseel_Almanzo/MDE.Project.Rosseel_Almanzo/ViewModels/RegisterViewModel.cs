@@ -1,6 +1,7 @@
 ﻿using FreshMvvm;
 using MDE.Project.Rosseel_Almanzo.Domain.Models;
 using MDE.Project.Rosseel_Almanzo.Domain.Services;
+using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Validators;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
     public class RegisterViewModel : FreshBasePageModel
     {
-        private readonly IUsersService _usersService;
+        private readonly IAccountService _accountService;
 
         private string errorText;
         private string firstName;
@@ -167,10 +168,10 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
         public int Id { get; set; }
 
-        public RegisterViewModel(IUsersService usersService)
+        public RegisterViewModel(IUsersService usersService, IAccountService accountService)
         {
-            _usersService = usersService;
             dateOfBirth = DateTime.Now;
+            _accountService = accountService;
         }
 
         public ICommand RegisterCommand 
@@ -179,10 +180,8 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    //var users = await _usersService.GetAllUsersAsync();
                     var newUser = new User
-                    {
-                        
+                    {                       
                         //Id = users.Count +1,
                         FirstName = FirstName,
                         LastName = LastName,
@@ -196,8 +195,16 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
                     if (Validate(newUser))
                     {
-                        await _usersService.CreateUserAsync(newUser);
-                        await CoreMethods.PushPageModel<LoginViewModel>();
+                        var result = await _accountService.Register(newUser);
+                        if(!result)
+                        {
+                            await CoreMethods.DisplayAlert("Error", "Email allready exists", "Ok");
+                        }
+                        else
+                        {
+                            await CoreMethods.DisplayAlert("Registered", "Registration completed", "Ok");
+                            await CoreMethods.PushPageModel<LoginViewModel>();
+                        }                       
                     }                   
                 });
             }
