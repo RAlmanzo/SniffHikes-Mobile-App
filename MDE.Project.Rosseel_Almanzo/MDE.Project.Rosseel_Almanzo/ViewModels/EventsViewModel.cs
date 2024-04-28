@@ -52,7 +52,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
         public EventsViewModel()
         {
-            _eventsService = new MockEventsService();
+            _eventsService = new EventsService();
             myEvents = new ObservableCollection<Event>();
         }
 
