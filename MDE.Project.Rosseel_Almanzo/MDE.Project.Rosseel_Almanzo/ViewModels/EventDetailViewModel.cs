@@ -10,6 +10,7 @@ using Xamarin.Forms;
 using Xamarin.Essentials;
 using Xamarin.Forms.PlatformConfiguration.TizenSpecific;
 using System.Linq;
+using Newtonsoft.Json.Serialization;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
@@ -219,8 +220,10 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         Content = "verrygood",
                     };
 
-                    var result = _eventsService.AddCommentAsync(id, comment);
-                    //await CoreMethods.PushPageModel<EventsViewModel>();
+                    if (!await _eventsService.AddCommentAsync(id, comment)) 
+                    {
+                        await CoreMethods.DisplayAlert("Error","Something went wrong and comment could not be added", "Ok");
+                    };
                 });
             }
         }
