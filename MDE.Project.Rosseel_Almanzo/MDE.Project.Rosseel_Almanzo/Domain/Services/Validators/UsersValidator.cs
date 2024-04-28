@@ -39,7 +39,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Validators
 
         private bool BeValidDateOfBirth(DateTime dateOfBirth)
         {
-            return dateOfBirth > DateTime.Now;
+            return dateOfBirth < DateTime.Now;
         }
     }
 }
