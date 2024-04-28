@@ -179,12 +179,12 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    var users = await _usersService.GetAllUsersAsync();
+                    //var users = await _usersService.GetAllUsersAsync();
                     var newUser = new User
                     {
                         
-                        Id = users.Count +1,
-                        FirstName = this.FirstName,
+                        //Id = users.Count +1,
+                        FirstName = FirstName,
                         LastName = LastName,
                         Email = Email,
                         City = City,
