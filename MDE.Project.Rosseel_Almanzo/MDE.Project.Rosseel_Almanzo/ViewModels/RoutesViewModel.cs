@@ -1,6 +1,5 @@
 ﻿using MDE.Project.Rosseel_Almanzo.Domain.Models;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Mock;
-using MDE.Project.Rosseel_Almanzo.Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,6 +7,7 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using FreshMvvm;
+using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {

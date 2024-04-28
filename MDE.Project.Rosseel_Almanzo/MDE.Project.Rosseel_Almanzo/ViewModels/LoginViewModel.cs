@@ -1,6 +1,7 @@
 ﻿using FreshMvvm;
 using MDE.Project.Rosseel_Almanzo.Domain.Models;
 using MDE.Project.Rosseel_Almanzo.Domain.Services;
+using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Validators;
 using MDE.Project.Rosseel_Almanzo.Pages;
 using System;
@@ -14,6 +15,12 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     public class LoginViewModel : FreshBasePageModel
     {
         private const string ISLOGGED = "islogged";
+        private readonly IAccountService _accountService;
+
+        public LoginViewModel(IAccountService accountService)
+        {
+            _accountService = accountService;
+        }
 
         private string email;
         private string password;
@@ -75,9 +82,18 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
                     if (Validate(user))
                     {
-                        var isLogged = true;
-                        Application.Current.Properties[ISLOGGED] = isLogged;
-                        await CoreMethods.PushPageModel<HomeViewModel>();
+                        var token = await _accountService.Login(user.Email, user.Password);
+
+                        if(!string.IsNullOrWhiteSpace(token))
+                        {
+                            var isLogged = true;
+                            Application.Current.Properties[ISLOGGED] = isLogged;
+                            await CoreMethods.PushPageModel<HomeViewModel>();
+                        }
+                        else
+                        {
+                            await CoreMethods.DisplayAlert("Error", "Login failed", "ok");
+                        }                     
                     }                 
                 });
             }
