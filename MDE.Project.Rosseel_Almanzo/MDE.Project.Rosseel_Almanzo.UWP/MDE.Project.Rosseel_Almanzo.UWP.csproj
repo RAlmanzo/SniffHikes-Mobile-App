@@ -198,6 +198,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FirebaseAuthentication.net">
+      <Version>3.7.2</Version>
+    </PackageReference>
     <PackageReference Include="FreshMvvm">
       <Version>4.0.1</Version>
     </PackageReference>
