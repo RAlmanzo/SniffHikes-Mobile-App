@@ -15,6 +15,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Models
         public string Country { get; set; }
         public DateTime DateEvent { get; set; }
         public IEnumerable<Comment> Comments { get; set; }
-        public int OrganizerId { get; set; }
+        public string OrganizerId { get; set; }
     }
 }
