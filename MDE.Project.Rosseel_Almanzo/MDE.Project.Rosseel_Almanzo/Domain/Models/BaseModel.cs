@@ -4,9 +4,11 @@ using System.Text;
 
 namespace MDE.Project.Rosseel_Almanzo.Domain.Models
 {
-    public class BaseModel<T>
+    public class BaseModel
     {
-        public string Key { get; set; }
-        public T Value { get; set; }
+        public string Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public Image Image { get; set; }
     }
 }
