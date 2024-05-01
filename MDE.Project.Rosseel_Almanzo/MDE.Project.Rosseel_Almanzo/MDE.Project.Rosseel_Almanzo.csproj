@@ -92,7 +92,7 @@
   <ItemGroup>
     <Folder Include="Assets\Images\" />
     <Folder Include="Fonts\" />
-    <Folder Include="DtoExtensions\" />
+    <Folder Include="ModelExtensions\" />
   </ItemGroup>
 
   <ItemGroup>
