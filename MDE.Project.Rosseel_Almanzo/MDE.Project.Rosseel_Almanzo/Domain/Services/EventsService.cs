@@ -2,6 +2,7 @@
 using Firebase.Database.Query;
 using MDE.Project.Rosseel_Almanzo.Domain.Models;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
+using MDE.Project.Rosseel_Almanzo.Infrastructure.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -61,7 +62,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         public async Task<IEnumerable<BaseModel>> GetAllEventsAsync()
         {
             //get de data
-            var eventsSnapshot = await _client.Child("Events").OnceAsync<Event>();
+            var eventsSnapshot = await _client.Child("Events").OnceAsync<EventDto>();
 
             //map data to event collection
             var events = eventsSnapshot.Select(e => new BaseModel
@@ -79,7 +80,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         public async Task<IEnumerable<BaseModel>> GetAllEventsByUserId(string id)
         {
             //get data
-            var myEventsSnapshot = await _client.Child("Events").OnceAsync<Event>();            
+            var myEventsSnapshot = await _client.Child("Events").OnceAsync<EventDto>();            
             var eventsList = myEventsSnapshot.Where(e => e.Object.OrginazerId == id).ToList();
 
             //map data to events collection
@@ -96,12 +97,25 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
 
         public async Task<Event> GetEventByIdAsync(string id)
         {
-            var eventSnapshot = await _client.Child("Events").Child(id).OnceSingleAsync<Event>();
+            var eventSnapshot = await _client.Child("Events").Child(id).OnceSingleAsync<EventDto>();
 
             if (eventSnapshot != null)
             {
-                return await Task.FromResult(eventSnapshot);
-            }
+                var selectedEvent = new Event
+                {
+                    Id = eventSnapshot.Id,
+                    Title = eventSnapshot.Title,
+                    Description = eventSnapshot.Description,
+                    Street = eventSnapshot.Street,
+                    City = eventSnapshot.City,
+                    Country = eventSnapshot.Country,
+                    DateEvent = eventSnapshot.DateEvent,
+                    OrginazerId = eventSnapshot.OrginazerId,
+                    Images = eventSnapshot.Images,
+                    Comments = eventSnapshot.Comments,
+                };
+                return await Task.FromResult(selectedEvent);
+            };
             return null;
         }
     }
