@@ -145,6 +145,11 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             };
         }
 
+        public Task<bool> AddCommentAsync(string id, Comment comment)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<bool> CreateRouteAsync(Route newRoute)
         {
             try
@@ -171,6 +176,16 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         public async Task<Route> GetRouteByIdAsync(int id)
         {
             return await Task.FromResult(_routes.FirstOrDefault(r => r.Id == id));
+        }
+
+        Task<IEnumerable<BaseModel>> IRoutesService.GetAllRoutesAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<IEnumerable<BaseModel>> IRoutesService.GetAllRoutesByUserId(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
