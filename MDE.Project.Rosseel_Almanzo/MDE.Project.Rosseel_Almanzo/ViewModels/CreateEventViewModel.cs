@@ -201,11 +201,16 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
                     if (Validate(newEvent))
                     {
-                        await _eventsService.CreateEventAsync(newEvent);
-                        //var eventsViewModel = new EventsViewModel();
-                        //eventsViewModel.MyEvents.Add(newEvent);
-                        //await CoreMethods.PushPageModel<EventsViewModel>(eventsViewModel);
-                        await CoreMethods.PushPageModel<EventsViewModel>();
+                        var result = await _eventsService.CreateEventAsync(newEvent);
+                        if (result == "Created")
+                        {
+                            await CoreMethods.DisplayAlert("Succes", "Event succesfull created", "Ok");
+                            await CoreMethods.PushPageModel<EventsViewModel>();
+                        }
+                        else
+                        {
+                            await CoreMethods.DisplayAlert("Failed", result, "Ok");
+                        }
                     }                  
                 });
             }

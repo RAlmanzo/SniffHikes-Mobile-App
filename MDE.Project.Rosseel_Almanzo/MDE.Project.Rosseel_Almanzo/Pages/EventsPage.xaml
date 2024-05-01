@@ -34,12 +34,12 @@
 
                                 <StackLayout Orientation="Horizontal" Padding="15" Grid.Column="0" Grid.Row="1">
                                     <Frame Style="{StaticResource baseImageFrameStyle}">
-                                        <Image Source="loooogin.jpg" Style="{StaticResource baseImageStyle}"></Image>
+                                        <Image Source="{Binding Image.ImagePath}" Style="{StaticResource baseImageStyle}"></Image>
                                     </Frame>
                                 </StackLayout>
 
-                                <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Value.Title}" Style="{StaticResource baseLabelStyle}" FontSize="20" Padding="25,0,0,0" TextDecorations="Underline"></Label>
-                                <Label Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"  Text="{Binding Value.Description}" FontSize="Subtitle" Style="{StaticResource baseLabelStyle}" Padding="10"></Label>
+                                <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Title}" Style="{StaticResource baseLabelStyle}" FontSize="20" Padding="25,0,0,0" TextDecorations="Underline"></Label>
+                                <Label Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"  Text="{Binding Description}" FontSize="Subtitle" Style="{StaticResource baseLabelStyle}" Padding="10"></Label>
                             </Grid>
                         </Frame>
                     </ViewCell>
