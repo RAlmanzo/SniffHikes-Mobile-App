@@ -11,7 +11,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces
         Task<Route> GetRouteByIdAsync(int id);
         Task<IEnumerable<BaseModel>> GetAllRoutesAsync();
         Task<IEnumerable<BaseModel>> GetAllRoutesByUserId(int id);
-        Task<bool> CreateRouteAsync(Route newRoute);
+        Task<string> CreateRouteAsync(Route newRoute);
         Task<bool> AddCommentAsync(string id, Comment comment);
     }
 }
