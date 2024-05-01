@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
 {
@@ -21,18 +22,19 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             _client = new FirebaseClient("https://sniffhikes-8e9a6-default-rtdb.europe-west1.firebasedatabase.app/");
         }
 
-        public async Task<bool> CreateEventAsync(Event newEvent)
+        public async Task<string> CreateEventAsync(Event newEvent)
         {
             try
             {
-                //_events.Add(newEvent);
+                var token = await SecureStorage.GetAsync("token");
+                newEvent.OrginazerId = token;
                 await _client.Child("Events")
                     .PostAsync(newEvent);
-                return await Task.FromResult(true);
+                return await Task.FromResult("Created");
             }
-            catch
+            catch(Exception ex)
             {
-                return await Task.FromResult(false);
+                return await Task.FromResult(ex.Message);
             }
         }
 
@@ -56,30 +58,40 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             }
         }
 
-        public async Task<List<BaseModel<Event>>> GetAllEventsAsync()
+        public async Task<IEnumerable<BaseModel>> GetAllEventsAsync()
         {
+            //get de data
             var eventsSnapshot = await _client.Child("Events").OnceAsync<Event>();
 
-            var eventsList = new List<BaseModel<Event>>();
-
-            foreach (var snapshot in eventsSnapshot)
+            //map data to event collection
+            var events = eventsSnapshot.Select(e => new BaseModel
             {
-                var eventData = new BaseModel<Event>
-                {
-                    Key = snapshot.Key,
-                    Value = snapshot.Object,
-                };
+                Id = e.Key,
+                Title = e.Object.Title,
+                Description = e.Object.Description,
+                Image = e.Object.Images?.FirstOrDefault(),
+            }).ToList();
 
-                eventsList.Add(eventData);
-            }
-
-            return eventsList;
+            return await Task.FromResult(events);
         }
 
 
-        public async Task<List<Event>> GetAllEventsByUserId(int id)
+        public async Task<IEnumerable<BaseModel>> GetAllEventsByUserId(string id)
         {
-            return await Task.FromResult(_events.Where(e => e.OrginazerId == id).ToList());
+            //get data
+            var myEventsSnapshot = await _client.Child("Events").OnceAsync<Event>();            
+            var eventsList = myEventsSnapshot.Where(e => e.Object.OrginazerId == id).ToList();
+
+            //map data to events collection
+            var events = eventsList.Select(e => new BaseModel
+            {
+                Id = e.Key,
+                Title = e.Object.Title,
+                Description = e.Object.Description,
+                Image = e.Object.Images?.FirstOrDefault(),
+            }).ToList();
+
+            return await Task.FromResult(events);
         }
 
         public async Task<Event> GetEventByIdAsync(string id)
@@ -91,13 +103,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 return await Task.FromResult(eventSnapshot);
             }
             return null;
-            //return await Task.FromResult(_events.FirstOrDefault(e => e.Id == id));
         }
-
-        //public async Task<List<Image>> GetEventImagesAsync(int id)
-        //{
-        //    var selectedEvent = await GetEventByIdAsync(id);
-        //    return (List<Image>)await Task.FromResult(selectedEvent.Images);
-        //}
     }
 }
