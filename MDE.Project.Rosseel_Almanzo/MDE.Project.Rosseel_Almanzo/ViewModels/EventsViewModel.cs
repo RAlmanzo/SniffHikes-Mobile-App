@@ -5,8 +5,10 @@ using MDE.Project.Rosseel_Almanzo.Domain.Services.Mock;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
@@ -15,10 +17,21 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     {
         private readonly IEventsService _eventsService;
 
-        private ObservableCollection<BaseModel<Event>> events;
-        private ObservableCollection<Event> myEvents;
+        private ObservableCollection<BaseModel> events;
+        private ObservableCollection<BaseModel> myEvents;
         private ObservableCollection<Domain.Models.Image> images;
-        private BaseModel<Event> selectedEvent;
+        private Domain.Models.Image image;
+        private BaseModel selectedEvent;
+
+        public Domain.Models.Image Image
+        {
+            get => image;
+            set
+            {
+                image = Images.FirstOrDefault();
+                RaisePropertyChanged(nameof(Image));
+            }
+        }
 
         public ObservableCollection<Domain.Models.Image> Images 
         { 
@@ -30,7 +43,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             } 
         }
 
-        public ObservableCollection<Event> MyEvents
+        public ObservableCollection<BaseModel> MyEvents
         {
             get => myEvents;
             set
@@ -40,7 +53,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public ObservableCollection<BaseModel<Event>> Events 
+        public ObservableCollection<BaseModel> Events 
         { 
             get => events; 
             set
@@ -53,7 +66,6 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         public EventsViewModel()
         {
             _eventsService = new EventsService();
-            myEvents = new ObservableCollection<Event>();
         }
 
         public override void Init(object initData)
@@ -68,16 +80,17 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    //Images = await _eventsService.GetEventImagesByEventIdAsync();
-                    List<BaseModel<Event>> fetchedEvents = await _eventsService.GetAllEventsAsync();
-                    Events = new ObservableCollection<BaseModel<Event>>(fetchedEvents);
-                    //List<Event> myEvents = await _eventsService.GetAllEventsByUserId(id);
-                    //Events = new ObservableCollection<Event>(fetchedEvents);
+                    var fetchedEvents = await _eventsService.GetAllEventsAsync();
+                    Events = new ObservableCollection<BaseModel>(fetchedEvents);
+
+                    var id = await SecureStorage.GetAsync("token");
+                    var myEvents = await _eventsService.GetAllEventsByUserId(id);
+                    MyEvents = new ObservableCollection<BaseModel>(myEvents);
                 });
             }
         }
 
-        public BaseModel<Event> SelectedEvent
+        public BaseModel SelectedEvent
         {
             get => selectedEvent;
             set
@@ -96,7 +109,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command(async () =>
                 {
                     if (SelectedEvent != null)
-                        await CoreMethods.PushPageModel<EventDetailViewModel>(SelectedEvent.Key, false, true);
+                        await CoreMethods.PushPageModel<EventDetailViewModel>(SelectedEvent.Id, false, true);
                 });
             }
         }
