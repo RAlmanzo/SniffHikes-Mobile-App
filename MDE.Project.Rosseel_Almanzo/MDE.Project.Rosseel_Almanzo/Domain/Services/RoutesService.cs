@@ -1,22 +1,38 @@
-﻿using MDE.Project.Rosseel_Almanzo.Domain.Models;
+﻿using Firebase.Database;
+using Firebase.Database.Query;
+using MDE.Project.Rosseel_Almanzo.Domain.Models;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace MDE.Project.Rosseel_Almanzo.Domain.Services
 {
     public class RoutesService : IRoutesService
     {
-        public Task<bool> AddCommentAsync(string id, Comment comment)
+        private readonly FirebaseClient _client;
+
+        public RoutesService()
         {
-            throw new NotImplementedException();
+            _client = new FirebaseClient("https://sniffhikes-8e9a6-default-rtdb.europe-west1.firebasedatabase.app/");
         }
 
-        public Task<bool> CreateRouteAsync(Route newRoute)
+        public async Task<string> CreateRouteAsync(Route newRoute)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var token = await SecureStorage.GetAsync("token");
+                newRoute.OrganizerId = token;
+                await _client.Child("Routes")
+                    .PostAsync(newRoute);
+                return await Task.FromResult("Created");
+            }
+            catch (Exception ex)
+            {
+                return await Task.FromResult(ex.Message);
+            }
         }
 
         public Task<List<Route>> GetAllRoutesAsync()
@@ -40,6 +56,11 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
         }
 
         Task<IEnumerable<BaseModel>> IRoutesService.GetAllRoutesByUserId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> AddCommentAsync(string id, Comment comment)
         {
             throw new NotImplementedException();
         }
