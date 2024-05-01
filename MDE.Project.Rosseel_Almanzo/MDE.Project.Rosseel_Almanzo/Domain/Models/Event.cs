@@ -6,6 +6,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Models
 {
     public class Event
     {
+        public string Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public IEnumerable<Image> Images { get; set; }
@@ -14,6 +15,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Models
         public string Country { get; set; }
         public DateTime DateEvent { get; set; }
         public ICollection<Comment> Comments { get; set; }
-        public int OrginazerId { get; set; }
+        public string OrginazerId { get; set; }
     }
 }
