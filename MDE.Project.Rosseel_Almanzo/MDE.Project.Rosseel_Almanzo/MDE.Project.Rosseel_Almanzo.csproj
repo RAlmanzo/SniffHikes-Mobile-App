@@ -92,6 +92,7 @@
   <ItemGroup>
     <Folder Include="Assets\Images\" />
     <Folder Include="Fonts\" />
+    <Folder Include="DtoExtensions\" />
   </ItemGroup>
 
   <ItemGroup>
