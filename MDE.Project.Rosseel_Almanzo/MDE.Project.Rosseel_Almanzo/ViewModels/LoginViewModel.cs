@@ -73,7 +73,6 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    // TODO set check if user email allrdy excists
                     var user = new User
                     {
                         Email = Email,
@@ -84,7 +83,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     {
                         var token = await _accountService.Login(user.Email, user.Password);
 
-                        if(!string.IsNullOrWhiteSpace(token))
+                        if(token == "Email confirmed")
                         {
                             var isLogged = true;
                             Application.Current.Properties[ISLOGGED] = isLogged;
@@ -92,7 +91,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         }
                         else
                         {
-                            await CoreMethods.DisplayAlert("Error", "Login failed", "ok");
+                            await CoreMethods.DisplayAlert("Error", token, "ok");
                         }                     
                     }                 
                 });
