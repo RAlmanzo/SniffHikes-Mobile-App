@@ -13,7 +13,7 @@
             <Label Text="Registered" Style="{StaticResource switchLabelStyle}"></Label>
             <Switch/>
         </StackLayout>
-        <ListView x:Name="lstItems" ItemsSource="{Binding Events}" HasUnevenRows="True" SelectedItem="{Binding SelectedEvent}">
+        <ListView x:Name="lstItems" ItemsSource="{Binding MyEvents}" HasUnevenRows="True" SelectedItem="{Binding SelectedEvent}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -32,7 +32,7 @@
 
                                 <StackLayout Orientation="Horizontal" Padding="15" Grid.Column="0" Grid.Row="1">
                                     <Frame Style="{StaticResource baseImageFrameStyle}">
-                                        <Image Source="loooogin.jpg" Style="{StaticResource baseImageStyle}"></Image>
+                                        <Image Source="{Binding Image.ImagePath}" Style="{StaticResource baseImageStyle}"></Image>
                                     </Frame>
                                 </StackLayout>
 
