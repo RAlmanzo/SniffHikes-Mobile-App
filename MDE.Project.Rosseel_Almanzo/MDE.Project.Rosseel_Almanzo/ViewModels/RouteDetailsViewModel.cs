@@ -10,6 +10,7 @@ using Xamarin.Essentials;
 using System.Linq;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Mock;
+using System.Xml.Linq;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
@@ -26,6 +27,21 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private DateTime dateEvent;
         private ObservableCollection<Domain.Models.Image> images;
         private ObservableCollection<Comment> comments;
+        private Comment selectedComment;
+
+        public Comment SelectedComment
+        {
+            get => selectedComment;
+            set
+            {
+                selectedComment = value;
+                RaisePropertyChanged(nameof(SelectedComment));
+                if (selectedComment != null)
+                {
+                    DeleteCommentCommand.Execute(null);
+                }            
+            }
+        }
 
         public ObservableCollection<Comment> Comments
         {
@@ -212,9 +228,9 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    var item = await _routesService.GetRouteByIdAsync(Id);
                     var comment = new Comment
                     {
+                        Id = Guid.NewGuid().ToString(),
                         CreatedOn = DateTime.Now,
                         Content = "verrygood",
                     };
@@ -223,6 +239,32 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     {
                         await CoreMethods.DisplayAlert("Error", "Something went wrong and comment could not be added", "Ok");
                     };
+                    
+                    Comments.Add(comment);
+                });
+            }
+        }
+
+        public ICommand DeleteCommentCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    var result = await CoreMethods.DisplayAlert("Delete Comment", "Are u sure u want to delete comment?", "Yes", "Cancel");
+                    if (result)
+                    {
+                        var deleteResult = await _routesService.DeleteCommentAsync(Id, selectedComment.Id);
+                        if (deleteResult)
+                        {
+                            Comments.Remove(selectedComment);
+                            await CoreMethods.DisplayAlert("Delete Comment", "Comment succesfull deleted", "Ok");
+                        }
+                        else
+                        {
+                            await CoreMethods.DisplayAlert("Delete Comment", "Delete comment failed!", "Ok");
+                        }
+                    }
                 });
             }
         }
