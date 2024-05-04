@@ -20,7 +20,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private ObservableCollection<BaseModel> routes;
         private ObservableCollection<Domain.Models.Image> images;
         private Domain.Models.Image image;
-        private Route selectedRoute;
+        private BaseModel selectedRoute;
 
         public Domain.Models.Image Image
         {
@@ -32,7 +32,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public Route SelectedRoute
+        public BaseModel SelectedRoute
         {
             get => selectedRoute;
             set
