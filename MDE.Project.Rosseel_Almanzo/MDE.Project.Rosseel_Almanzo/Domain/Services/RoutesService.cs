@@ -54,9 +54,28 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
             return await Task.FromResult(routes);
         }
 
-        public Task<Route> GetRouteByIdAsync(int id)
+        public async Task<Route> GetRouteByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            var routeSnapshot = await _client.Child("Routes").Child(id).OnceSingleAsync<RouteDto>();
+
+            if (routeSnapshot != null)
+            {
+                var selectedRoute = new Route
+                {
+                    Id = routeSnapshot.Id,
+                    Title = routeSnapshot.Title,
+                    Description = routeSnapshot.Description,
+                    Street = routeSnapshot.Street,
+                    City = routeSnapshot.City,
+                    Country = routeSnapshot.Country,
+                    DateEvent = routeSnapshot.DateEvent,
+                    OrganizerId = routeSnapshot.OrganizerId,
+                    Images = routeSnapshot.Images,
+                    Comments = routeSnapshot.Comments,
+                };
+                return await Task.FromResult(selectedRoute);
+            };
+            return null;
         }
 
         public Task<bool> AddCommentAsync(string id, Comment comment)
