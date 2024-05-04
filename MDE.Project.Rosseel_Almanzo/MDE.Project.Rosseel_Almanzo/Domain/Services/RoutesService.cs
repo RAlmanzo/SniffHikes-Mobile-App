@@ -43,9 +43,9 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
         {
             //get de data
             var routesSnapshot = await _client.Child("Routes").OnceAsync<RouteDto>();
-
+            var sortedRoutes = routesSnapshot.OrderByDescending(r => r.Object.DateEvent);
             //map data to event collection
-            var routes = routesSnapshot.Select(e => new BaseModel
+            var routes = sortedRoutes.Select(e => new BaseModel
             {
                 Id = e.Key,
                 Title = e.Object.Title,
@@ -73,7 +73,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
                     DateEvent = routeSnapshot.DateEvent,
                     OrganizerId = routeSnapshot.OrganizerId,
                     Images = routeSnapshot.Images,
-                    Comments = routeSnapshot.Comments.OrderByDescending(c => c.CreatedOn).ToList(),
+                    Comments = routeSnapshot.Comments != null ? routeSnapshot.Comments.OrderByDescending(c => c.CreatedOn).ToList() : new List<Comment>(),
                 };
                 return await Task.FromResult(selectedRoute);
             };
