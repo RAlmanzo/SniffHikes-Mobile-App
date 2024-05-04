@@ -10,15 +10,21 @@
         <StackLayout>
             <ScrollView>
                 <StackLayout>
-                    <Button Text="Add picture" HorizontalOptions="EndAndExpand" Margin="0,20,0,0" Command="{Binding AddImage}"></Button>
-                    <ListView HorizontalOptions="CenterAndExpand" WidthRequest="350" HeightRequest="150" BackgroundColor="#70FFFFFF" ItemsSource="{Binding Images}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                    <Button Text="Add picture" HorizontalOptions="EndAndExpand" Margin="0,20,0,0" Command="{Binding AddImageCommand}"></Button>
+                    <StackLayout>
+                        <CollectionView ItemsSource="{Binding Images}" HeightRequest="250" BackgroundColor="{StaticResource transparantWhite}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"></LinearItemsLayout>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame Padding="2">
+                                        <Image Source="{Binding ImagePath}"  Style="{StaticResource collectionImages}"/>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
                     <StackLayout Style="{StaticResource createFormStyle}">
                         <Label Text="Title" Style="{StaticResource formLabelStyle}"></Label>
                         <Entry Text="{Binding Title}"></Entry>
