@@ -17,7 +17,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             {
                 new Route
                 {
-                    Id = 1,
+                    Id = "1",
                     Title = "Ardennen Avontuur",
                     Description = "Verken de prachtige natuur van de Ardennen tijdens deze avontuurlijke wandelroute.Verken de prachtige natuur van de Ardennen tijdens deze avontuurlijke wandelroute.Verken de prachtige natuur van de Ardennen tijdens deze avontuurlijke wandelroute.Verken de prachtige natuur van de Ardennen tijdens deze avontuurlijke wandelroute.",
                     Street = "Ardennenweg 1",
@@ -43,7 +43,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 },
                 new Route
                 {
-                    Id = 2,
+                    Id = "2",
                     Title = "Brugse Binnenstad",
                     Description = "Ontdek de historische binnenstad van Brugge tijdens deze sfeervolle wandeling langs grachten en middeleeuwse gebouwen.",
                     Street = "Markt 1",
@@ -68,7 +68,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 },
                 new Route
                 {
-                    Id = 3,
+                    Id = "3",
                     Title = "Ardennen Uitzicht",
                     Description = "Geniet van adembenemende uitzichten tijdens deze panoramische wandelroute door de Ardennen.",
                     Street = "Uitzichtweg 5",
@@ -93,7 +93,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 },
                 new Route
                 {
-                    Id = 4,
+                    Id = "5",
                     Title = "Kustwandeling Oostende",
                     Description = "Maak een ontspannende wandeling langs de kustlijn van Oostende en geniet van de frisse zeelucht.",
                     Street = "Zeedijk 1",
@@ -118,7 +118,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 },
                 new Route
                 {
-                    Id = 5,
+                    Id = "6",
                     Title = "Maasvallei Verkenning",
                     Description = "Verken de prachtige natuur langs de Maasvallei tijdens deze gevarieerde wandelroute.",
                     Street = "Maasdijk 10",
