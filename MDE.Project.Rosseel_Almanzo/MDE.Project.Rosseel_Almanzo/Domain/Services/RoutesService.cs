@@ -6,6 +6,7 @@ using MDE.Project.Rosseel_Almanzo.Infrastructure.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,7 +73,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
                     DateEvent = routeSnapshot.DateEvent,
                     OrganizerId = routeSnapshot.OrganizerId,
                     Images = routeSnapshot.Images,
-                    Comments = routeSnapshot.Comments,
+                    Comments = routeSnapshot.Comments.OrderByDescending(c => c.CreatedOn).ToList(),
                 };
                 return await Task.FromResult(selectedRoute);
             };
@@ -99,13 +100,33 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
             }
         }
 
+        public async Task<bool> DeleteCommentAsync(string id, string commentId)
+        {
+            try
+            {
+                //get the route
+                var route = await GetRouteByIdAsync(id);
+                //get the comment
+                var selectedComment = route.Comments.Where(c => c.Id == commentId).FirstOrDefault();
+                //delete comment and update db
+                route.Comments.Remove(selectedComment);
+
+                await _client.Child("Routes").Child(id).PutAsync(route);
+                return await Task.FromResult(true);
+            }
+            catch
+            {
+                return await Task.FromResult(false);
+            }
+        }
+
         public async Task<IEnumerable<BaseModel>> GetAllRoutesByUserId(string id)
         {
             //get data
             var myRoutesSnapshot = await _client.Child("Routes").OnceAsync<RouteDto>();
             var routesList = myRoutesSnapshot.Where(e => e.Object.OrganizerId == id).ToList();
 
-            //map data to events collection
+            //map data to routes collection
             var routes = routesList.Select(e => new BaseModel
             {
                 Id = e.Key,
