@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.Linq;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
+using MDE.Project.Rosseel_Almanzo.Domain.Services.Mock;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
@@ -201,6 +202,27 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command(async () =>
                 {
                     await CoreMethods.PushPageModel<RoutesViewModel>();
+                });
+            }
+        }
+
+        public ICommand AddCommentCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    var item = await _routesService.GetRouteByIdAsync(Id);
+                    var comment = new Comment
+                    {
+                        CreatedOn = DateTime.Now,
+                        Content = "verrygood",
+                    };
+
+                    if (!await _routesService.AddCommentAsync(id, comment))
+                    {
+                        await CoreMethods.DisplayAlert("Error", "Something went wrong and comment could not be added", "Ok");
+                    };
                 });
             }
         }
