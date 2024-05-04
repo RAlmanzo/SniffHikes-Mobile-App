@@ -5,6 +5,7 @@ using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using MDE.Project.Rosseel_Almanzo.Infrastructure.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,9 +79,24 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
             return null;
         }
 
-        public Task<bool> AddCommentAsync(string id, Comment comment)
+        public async Task<bool> AddCommentAsync(string id, Comment comment)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var existingRoute = await GetRouteByIdAsync(id);
+                if (existingRoute.Comments == null)
+                {
+                    existingRoute.Comments = new ObservableCollection<Comment>();
+                }
+                existingRoute.Comments.Add(comment);
+
+                await _client.Child("Routes").Child(id).PutAsync(existingRoute);
+                return await Task.FromResult(true);
+            }
+            catch
+            {
+                return await Task.FromResult(false);
+            }
         }
 
         public async Task<IEnumerable<BaseModel>> GetAllRoutesByUserId(string id)
