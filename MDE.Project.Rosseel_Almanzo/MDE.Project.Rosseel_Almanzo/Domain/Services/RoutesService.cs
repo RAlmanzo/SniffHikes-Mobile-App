@@ -2,8 +2,10 @@
 using Firebase.Database.Query;
 using MDE.Project.Rosseel_Almanzo.Domain.Models;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
+using MDE.Project.Rosseel_Almanzo.Infrastructure.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -35,14 +37,21 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
             }
         }
 
-        public Task<List<Route>> GetAllRoutesAsync()
+        public async Task<IEnumerable<BaseModel>> GetAllRoutesAsync()
         {
-            throw new NotImplementedException();
-        }
+            //get de data
+            var routesSnapshot = await _client.Child("Routes").OnceAsync<RouteDto>();
 
-        public Task<List<Route>> GetAllRoutesByUserId(int id)
-        {
-            throw new NotImplementedException();
+            //map data to event collection
+            var routes = routesSnapshot.Select(e => new BaseModel
+            {
+                Id = e.Key,
+                Title = e.Object.Title,
+                Description = e.Object.Description,
+                Image = e.Object.Images?.FirstOrDefault(),
+            }).ToList();
+
+            return await Task.FromResult(routes);
         }
 
         public Task<Route> GetRouteByIdAsync(int id)
@@ -50,17 +59,12 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
             throw new NotImplementedException();
         }
 
-        Task<IEnumerable<BaseModel>> IRoutesService.GetAllRoutesAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<IEnumerable<BaseModel>> IRoutesService.GetAllRoutesByUserId(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<bool> AddCommentAsync(string id, Comment comment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<BaseModel>> GetAllRoutesByUserId(string id)
         {
             throw new NotImplementedException();
         }
