@@ -13,7 +13,7 @@
                 <Switch/>
             </StackLayout>
 
-            <ListView x:Name="lstItems" ItemsSource="{Binding Routes}" HasUnevenRows="True" SelectedItem="{Binding SelectedRoute}">
+            <ListView x:Name="lstItems" ItemsSource="{Binding MyRoutes}" HasUnevenRows="True" SelectedItem="{Binding SelectedRoute}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
