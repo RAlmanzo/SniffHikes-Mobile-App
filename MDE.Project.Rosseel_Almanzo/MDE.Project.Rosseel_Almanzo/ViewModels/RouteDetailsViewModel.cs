@@ -16,7 +16,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     {
         private readonly IRoutesService _routesService;
 
-        private int id;
+        private string id;
         private string title;
         private string description;
         private string street;
@@ -113,7 +113,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public int Id
+        public string Id
         {
             get => id;
             set
@@ -127,7 +127,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         {
             base.Init(initData);
 
-            Id = (int)initData;
+            Id = initData.ToString();
 
             GetRouteDetails.Execute(null);
         }
@@ -146,7 +146,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     Country = item.Country;
                     DateEvent = item.DateEvent;
                     Images = item.Images != null ? new ObservableCollection<Domain.Models.Image>(item.Images) : new ObservableCollection<Domain.Models.Image>();
-                    comments = item.Comments != null ? new ObservableCollection<Comment>(item.Comments) : new ObservableCollection<Comment>();
+                    Comments = item.Comments != null ? new ObservableCollection<Comment>(item.Comments) : new ObservableCollection<Comment>();
                 });
             }
         }
