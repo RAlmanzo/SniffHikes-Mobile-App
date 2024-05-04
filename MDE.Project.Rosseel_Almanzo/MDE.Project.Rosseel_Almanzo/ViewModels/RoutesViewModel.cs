@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using FreshMvvm;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using MDE.Project.Rosseel_Almanzo.Domain.Services;
+using System.Linq;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
@@ -18,7 +19,18 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
         private ObservableCollection<BaseModel> routes;
         private ObservableCollection<Domain.Models.Image> images;
+        private Domain.Models.Image image;
         private Route selectedRoute;
+
+        public Domain.Models.Image Image
+        {
+            get => image;
+            set
+            {
+                image = Images.FirstOrDefault();
+                RaisePropertyChanged(nameof(Image));
+            }
+        }
 
         public Route SelectedRoute
         {
@@ -52,9 +64,9 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public RoutesViewModel()
+        public RoutesViewModel(IRoutesService routesService)
         {
-            _routesService = new RoutesService();
+            _routesService = routesService;
         }
 
         public override void Init(object initData)
