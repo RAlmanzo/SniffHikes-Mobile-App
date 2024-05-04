@@ -1,5 +1,6 @@
 ﻿using FreshMvvm;
 using MDE.Project.Rosseel_Almanzo.Domain.Models;
+using MDE.Project.Rosseel_Almanzo.Domain.Services;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Validators;
 using System;
@@ -14,6 +15,8 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     public class CreateRouteViewModel : FreshBasePageModel
     {
         private readonly IRoutesService _routesService;
+        private readonly IImageService _imageService;
+
         private string title;
         private string description;
         private string street;
@@ -158,11 +161,12 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public CreateRouteViewModel(IRoutesService routesService)
+        public CreateRouteViewModel(IRoutesService routesService, IImageService imageService)
         {
             Images = new ObservableCollection<Domain.Models.Image>();
             Comments = new ObservableCollection<Comment>();
             _routesService = routesService;
+            _imageService = imageService;
         }
 
         public ICommand CreateRouteCommand
@@ -171,10 +175,8 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    var routes = await _routesService.GetAllRoutesAsync();
                     var newRoute = new Route
                     {
-                        Id = routes.Count + 1,
                         Title = Title,
                         Description = Description,
                         Street = Street,
@@ -187,22 +189,47 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
                     if (Validate(newRoute))
                     {
-                        await _routesService.CreateRouteAsync(newRoute);
-                        //var eventsViewModel = new EventsViewModel();
-                        //eventsViewModel.MyEvents.Add(newEvent);
-                        //await CoreMethods.PushPageModel<EventsViewModel>(eventsViewModel);
-                        await CoreMethods.PushPageModel<RoutesViewModel>();
+                        var result = await _routesService.CreateRouteAsync(newRoute);
+                        if (result == "Created")
+                        {
+                            await CoreMethods.DisplayAlert("Succes", "Route succesfull created", "Ok");
+                            await CoreMethods.PushPageModel<RoutesViewModel>();
+                        }
+                        else
+                        {
+                            await CoreMethods.DisplayAlert("Failed", result, "Ok");
+                        }
                     }                 
                 });
             }
         }
 
-        public ICommand AddImage
+        public ICommand AddImageCommand
         {
             get
             {
-                return new Command(() =>
+                return new Command(async () =>
                 {
+                    string action = await CoreMethods.DisplayActionSheet("Select an option", "Annuleren", null, "Take picture", "Select picture");
+
+                    if (action == "Take picture")
+                    {
+                        var imageUrl = await _imageService.TakePhotoAsync();
+                        var image = new Domain.Models.Image
+                        {
+                            ImagePath = imageUrl,
+                        };
+                        Images.Add(image);
+                    }
+                    else
+                    {
+                        var imageUrl = await _imageService.PickPhotoAsync();
+                        var image = new Domain.Models.Image
+                        {
+                            ImagePath = imageUrl,
+                        };
+                        Images.Add(image);
+                    }
 
                 });
             }
