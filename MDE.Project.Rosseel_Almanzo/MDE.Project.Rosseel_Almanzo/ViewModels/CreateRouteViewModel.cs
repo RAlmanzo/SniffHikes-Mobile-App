@@ -22,7 +22,6 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private string street;
         private string city;
         private string country;
-        private DateTime dateCreated;
         private ObservableCollection<Domain.Models.Image> images;
         private ObservableCollection<Comment> comments;
         private string titleError;
@@ -101,16 +100,6 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public DateTime DateCreated
-        {
-            get => dateCreated;
-            set
-            {
-                dateCreated = value;
-                RaisePropertyChanged(nameof(DateCreated));
-            }
-        }
-
         public string Country
         {
             get => country;
@@ -182,7 +171,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         Street = Street,
                         City = City,
                         Country = Country,
-                        DateEvent = DateCreated,
+                        DateEvent = DateTime.Now,
                         Images = Images ?? new ObservableCollection<Domain.Models.Image>(),
                         Comments = Comments ?? new ObservableCollection<Comment>(),
                     };
