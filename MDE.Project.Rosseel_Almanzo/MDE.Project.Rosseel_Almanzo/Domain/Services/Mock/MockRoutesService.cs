@@ -24,7 +24,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                     City = "La Roche-en-Ardenne",
                     Country = "België",
                     DateEvent = new DateTime(2024, 4, 1),
-                    OrganizerId = 2,
+                    OrganizerId = "2",
                     Images = new List<Image>
                     {
                         new Image{Title="first image", ImagePath ="login.jpg"},
@@ -50,7 +50,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                     City = "Brugge",
                     Country = "België",
                     DateEvent = new DateTime(2024, 4, 5),
-                    OrganizerId = 3,
+                    OrganizerId = "3",
                     Images = new List<Image>
                     {
                         new Image{Title="first image", ImagePath ="login.jpg"},
@@ -75,7 +75,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                     City = "Durbuy",
                     Country = "België",
                     DateEvent = new DateTime(2024, 4, 10),
-                    OrganizerId = 4,
+                    OrganizerId = "4",
                     Images = new List<Image>
                     {
                         new Image{Title="first image", ImagePath ="login.jpg"},
@@ -100,7 +100,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                     City = "Oostende",
                     Country = "België",
                     DateEvent = new DateTime(2024, 4, 15),
-                    OrganizerId = 5,
+                    OrganizerId = "5",
                     Images = new List<Image>
                     {
                         new Image{Title="first image", ImagePath ="login.jpg"},
@@ -125,7 +125,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                     City = "Dinant",
                     Country = "België",
                     DateEvent = new DateTime(2024, 4, 20),
-                    OrganizerId = 5,
+                    OrganizerId = "5",
                     Images = new List<Image>
                     {
                         new Image{Title="first image", ImagePath ="login.jpg"},
@@ -145,47 +145,50 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             };
         }
 
+        public async Task<string> CreateRouteAsync(Route newRoute)
+        {
+            _routes.Add(newRoute);
+            return await Task.FromResult("Created");
+        }
+
         public Task<bool> AddCommentAsync(string id, Comment comment)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> CreateRouteAsync(Route newRoute)
+        public async Task<IEnumerable<BaseModel>> GetAllRoutesAsync()
         {
-            try
+            //map data to route collection
+            var routes = _routes.Select(e => new BaseModel
             {
-                _routes.Add(newRoute);
-                return Task.FromResult(true);
-            }
-            catch
+                Id = e.Id,
+                Title = e.Title,
+                Description = e.Description,
+                Image = e.Images?.FirstOrDefault(),
+            }).ToList();
+
+            return await Task.FromResult(routes);
+        }
+
+        public async Task<IEnumerable<BaseModel>> GetAllRoutesByUserId(string id)
+        {
+            //get data
+            var routes = _routes.Where(e => e.OrganizerId == id).ToList();
+            //map data to event collection
+            var routesList = routes.Select(e => new BaseModel
             {
-                return Task.FromResult(false);
-            }
+                Id = e.Id,
+                Title = e.Title,
+                Description = e.Description,
+                Image = e.Images?.FirstOrDefault(),
+            }).ToList();
+
+            return await Task.FromResult(routesList);
         }
 
-        public async Task<List<Route>> GetAllRoutesAsync()
-        {
-            return await Task.FromResult(_routes);
-        }
-
-        public async Task<List<Route>> GetAllRoutesByUserId(int id)
-        {
-            return await Task.FromResult(_routes.Where(r => r.OrganizerId == id).ToList());
-        }
-
-        public async Task<Route> GetRouteByIdAsync(int id)
+        public async Task<Route> GetRouteByIdAsync(string id)
         {
             return await Task.FromResult(_routes.FirstOrDefault(r => r.Id == id));
-        }
-
-        Task<IEnumerable<BaseModel>> IRoutesService.GetAllRoutesAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<IEnumerable<BaseModel>> IRoutesService.GetAllRoutesByUserId(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }
