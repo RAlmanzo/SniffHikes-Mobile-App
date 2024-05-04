@@ -2,8 +2,6 @@
 using MDE.Project.Rosseel_Almanzo.Domain.Models;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -66,6 +64,17 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         await CoreMethods.DisplayAlert("Error", "Something went wrong and comment could not be added", "Ok");
                     };
 
+                    await CoreMethods.PushPageModel<RouteDetailsViewModel>(id, false, true);
+                });
+            }
+        }
+
+        public ICommand CancelCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
                     await CoreMethods.PushPageModel<RouteDetailsViewModel>(id, false, true);
                 });
             }
