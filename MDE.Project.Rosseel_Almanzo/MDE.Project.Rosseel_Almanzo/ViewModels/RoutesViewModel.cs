@@ -8,6 +8,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using FreshMvvm;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
+using MDE.Project.Rosseel_Almanzo.Domain.Services;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
@@ -15,7 +16,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     {
         private readonly IRoutesService _routesService;
 
-        private ObservableCollection<Route> routes;
+        private ObservableCollection<BaseModel> routes;
         private ObservableCollection<Domain.Models.Image> images;
         private Route selectedRoute;
 
@@ -41,7 +42,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public ObservableCollection<Route> Routes
+        public ObservableCollection<BaseModel> Routes
         {
             get => routes;
             set
@@ -53,7 +54,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
         public RoutesViewModel()
         {
-            _routesService = new MockRoutesService();
+            _routesService = new RoutesService();
         }
 
         public override void Init(object initData)
@@ -80,8 +81,8 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    List<Route> fetchedRoutes = await _routesService.GetAllRoutesAsync();
-                    Routes = new ObservableCollection<Route>(fetchedRoutes);
+                    var fetchedRoutes = await _routesService.GetAllRoutesAsync();
+                    Routes = new ObservableCollection<BaseModel>(fetchedRoutes);
                 });
             }
         }
