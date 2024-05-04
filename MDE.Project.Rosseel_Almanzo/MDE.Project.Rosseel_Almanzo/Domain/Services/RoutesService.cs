@@ -83,9 +83,22 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<BaseModel>> GetAllRoutesByUserId(string id)
+        public async Task<IEnumerable<BaseModel>> GetAllRoutesByUserId(string id)
         {
-            throw new NotImplementedException();
+            //get data
+            var myRoutesSnapshot = await _client.Child("Routes").OnceAsync<RouteDto>();
+            var routesList = myRoutesSnapshot.Where(e => e.Object.OrganizerId == id).ToList();
+
+            //map data to events collection
+            var routes = routesList.Select(e => new BaseModel
+            {
+                Id = e.Key,
+                Title = e.Object.Title,
+                Description = e.Object.Description,
+                Image = e.Object.Images?.FirstOrDefault(),
+            }).ToList();
+
+            return await Task.FromResult(routes);
         }
     }
 }
