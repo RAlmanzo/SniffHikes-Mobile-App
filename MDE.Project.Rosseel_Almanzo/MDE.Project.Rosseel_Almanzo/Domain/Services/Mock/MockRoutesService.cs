@@ -190,5 +190,10 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         {
             return await Task.FromResult(_routes.FirstOrDefault(r => r.Id == id));
         }
+
+        public Task<bool> DeleteCommentAsync(string id, string commentId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
