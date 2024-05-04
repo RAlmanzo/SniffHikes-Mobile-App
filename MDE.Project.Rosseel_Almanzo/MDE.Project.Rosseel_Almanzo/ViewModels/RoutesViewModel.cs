@@ -10,6 +10,7 @@ using FreshMvvm;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using MDE.Project.Rosseel_Almanzo.Domain.Services;
 using System.Linq;
+using Xamarin.Essentials;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
@@ -18,9 +19,20 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private readonly IRoutesService _routesService;
 
         private ObservableCollection<BaseModel> routes;
+        private ObservableCollection<BaseModel> myRoutes;
         private ObservableCollection<Domain.Models.Image> images;
         private Domain.Models.Image image;
         private BaseModel selectedRoute;
+
+        public ObservableCollection<BaseModel> MyRoutes
+        {
+            get => myRoutes;
+            set
+            {
+                myRoutes = value;
+                RaisePropertyChanged(nameof(MyRoutes));
+            }
+        }
 
         public Domain.Models.Image Image
         {
@@ -95,6 +107,10 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 {
                     var fetchedRoutes = await _routesService.GetAllRoutesAsync();
                     Routes = new ObservableCollection<BaseModel>(fetchedRoutes);
+
+                    var id = await SecureStorage.GetAsync("token");
+                    var myRoutes = await _routesService.GetAllRoutesByUserId(id);
+                    MyRoutes = new ObservableCollection<BaseModel>(myRoutes);
                 });
             }
         }
