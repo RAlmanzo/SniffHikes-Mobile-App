@@ -228,19 +228,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    var comment = new Comment
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        CreatedOn = DateTime.Now,
-                        Content = "verrygood",
-                    };
-
-                    if (!await _routesService.AddCommentAsync(id, comment))
-                    {
-                        await CoreMethods.DisplayAlert("Error", "Something went wrong and comment could not be added", "Ok");
-                    };
-                    
-                    Comments.Add(comment);
+                    await CoreMethods.PushPageModel<CreateCommentViewModel>(id);
                 });
             }
         }
