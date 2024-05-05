@@ -8,11 +8,6 @@
              BackgroundImageSource="sky.jpg">
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Created" Style="{StaticResource switchLabelStyle}"></Label>
-                <Switch/>
-            </StackLayout>
-
             <ListView x:Name="lstItems" ItemsSource="{Binding MyRoutes}" HasUnevenRows="True" SelectedItem="{Binding SelectedRoute}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
