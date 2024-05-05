@@ -271,7 +271,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         await CoreMethods.DisplayAlert("Failed", result, "Ok");
                     }
 
-                    await CoreMethods.PopPageModel(true);
+                    await CoreMethods.PushPageModel<RoutesViewModel>();
                 });
             }
         }

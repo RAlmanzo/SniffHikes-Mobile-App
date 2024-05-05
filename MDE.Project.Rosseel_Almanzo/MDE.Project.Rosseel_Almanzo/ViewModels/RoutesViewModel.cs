@@ -132,7 +132,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    id = await SecureStorage.GetAsync("token");
+                    Id = await SecureStorage.GetAsync("token");
 
                     var fetchedRoutes = await _routesService.GetAllRoutesAsync();
                     Routes = new ObservableCollection<BaseModel>(fetchedRoutes);
