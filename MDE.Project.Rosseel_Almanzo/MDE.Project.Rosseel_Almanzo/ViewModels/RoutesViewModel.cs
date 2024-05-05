@@ -11,6 +11,7 @@ using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using MDE.Project.Rosseel_Almanzo.Domain.Services;
 using System.Linq;
 using Xamarin.Essentials;
+using System.Threading.Tasks;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
@@ -24,6 +25,28 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private Domain.Models.Image image;
         private BaseModel selectedRoute;
         private string id;
+        private bool isLoading;
+        private bool isVisible;
+
+        public bool IsVisible
+        {
+            get => isVisible;
+            set
+            {
+                isVisible = value;
+                RaisePropertyChanged(nameof(IsVisible));
+            }
+        }
+
+        public bool IsLoading
+        {
+            get => isLoading;
+            set
+            {
+                isLoading = value;
+                RaisePropertyChanged(nameof(IsLoading));
+            }
+        }
 
         public string Id 
         {
@@ -137,6 +160,9 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
+                    IsLoading = true;
+                    IsVisible = false;
+
                     Id = await SecureStorage.GetAsync("token");
 
                     var fetchedRoutes = await _routesService.GetAllRoutesAsync();
@@ -144,6 +170,10 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
                     var myRoutes = await _routesService.GetAllRoutesByUserId(id);
                     MyRoutes = new ObservableCollection<BaseModel>(myRoutes);
+
+                    await Task.Delay(500);
+                    IsLoading = false;
+                    IsVisible = true;
                 });
             }
         }
