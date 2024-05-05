@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDE.Project.Rosseel_Almanzo.Pages.UpdateRoutePage"
+             Title="Update"
              NavigationPage.HasBackButton="False"
              BackgroundImageSource="sky.jpg">
     <ContentPage.Content>
