@@ -11,6 +11,7 @@ using Xamarin.Forms.PlatformConfiguration.TizenSpecific;
 using System.Linq;
 using Newtonsoft.Json.Serialization;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
+using MDE.Project.Rosseel_Almanzo.Domain.Services;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
@@ -27,6 +28,21 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private DateTime dateEvent;
         private ObservableCollection<Domain.Models.Image> images;
         private ObservableCollection<Comment> comments;
+        private Comment selectedComment;
+
+        public Comment SelectedComment
+        {
+            get => selectedComment;
+            set
+            {
+                selectedComment = value;
+                RaisePropertyChanged(nameof(SelectedComment));
+                if (selectedComment != null)
+                {
+                    DeleteCommentCommand.Execute(null);
+                }
+            }
+        }
 
         public ObservableCollection<Comment> Comments
         {
@@ -36,13 +52,6 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 comments = value;
                 RaisePropertyChanged(nameof(Comments));
             }
-        }
-
-        public EventDetailViewModel(IEventsService eventsService)
-        {
-            _eventsService = eventsService;
-            Images = new ObservableCollection<Domain.Models.Image>();
-            Comments = new ObservableCollection<Comment>();
         }
 
         public ObservableCollection<Domain.Models.Image> Images
@@ -123,6 +132,13 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 id = value;
                 RaisePropertyChanged(nameof(Id));
             }
+        }
+
+        public EventDetailViewModel(IEventsService eventsService)
+        {
+            _eventsService = eventsService;
+            Images = new ObservableCollection<Domain.Models.Image>();
+            Comments = new ObservableCollection<Comment>();
         }
 
         public override void Init(object initData)
@@ -213,17 +229,33 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    var item = await _eventsService.GetEventByIdAsync(Id);
-                    var comment = new Comment
-                    {
-                        CreatedOn = DateTime.Now,
-                        Content = "verrygood",
-                    };
+                    await CoreMethods.PushPageModel<CreateEventCommentViewModel>(id);
+                });
+            }
+        }
 
-                    if (!await _eventsService.AddCommentAsync(id, comment)) 
+        public ICommand DeleteCommentCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    //TODO: Check if comment belongs to logged user!!!!!!!!!!!!!!!!!!!
+
+                    var result = await CoreMethods.DisplayAlert("Delete Comment", "Are u sure u want to delete comment?", "Yes", "Cancel");
+                    if (result)
                     {
-                        await CoreMethods.DisplayAlert("Error","Something went wrong and comment could not be added", "Ok");
-                    };
+                        var deleteResult = await _eventsService.DeleteCommentAsync(Id, selectedComment.Id);
+                        if (deleteResult)
+                        {
+                            Comments.Remove(selectedComment);
+                            await CoreMethods.DisplayAlert("Delete Comment", "Comment succesfull deleted", "Ok");
+                        }
+                        else
+                        {
+                            await CoreMethods.DisplayAlert("Delete Comment", "Delete comment failed!", "Ok");
+                        }
+                    }
                 });
             }
         }
