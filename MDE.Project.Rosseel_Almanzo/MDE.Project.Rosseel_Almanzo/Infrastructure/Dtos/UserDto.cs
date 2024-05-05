@@ -17,5 +17,6 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Dtos
         public DateTime DateOfBirth { get; set; }
         public string Password { get; set; }
         public IEnumerable<Dog> Dogs { get; set; }
+        public Image Image { get; set; }
     }
 }
