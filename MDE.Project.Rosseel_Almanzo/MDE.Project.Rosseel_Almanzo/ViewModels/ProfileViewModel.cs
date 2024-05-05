@@ -1,6 +1,7 @@
 ﻿using FreshMvvm;
 using MDE.Project.Rosseel_Almanzo.Domain.Models;
 using MDE.Project.Rosseel_Almanzo.Domain.Services;
+using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Mock;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
@@ -15,6 +17,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     public class ProfileViewModel : FreshBasePageModel
     {
         private readonly IUsersService _usersService;
+        private readonly IAccountService _accountService;
 
         private string errorText;
         private string firstName;
@@ -26,6 +29,17 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private string password;
         private string gender;
         private ObservableCollection<Dog> dogs;
+        private string id;
+
+        public string Id 
+        { 
+            get => id;
+            set
+            {
+                id = value;
+                //RaisePropertyChanged(nameof(Id));
+            }
+        }
 
         public ObservableCollection<Dog> Dogs 
         {
@@ -123,20 +137,16 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             set { errorText = value; RaisePropertyChanged(nameof(ErrorText)); }
         }
 
-        public int Id { get; set; }
-
-        public ProfileViewModel()
+        public ProfileViewModel(IAccountService accountService, IUsersService usersService)
         {
-            _usersService = new MockUsersService();
             dogs = new ObservableCollection<Dog>();
+            _accountService = accountService;
+            _usersService = usersService;
         }
 
-        public override void Init(object initData)
+        protected override void ViewIsAppearing(object sender, EventArgs e)
         {
-            base.Init(initData);
-
-            //Id = (int)initData;
-
+            base.ViewIsAppearing(sender, e);
             LoadData.Execute(null);
         }
 
@@ -146,9 +156,8 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    //var currentUser = await _usersService.GetUserByIdAsync(Id);
-                    var users = await _usersService.GetAllUsersAsync();
-                    var currentUser = users.FirstOrDefault();
+                    Id = await SecureStorage.GetAsync("token");
+                    var currentUser = await _usersService.GetUserByIdAsync(id);
                     FirstName = currentUser.FirstName;
                     LastName = currentUser.LastName;
                     Email = currentUser.Email;
@@ -169,6 +178,27 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command(async () =>
                 {
                     await CoreMethods.PushPageModel<AddDogViewModel>();
+                });
+            }
+        }
+
+        public ICommand DeleteAccountCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    var result = await _accountService.DeleteAccountAsync(id);
+                    if (result)
+                    {
+                        await CoreMethods.DisplayAlert("Deleted", "Account succesfull deleted", "Ok");
+                        SecureStorage.RemoveAll();
+                        await CoreMethods.PushPageModel<LoginViewModel>();
+                    }
+                    else
+                    {
+                        await CoreMethods.DisplayAlert("Failed", "Account couldn not be deleted, please contact app services", "Ok");
+                    }
                 });
             }
         }
