@@ -101,6 +101,11 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             };
         }
 
+        public Task<bool> AddDogAsync(string userId, Dog dog)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<bool> CreateUserAsync(User newUser)
         {
             try

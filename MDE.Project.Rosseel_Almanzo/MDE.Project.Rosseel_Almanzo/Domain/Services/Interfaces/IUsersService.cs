@@ -12,5 +12,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
         Task<bool> CreateUserAsync(User newUser);
         Task<string> DeleteUserAsync(string id);
         Task<User> GetUserByIdAsync(string id);
+        Task<bool> AddDogAsync(string userId, Dog dog);
     }
 }
