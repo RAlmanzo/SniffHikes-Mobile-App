@@ -282,7 +282,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         await CoreMethods.DisplayAlert("Failed", result, "Ok");
                     }
 
-                    await CoreMethods.PopPageModel(true);
+                    await CoreMethods.PushPageModel<EventsViewModel>();
                 });
             }
         }
@@ -302,7 +302,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         Street = Street,
                         City = City,
                         Country = Country,
-                        DateEvent = DateTime.Now,
+                        DateEvent = DateEvent,
                         OrginazerId = orginazerId,
                         Images = Images ?? new ObservableCollection<Domain.Models.Image>(),
                         Comments = Comments ?? new ObservableCollection<Comment>(),
