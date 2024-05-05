@@ -144,6 +144,8 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
         {
             try
             {
+                //TODO delete images from db!!!!!!!!!!!!!!!!!!!!!!!
+
                 await _client.Child("Routes").Child(id).DeleteAsync();
                 return await Task.FromResult("Deleted");
             }
