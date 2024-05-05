@@ -42,9 +42,9 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Validators
                 .WithMessage("DateEvent cant be in de past");
         }
 
-        private bool BeValidDate(DateTime dateOfBirth)
+        private bool BeValidDate(DateTime dateEvent)
         {
-            return dateOfBirth > DateTime.Now;
+            return dateEvent > DateTime.Now;
         }
     }
 }
