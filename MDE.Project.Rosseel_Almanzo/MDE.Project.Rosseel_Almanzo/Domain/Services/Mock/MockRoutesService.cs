@@ -200,5 +200,10 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         {
             throw new NotImplementedException();
         }
+
+        public Task<bool> UpdateRouteAsync(Route toUpdate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

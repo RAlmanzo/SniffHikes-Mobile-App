@@ -15,5 +15,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces
         Task<string> DeleteRouteAsync(string id);
         Task<bool> AddCommentAsync(string id, Comment comment);
         Task<bool> DeleteCommentAsync(string id, string commentId);
+        Task<bool> UpdateRouteAsync(Route toUpdate);
     }
 }

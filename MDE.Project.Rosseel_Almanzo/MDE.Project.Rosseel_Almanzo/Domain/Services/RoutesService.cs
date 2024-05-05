@@ -153,5 +153,19 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
             }
             
         }
+
+        public async Task<bool> UpdateRouteAsync(Route toUpdate)
+        {
+            try
+            {
+                await _client.Child("Routes").Child(toUpdate.Id)
+                    .PutAsync(toUpdate);
+                return await Task.FromResult(true);
+            }
+            catch
+            {
+                return await Task.FromResult(false);
+            }
+        }
     }
 }
