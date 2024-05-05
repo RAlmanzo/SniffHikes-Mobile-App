@@ -15,6 +15,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Models
         public string Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Password { get; set; }
-        public IEnumerable<Dog> Dogs { get; set; }
+        public ICollection<Dog> Dogs { get; set; }
+        public Image Image { get; set; }
     }
 }
