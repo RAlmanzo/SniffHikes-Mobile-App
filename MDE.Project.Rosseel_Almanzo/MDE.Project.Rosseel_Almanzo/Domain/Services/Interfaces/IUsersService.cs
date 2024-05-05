@@ -10,6 +10,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
     {
         Task<List<User>> GetAllUsersAsync();
         Task<bool> CreateUserAsync(User newUser);
-        Task<User> GetUserByIdAsync(int id);
+        Task<string> DeleteUserAsync(string id);
+        Task<User> GetUserByIdAsync(string id);
     }
 }
