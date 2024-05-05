@@ -62,14 +62,16 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         {
             //get de data
             var eventsSnapshot = await _client.Child("Events").OnceAsync<EventDto>();
+            var sortedEvents = eventsSnapshot.OrderByDescending(r => r.Object.DateEvent);
 
             //map data to event collection
-            var events = eventsSnapshot.Select(e => new BaseModel
+            var events = sortedEvents.Select(e => new BaseModel
             {
                 Id = e.Key,
                 Title = e.Object.Title,
                 Description = e.Object.Description,
                 Image = e.Object.Images?.FirstOrDefault(),
+                OrginazerId = e.Object.OrginazerId,
             }).ToList();
 
             return await Task.FromResult(events);
@@ -80,7 +82,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         {
             //get data
             var myEventsSnapshot = await _client.Child("Events").OnceAsync<EventDto>();            
-            var eventsList = myEventsSnapshot.Where(e => e.Object.OrginazerId == id).ToList();
+            var eventsList = myEventsSnapshot.Where(e => e.Object.OrginazerId == id).OrderByDescending(e => e.Object.DateEvent).ToList();
 
             //map data to events collection
             var events = eventsList.Select(e => new BaseModel
@@ -89,6 +91,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 Title = e.Object.Title,
                 Description = e.Object.Description,
                 Image = e.Object.Images?.FirstOrDefault(),
+                OrginazerId = e.Object.OrginazerId,
             }).ToList();
 
             return await Task.FromResult(events);
