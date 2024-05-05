@@ -59,7 +59,7 @@
                         <Label Text="Share your experience here" Style="{StaticResource formLabelStyle}"></Label>
                         <Button Text="Comment" Style="{StaticResource formButtonStye}" Command="{Binding AddCommentCommand}"></Button>
                     </StackLayout>
-                    <ListView x:Name="lstItems" ItemsSource="{Binding Comments}" HasUnevenRows="True">
+                    <ListView x:Name="lstItems" ItemsSource="{Binding Comments}" HasUnevenRows="True" SelectedItem="{Binding SelectedComment}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>

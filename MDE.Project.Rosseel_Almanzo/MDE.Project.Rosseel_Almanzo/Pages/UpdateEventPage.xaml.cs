@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace MDE.Project.Rosseel_Almanzo.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CreateCommentPage : ContentPage
+	public partial class UpdateEventPage : ContentPage
 	{
-		public CreateCommentPage ()
+		public UpdateEventPage ()
 		{
 			InitializeComponent ();
 		}

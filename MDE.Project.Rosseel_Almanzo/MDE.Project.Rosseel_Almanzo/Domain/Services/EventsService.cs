@@ -15,7 +15,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
 {
     public class EventsService : IEventsService
     {
-        private static List<Event> _events;
         private readonly FirebaseClient _client;
 
         public EventsService()
@@ -63,14 +62,16 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         {
             //get de data
             var eventsSnapshot = await _client.Child("Events").OnceAsync<EventDto>();
+            var sortedEvents = eventsSnapshot.OrderByDescending(r => r.Object.DateEvent);
 
             //map data to event collection
-            var events = eventsSnapshot.Select(e => new BaseModel
+            var events = sortedEvents.Select(e => new BaseModel
             {
                 Id = e.Key,
                 Title = e.Object.Title,
                 Description = e.Object.Description,
                 Image = e.Object.Images?.FirstOrDefault(),
+                OrginazerId = e.Object.OrginazerId,
             }).ToList();
 
             return await Task.FromResult(events);
@@ -81,7 +82,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         {
             //get data
             var myEventsSnapshot = await _client.Child("Events").OnceAsync<EventDto>();            
-            var eventsList = myEventsSnapshot.Where(e => e.Object.OrginazerId == id).ToList();
+            var eventsList = myEventsSnapshot.Where(e => e.Object.OrginazerId == id).OrderByDescending(e => e.Object.DateEvent).ToList();
 
             //map data to events collection
             var events = eventsList.Select(e => new BaseModel
@@ -90,6 +91,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 Title = e.Object.Title,
                 Description = e.Object.Description,
                 Image = e.Object.Images?.FirstOrDefault(),
+                OrginazerId = e.Object.OrginazerId,
             }).ToList();
 
             return await Task.FromResult(events);
@@ -117,6 +119,56 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 return await Task.FromResult(selectedEvent);
             };
             return null;
+        }
+
+        public async Task<string> DeleteEventAsync(string id)
+        {
+            try
+            {
+                //TODO delete images from db!!!!!!!!!!!!!!!!!!!!!!!
+
+                await _client.Child("Events").Child(id).DeleteAsync();
+                return await Task.FromResult("Deleted");
+            }
+            catch (Exception ex)
+            {
+                return await Task.FromResult(ex.Message);
+            }
+
+        }
+
+        public async Task<bool> DeleteCommentAsync(string id, string commentId)
+        {
+            try
+            {
+                //get the route
+                var selectedEvent = await GetEventByIdAsync(id);
+                //get the comment
+                var selectedComment = selectedEvent.Comments.Where(c => c.Id == commentId).FirstOrDefault();
+                //delete comment and update db
+                selectedEvent.Comments.Remove(selectedComment);
+
+                await _client.Child("Events").Child(id).PutAsync(selectedEvent);
+                return await Task.FromResult(true);
+            }
+            catch
+            {
+                return await Task.FromResult(false);
+            }
+        }
+
+        public async Task<bool> UpdateEventAsync(Event toUpdate)
+        {
+            try
+            {
+                await _client.Child("Events").Child(toUpdate.Id)
+                    .PutAsync(toUpdate);
+                return await Task.FromResult(true);
+            }
+            catch
+            {
+                return await Task.FromResult(false);
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MDE.Project.Rosseel_Almanzo.Pages.UpdateRoutePage"
+             x:Class="MDE.Project.Rosseel_Almanzo.Pages.UpdateEventPage"
              Title="Update"
              NavigationPage.HasBackButton="False"
              BackgroundImageSource="sky.jpg">
@@ -49,6 +49,11 @@
                         <Entry Text="{Binding Country}"></Entry>
                         <Label Text="{Binding CountryError}" TextColor="red"></Label>
                     </StackLayout>
+                    <StackLayout Style="{StaticResource createFormStyle}">
+                        <Label Text="Date of event" Style="{StaticResource formLabelStyle}"></Label>
+                        <DatePicker Date="{Binding DateEvent}" Format="dd-MM-yyyy"></DatePicker>
+                        <Label Text="{Binding DateError}" TextColor="red"></Label>
+                    </StackLayout>
                     <StackLayout>
                         <ListView x:Name="lstItems" ItemsSource="{Binding Comments}" HasUnevenRows="True" SelectedItem="{Binding SelectedComment}">
                             <ListView.ItemTemplate>
@@ -78,8 +83,8 @@
                 </StackLayout>
             </ScrollView>
             <StackLayout Orientation="Horizontal" BackgroundColor="Black">
-                <Button Text="Update" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding UpdateRouteCommand}"></Button>
-                <Button Text="Delete" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding DeleteRouteCommand}"></Button>
+                <Button Text="Update" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding UpdateEventCommand}"></Button>
+                <Button Text="Delete" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding DeleteEventCommand}"></Button>
                 <Button Text="Cancel" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding CancelCommand}"></Button>
             </StackLayout>
         </StackLayout>

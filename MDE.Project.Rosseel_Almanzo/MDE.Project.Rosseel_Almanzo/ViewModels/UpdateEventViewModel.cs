@@ -12,9 +12,9 @@ using Xamarin.Forms;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
-    public class UpdateRouteViewModel : FreshBasePageModel
+    public class UpdateEventViewModel : FreshBasePageModel
     {
-        private readonly IRoutesService _routesService;
+        private readonly IEventsService _eventsService;
 
         private string id;
         private string title;
@@ -31,6 +31,17 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private string streetError;
         private string cityError;
         private string countryError;
+        private string dateError;
+
+        public string DateError
+        {
+            get => dateError;
+            set
+            {
+                dateError = value;
+                RaisePropertyChanged(nameof(DateError));
+            }
+        }
 
         public string TitleError
         {
@@ -186,11 +197,11 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public UpdateRouteViewModel(IRoutesService routesService)
+        public UpdateEventViewModel(IEventsService eventsService)
         {
             Images = new ObservableCollection<Domain.Models.Image>();
             Comments = new ObservableCollection<Comment>();
-            _routesService = routesService;
+            _eventsService = eventsService;
         }
 
         public override void Init(object initData)
@@ -207,7 +218,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    var item = await _routesService.GetRouteByIdAsync(id);
+                    var item = await _eventsService.GetEventByIdAsync(id);
                     Title = item.Title;
                     Description = item.Description;
                     Street = item.Street;
@@ -229,7 +240,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     var result = await CoreMethods.DisplayAlert("Delete Comment", "Are u sure u want to delete comment?", "Yes", "Cancel");
                     if (result)
                     {
-                        var deleteResult = await _routesService.DeleteCommentAsync(Id, selectedComment.Id);
+                        var deleteResult = await _eventsService.DeleteCommentAsync(Id, selectedComment.Id);
                         if (deleteResult)
                         {
                             Comments.Remove(selectedComment);
@@ -250,40 +261,40 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    await CoreMethods.PushPageModel<RoutesViewModel>();
+                    await CoreMethods.PushPageModel<EventsViewModel>();
                 });
             }
         }
 
-        public ICommand DeleteRouteCommand
+        public ICommand DeleteEventCommand
         {
             get
             {
                 return new Command(async () =>
                 {
-                    var result = await _routesService.DeleteRouteAsync(Id);
-                    if(result == "Deleted")
+                    var result = await _eventsService.DeleteEventAsync(Id);
+                    if (result == "Deleted")
                     {
-                        await CoreMethods.DisplayAlert("Deleted", "Route succesfull deleted!", "Ok");
+                        await CoreMethods.DisplayAlert("Deleted", "Event succesfull deleted!", "Ok");
                     }
                     else
                     {
                         await CoreMethods.DisplayAlert("Failed", result, "Ok");
                     }
 
-                    await CoreMethods.PushPageModel<RoutesViewModel>();
+                    await CoreMethods.PushPageModel<EventsViewModel>();
                 });
             }
         }
 
-        public ICommand UpdateRouteCommand
+        public ICommand UpdateEventCommand
         {
             get
             {
                 return new Command(async () =>
                 {
                     var orginazerId = await SecureStorage.GetAsync("token");
-                    var updatedRoute = new Route
+                    var updatedEvent = new Event
                     {
                         Id = id,
                         Title = Title,
@@ -291,19 +302,19 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         Street = Street,
                         City = City,
                         Country = Country,
-                        DateEvent = DateTime.Now,
-                        OrganizerId = orginazerId,
+                        DateEvent = DateEvent,
+                        OrginazerId = orginazerId,
                         Images = Images ?? new ObservableCollection<Domain.Models.Image>(),
                         Comments = Comments ?? new ObservableCollection<Comment>(),
                     };
 
-                    if (Validate(updatedRoute))
+                    if (Validate(updatedEvent))
                     {
-                        var result = await _routesService.UpdateRouteAsync(updatedRoute);
+                        var result = await _eventsService.UpdateEventAsync(updatedEvent);
                         if (result)
                         {
                             await CoreMethods.DisplayAlert("Succes", "Route succesfull updated", "Ok");
-                            await CoreMethods.PushPageModel<RoutesViewModel>();
+                            await CoreMethods.PushPageModel<EventsViewModel>();
                         }
                         else
                         {
@@ -314,12 +325,12 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        private bool Validate(Route route)
+        private bool Validate(Event currentEvent)
         {
 
-            var validator = new RoutesValidator();
+            var validator = new EventsValidator();
 
-            var result = validator.Validate(route);
+            var result = validator.Validate(currentEvent);
 
             foreach (var error in result.Errors)
             {
@@ -346,6 +357,11 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 if (error.PropertyName == nameof(Country))
                 {
                     CountryError = error.ErrorMessage;
+                }
+
+                if (error.PropertyName == nameof(DateEvent))
+                {
+                    DateError = error.ErrorMessage;
                 }
             }
             return result.IsValid;

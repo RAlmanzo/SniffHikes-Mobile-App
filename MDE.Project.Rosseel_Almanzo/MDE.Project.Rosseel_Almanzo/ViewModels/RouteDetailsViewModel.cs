@@ -53,13 +53,6 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public RouteDetailsViewModel(IRoutesService routesService)
-        {
-            Images = new ObservableCollection<Domain.Models.Image>();
-            Comments = new ObservableCollection<Comment>();
-            _routesService = routesService;
-        }
-
         public ObservableCollection<Domain.Models.Image> Images
         {
             get => images;
@@ -138,6 +131,13 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 id = value;
                 RaisePropertyChanged(nameof(Id));
             }
+        }
+
+        public RouteDetailsViewModel(IRoutesService routesService)
+        {
+            Images = new ObservableCollection<Domain.Models.Image>();
+            Comments = new ObservableCollection<Comment>();
+            _routesService = routesService;
         }
 
         public override void Init(object initData)
@@ -228,7 +228,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    await CoreMethods.PushPageModel<CreateCommentViewModel>(id);
+                    await CoreMethods.PushPageModel<CreateRouteCommentViewModel>(id);
                 });
             }
         }

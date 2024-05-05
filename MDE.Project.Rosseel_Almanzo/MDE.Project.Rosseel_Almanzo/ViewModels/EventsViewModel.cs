@@ -22,6 +22,13 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private ObservableCollection<Domain.Models.Image> images;
         private Domain.Models.Image image;
         private BaseModel selectedEvent;
+        private string id;
+
+        public string Id
+        {
+            get => id;
+            set => id = value;
+        }
 
         public Domain.Models.Image Image
         {
@@ -30,6 +37,26 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 image = Images.FirstOrDefault();
                 RaisePropertyChanged(nameof(Image));
+            }
+        }
+
+        public BaseModel SelectedEvent
+        {
+            get => selectedEvent;
+            set
+            {
+                selectedEvent = value;
+                if (value != null)
+                {
+                    if (selectedEvent.OrginazerId == id)
+                    {
+                        GoToUpdatePage.Execute(null);
+                    }
+                    else
+                    {
+                        GoToDetailPage.Execute(null);
+                    }
+                }
             }
         }
 
@@ -71,6 +98,11 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         public override void Init(object initData)
         {
             base.Init(initData);
+        }
+
+        protected override void ViewIsAppearing(object sender, EventArgs e)
+        {
+            base.ViewIsAppearing(sender, e);
             RefreshData.Execute(null);
         }
 
@@ -80,25 +112,26 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
+                    Id = await SecureStorage.GetAsync("token");
+
                     var fetchedEvents = await _eventsService.GetAllEventsAsync();
                     Events = new ObservableCollection<BaseModel>(fetchedEvents);
 
-                    var id = await SecureStorage.GetAsync("token");
                     var myEvents = await _eventsService.GetAllEventsByUserId(id);
                     MyEvents = new ObservableCollection<BaseModel>(myEvents);
                 });
             }
         }
 
-        public BaseModel SelectedEvent
+        public ICommand GoToUpdatePage
         {
-            get => selectedEvent;
-            set
+            get
             {
-                selectedEvent = value;
-
-                // RaisePropertyChanged(nameof(SelectedItem));
-                GoToDetailPage.Execute(null);
+                return new Command(async () =>
+                {
+                    if (selectedEvent != null)
+                        await CoreMethods.PushPageModel<UpdateEventViewModel>(selectedEvent.Id, false, true);
+                });
             }
         }
 

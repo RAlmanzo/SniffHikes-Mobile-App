@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
-    public class CreateCommentViewModel : FreshBasePageModel
+    public class CreateRouteCommentViewModel : FreshBasePageModel
     {
         private readonly IRoutesService _routesService;
 
@@ -34,7 +34,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public CreateCommentViewModel(IRoutesService routesService)
+        public CreateRouteCommentViewModel(IRoutesService routesService)
         {
             _routesService = routesService;
         }
