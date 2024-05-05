@@ -98,6 +98,11 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         public override void Init(object initData)
         {
             base.Init(initData);
+        }
+
+        protected override void ViewIsAppearing(object sender, EventArgs e)
+        {
+            base.ViewIsAppearing(sender, e);
             RefreshData.Execute(null);
         }
 
@@ -125,7 +130,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command(async () =>
                 {
                     if (selectedEvent != null)
-                        await CoreMethods.PushPageModel<UpdateRouteViewModel>(selectedEvent.Id, false, true);
+                        await CoreMethods.PushPageModel<UpdateEventViewModel>(selectedEvent.Id, false, true);
                 });
             }
         }
