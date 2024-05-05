@@ -51,6 +51,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
                 Title = e.Object.Title,
                 Description = e.Object.Description,
                 Image = e.Object.Images?.FirstOrDefault(),
+                OrginazerId = e.Object.OrganizerId,
             }).ToList();
 
             return await Task.FromResult(routes);
@@ -133,9 +134,24 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
                 Title = e.Object.Title,
                 Description = e.Object.Description,
                 Image = e.Object.Images?.FirstOrDefault(),
+                OrginazerId = e.Object.OrganizerId,
             }).ToList();
 
             return await Task.FromResult(routes);
+        }
+
+        public async Task<string> DeleteRouteAsync(string id)
+        {
+            try
+            {
+                await _client.Child("Routes").Child(id).DeleteAsync();
+                return await Task.FromResult("Deleted");
+            }
+            catch(Exception ex)
+            {
+                return await Task.FromResult(ex.Message);
+            }
+            
         }
     }
 }
