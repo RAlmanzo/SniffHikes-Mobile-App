@@ -15,7 +15,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
 {
     public class EventsService : IEventsService
     {
-        private static List<Event> _events;
         private readonly FirebaseClient _client;
 
         public EventsService()
@@ -117,6 +116,56 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 return await Task.FromResult(selectedEvent);
             };
             return null;
+        }
+
+        public async Task<string> DeleteEventAsync(string id)
+        {
+            try
+            {
+                //TODO delete images from db!!!!!!!!!!!!!!!!!!!!!!!
+
+                await _client.Child("Events").Child(id).DeleteAsync();
+                return await Task.FromResult("Deleted");
+            }
+            catch (Exception ex)
+            {
+                return await Task.FromResult(ex.Message);
+            }
+
+        }
+
+        public async Task<bool> DeleteCommentAsync(string id, string commentId)
+        {
+            try
+            {
+                //get the route
+                var selectedEvent = await GetEventByIdAsync(id);
+                //get the comment
+                var selectedComment = selectedEvent.Comments.Where(c => c.Id == commentId).FirstOrDefault();
+                //delete comment and update db
+                selectedEvent.Comments.Remove(selectedComment);
+
+                await _client.Child("Events").Child(id).PutAsync(selectedEvent);
+                return await Task.FromResult(true);
+            }
+            catch
+            {
+                return await Task.FromResult(false);
+            }
+        }
+
+        public async Task<bool> UpdateEventAsync(Event toUpdate)
+        {
+            try
+            {
+                await _client.Child("Events").Child(toUpdate.Id)
+                    .PutAsync(toUpdate);
+                return await Task.FromResult(true);
+            }
+            catch
+            {
+                return await Task.FromResult(false);
+            }
         }
     }
 }
