@@ -133,5 +133,10 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         {
             return await Task.FromResult(_users.FirstOrDefault());
         }
+
+        public Task<bool> UpdateUserAsync(User toUpdate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

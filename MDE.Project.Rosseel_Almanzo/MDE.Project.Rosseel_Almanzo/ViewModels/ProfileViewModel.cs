@@ -182,6 +182,37 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
+        public ICommand UpdateProfileCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    var user = new User
+                    {
+                        Id = id,
+                        FirstName = FirstName,
+                        LastName = LastName,
+                        Email = Email,
+                        City = City,
+                        Country = Country,
+                        Gender = Gender,
+                        DateOfBirth = DateOfBirth,
+                        Password = Password,
+                        Dogs = Dogs,
+                        Image = Image,
+                    };
+
+                    if (!await _usersService.UpdateUserAsync(user)) 
+                    {
+                        await CoreMethods.DisplayAlert("Failed", "Update profile failed please later again!", "Ok");
+                    };
+
+                    await CoreMethods.PushPageModel<ProfileViewModel>();
+                });
+            }
+        }
+
         public ICommand GoToAddDogPageCommand
         {
             get

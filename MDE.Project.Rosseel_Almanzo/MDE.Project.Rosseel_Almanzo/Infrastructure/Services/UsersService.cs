@@ -103,5 +103,19 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
             };
             return null;
         }
+
+        public async Task<bool> UpdateUserAsync(User toUpdate)
+        {
+            try
+            {
+                await _client.Child("Users").Child(toUpdate.Id)
+                    .PutAsync(toUpdate);
+                return await Task.FromResult(true);
+            }
+            catch
+            {
+                return await Task.FromResult(false);
+            }
+        }
     }
 }
