@@ -12,7 +12,10 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces
         Task<IEnumerable<BaseModel>> GetAllEventsAsync();
         Task<IEnumerable<BaseModel>> GetAllEventsByUserId(string id);
         Task<string> CreateEventAsync(Event newEvent);
+        Task<string> DeleteEventAsync(string id);
         Task<bool> AddCommentAsync(string id, Comment comment);
+        Task<bool> DeleteCommentAsync(string id, string commentId);
+        Task<bool> UpdateEventAsync(Event toUpdate);
 
     }
 }
