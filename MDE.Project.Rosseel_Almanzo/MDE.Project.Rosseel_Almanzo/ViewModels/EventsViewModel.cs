@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -23,6 +24,28 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private Domain.Models.Image image;
         private BaseModel selectedEvent;
         private string id;
+        private bool isLoading;
+        private bool isVisible;
+
+        public bool IsVisible
+        {
+            get => isVisible;
+            set
+            {
+                isVisible = value;
+                RaisePropertyChanged(nameof(IsVisible));
+            }
+        }
+
+        public bool IsLoading
+        {
+            get => isLoading;
+            set
+            {
+                isLoading = value;
+                RaisePropertyChanged(nameof(IsLoading));
+            }
+        }
 
         public string Id
         {
@@ -112,6 +135,9 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
+                    IsLoading = true;
+                    IsVisible = false;
+
                     Id = await SecureStorage.GetAsync("token");
 
                     var fetchedEvents = await _eventsService.GetAllEventsAsync();
@@ -119,6 +145,10 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
                     var myEvents = await _eventsService.GetAllEventsByUserId(id);
                     MyEvents = new ObservableCollection<BaseModel>(myEvents);
+
+                    await Task.Delay(500);
+                    IsLoading = false;
+                    IsVisible= true;
                 });
             }
         }
