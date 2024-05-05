@@ -12,7 +12,7 @@ using Xamarin.Forms;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
-    public class UpdateRouteViewModel : FreshBasePageModel
+    public class UpdateViewModel : FreshBasePageModel
     {
         private readonly IRoutesService _routesService;
 
@@ -186,7 +186,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public UpdateRouteViewModel(IRoutesService routesService)
+        public UpdateViewModel(IRoutesService routesService)
         {
             Images = new ObservableCollection<Domain.Models.Image>();
             Comments = new ObservableCollection<Comment>();

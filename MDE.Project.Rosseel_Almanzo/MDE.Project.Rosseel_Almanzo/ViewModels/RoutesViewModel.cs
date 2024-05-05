@@ -109,7 +109,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command(async () =>
                 {
                     if (SelectedRoute != null)
-                        await CoreMethods.PushPageModel<UpdateRouteViewModel>(SelectedRoute.Id, false, true);
+                        await CoreMethods.PushPageModel<UpdateViewModel>(SelectedRoute.Id, false, true);
                 });
             }
         }
