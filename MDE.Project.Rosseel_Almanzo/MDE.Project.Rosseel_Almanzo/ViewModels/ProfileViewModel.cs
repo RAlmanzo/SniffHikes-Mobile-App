@@ -30,6 +30,17 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private string gender;
         private ObservableCollection<Dog> dogs;
         private string id;
+        private Domain.Models.Image image;
+
+        public Domain.Models.Image Image
+        {
+            get => image;
+            set
+            {
+                image = value;
+                RaisePropertyChanged(nameof(Image));
+            }
+        }
 
         public string Id 
         { 
@@ -37,7 +48,6 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             set
             {
                 id = value;
-                //RaisePropertyChanged(nameof(Id));
             }
         }
 
@@ -167,6 +177,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     DateOfBirth = currentUser.DateOfBirth;
                     Password = currentUser.Password;
                     Dogs = currentUser.Dogs != null ? new ObservableCollection<Dog>(currentUser.Dogs) : new ObservableCollection<Dog>();
+                    Image = currentUser.Image;
                 });
             }
         }
@@ -177,7 +188,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    await CoreMethods.PushPageModel<AddDogViewModel>();
+                    await CoreMethods.PushPageModel<AddDogViewModel>(id);
                 });
             }
         }
