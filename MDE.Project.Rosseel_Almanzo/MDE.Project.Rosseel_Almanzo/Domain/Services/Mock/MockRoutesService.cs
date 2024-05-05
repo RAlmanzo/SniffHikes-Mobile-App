@@ -195,5 +195,10 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         {
             throw new NotImplementedException();
         }
+
+        public Task<string> DeleteRouteAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
