@@ -1,11 +1,13 @@
 ﻿using FreshMvvm;
 using MDE.Project.Rosseel_Almanzo.Domain.Models;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
+using MDE.Project.Rosseel_Almanzo.Domain.Services.Validators;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
@@ -24,6 +26,61 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private ObservableCollection<Domain.Models.Image> images;
         private ObservableCollection<Comment> comments;
         private Comment selectedComment;
+        private string titleError;
+        private string descriptionError;
+        private string streetError;
+        private string cityError;
+        private string countryError;
+
+        public string TitleError
+        {
+            get => titleError;
+            set
+            {
+                titleError = value;
+                RaisePropertyChanged(nameof(TitleError));
+            }
+        }
+
+        public string DescriptionError
+        {
+            get => descriptionError;
+            set
+            {
+                descriptionError = value;
+                RaisePropertyChanged(nameof(DescriptionError));
+            }
+        }
+
+        public string StreetError
+        {
+            get => streetError;
+            set
+            {
+                streetError = value;
+                RaisePropertyChanged(nameof(StreetError));
+            }
+        }
+
+        public string CityError
+        {
+            get => cityError;
+            set
+            {
+                cityError = value;
+                RaisePropertyChanged(nameof(CityError));
+            }
+        }
+
+        public string CountryError
+        {
+            get => countryError;
+            set
+            {
+                countryError = value;
+                RaisePropertyChanged(nameof(CountryError));
+            }
+        }
 
         public Comment SelectedComment
         {
@@ -217,6 +274,81 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     await CoreMethods.PushPageModel<RoutesViewModel>();
                 });
             }
+        }
+
+        public ICommand UpdateRouteCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    var orginazerId = await SecureStorage.GetAsync("token");
+                    var updatedRoute = new Route
+                    {
+                        Id = id,
+                        Title = Title,
+                        Description = Description,
+                        Street = Street,
+                        City = City,
+                        Country = Country,
+                        DateEvent = DateTime.Now,
+                        OrganizerId = orginazerId,
+                        Images = Images ?? new ObservableCollection<Domain.Models.Image>(),
+                        Comments = Comments ?? new ObservableCollection<Comment>(),
+                    };
+
+                    if (Validate(updatedRoute))
+                    {
+                        var result = await _routesService.UpdateRouteAsync(updatedRoute);
+                        if (result)
+                        {
+                            await CoreMethods.DisplayAlert("Succes", "Route succesfull updated", "Ok");
+                            await CoreMethods.PushPageModel<RoutesViewModel>();
+                        }
+                        else
+                        {
+                            await CoreMethods.DisplayAlert("Failed", "Could not update route!", "Ok");
+                        }
+                    }
+                });
+            }
+        }
+
+        private bool Validate(Route route)
+        {
+
+            var validator = new RoutesValidator();
+
+            var result = validator.Validate(route);
+
+            foreach (var error in result.Errors)
+            {
+                if (error.PropertyName == nameof(Title))
+                {
+                    TitleError = error.ErrorMessage;
+                }
+
+                if (error.PropertyName == nameof(Description))
+                {
+                    DescriptionError = error.ErrorMessage;
+                }
+
+                if (error.PropertyName == nameof(Street))
+                {
+                    StreetError = error.ErrorMessage;
+                }
+
+                if (error.PropertyName == nameof(City))
+                {
+                    CityError = error.ErrorMessage;
+                }
+
+                if (error.PropertyName == nameof(Country))
+                {
+                    CountryError = error.ErrorMessage;
+                }
+            }
+            return result.IsValid;
         }
     }
 }
