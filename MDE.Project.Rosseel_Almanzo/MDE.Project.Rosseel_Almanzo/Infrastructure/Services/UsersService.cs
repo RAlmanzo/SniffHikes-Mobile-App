@@ -22,6 +22,26 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
             _client = new FirebaseClient("https://sniffhikes-8e9a6-default-rtdb.europe-west1.firebasedatabase.app/");
         }
 
+        public async Task<bool> AddDogAsync(string userId, Dog dog)
+        {
+            try
+            {
+                var user = await GetUserByIdAsync(userId);
+                if (user.Dogs == null)
+                {
+                    user.Dogs = new ObservableCollection<Dog>();
+                }
+                user.Dogs.Add(dog);
+
+                await _client.Child("Users").Child(userId).PutAsync(user);
+                return await Task.FromResult(true);
+            }
+            catch
+            {
+                return await Task.FromResult(false);
+            }
+        }
+
         public async Task<bool> CreateUserAsync(User newUser)
         {
             try
@@ -76,6 +96,7 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
                     DateOfBirth = userSnapshot.DateOfBirth,
                     Password = userSnapshot.Password,
                     Dogs = userSnapshot.Dogs != null ? new ObservableCollection<Dog>(userSnapshot.Dogs) : new ObservableCollection<Dog>(),
+                    Image = userSnapshot.Image,
                 };
                 
                 return await Task.FromResult(user);
