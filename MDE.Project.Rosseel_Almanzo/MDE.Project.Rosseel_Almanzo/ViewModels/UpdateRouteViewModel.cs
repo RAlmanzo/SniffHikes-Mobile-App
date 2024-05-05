@@ -1,6 +1,5 @@
 ﻿using FreshMvvm;
 using MDE.Project.Rosseel_Almanzo.Domain.Models;
-using MDE.Project.Rosseel_Almanzo.Domain.Services;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Validators;
 using System;
@@ -13,18 +12,20 @@ using Xamarin.Forms;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
-    public class CreateRouteViewModel : FreshBasePageModel
+    public class UpdateRouteViewModel : FreshBasePageModel
     {
         private readonly IRoutesService _routesService;
-        private readonly IImageService _imageService;
 
+        private string id;
         private string title;
         private string description;
         private string street;
         private string city;
         private string country;
+        private DateTime dateEvent;
         private ObservableCollection<Domain.Models.Image> images;
         private ObservableCollection<Comment> comments;
+        private Comment selectedComment;
         private string titleError;
         private string descriptionError;
         private string streetError;
@@ -81,6 +82,20 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
+        public Comment SelectedComment
+        {
+            get => selectedComment;
+            set
+            {
+                selectedComment = value;
+                RaisePropertyChanged(nameof(SelectedComment));
+                if (selectedComment != null)
+                {
+                    DeleteCommentCommand.Execute(null);
+                }
+            }
+        }
+
         public ObservableCollection<Comment> Comments
         {
             get => comments;
@@ -98,6 +113,16 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 images = value;
                 RaisePropertyChanged(nameof(Images));
+            }
+        }
+
+        public DateTime DateEvent
+        {
+            get => dateEvent;
+            set
+            {
+                dateEvent = value;
+                RaisePropertyChanged(nameof(DateEvent));
             }
         }
 
@@ -151,89 +176,70 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public CreateRouteViewModel(IRoutesService routesService, IImageService imageService)
+        public string Id
+        {
+            get => id;
+            set
+            {
+                id = value;
+                RaisePropertyChanged(nameof(Id));
+            }
+        }
+
+        public UpdateRouteViewModel(IRoutesService routesService)
         {
             Images = new ObservableCollection<Domain.Models.Image>();
             Comments = new ObservableCollection<Comment>();
             _routesService = routesService;
-            _imageService = imageService;
         }
 
-        public ICommand CreateRouteCommand
+        public override void Init(object initData)
+        {
+            base.Init(initData);
+
+            Id = initData.ToString();
+            RefreshData.Execute(null);
+        }
+
+        public ICommand RefreshData
         {
             get
             {
                 return new Command(async () =>
                 {
-                    var orginazerId = await SecureStorage.GetAsync("token");
-                    var newRoute = new Route
-                    {
-                        Title = Title,
-                        Description = Description,
-                        Street = Street,
-                        City = City,
-                        Country = Country,
-                        DateEvent = DateTime.Now,
-                        OrganizerId = orginazerId,
-                        Images = Images ?? new ObservableCollection<Domain.Models.Image>(),
-                        Comments = Comments ?? new ObservableCollection<Comment>(),
-                    };
+                    var selectedRoute = await _routesService.GetRouteByIdAsync(id);
+                    Title = selectedRoute.Title;
+                    Description = selectedRoute.Description;
+                    Street = selectedRoute.Street;
+                    City = selectedRoute.City;
+                    Country = selectedRoute.Country;
+                    DateEvent = selectedRoute.DateEvent;
+                    Images = selectedRoute.Images != null ? new ObservableCollection<Domain.Models.Image>(selectedRoute.Images) : new ObservableCollection<Domain.Models.Image>();
+                    Comments = selectedRoute.Comments != null ? new ObservableCollection<Comment>(selectedRoute.Comments) : new ObservableCollection<Comment>();
+                });
+            }
+        }
 
-                    if (Validate(newRoute))
+        public ICommand DeleteCommentCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    var result = await CoreMethods.DisplayAlert("Delete Comment", "Are u sure u want to delete comment?", "Yes", "Cancel");
+                    if (result)
                     {
-                        var result = await _routesService.CreateRouteAsync(newRoute);
-                        if (result == "Created")
+                        var deleteResult = await _routesService.DeleteCommentAsync(Id, selectedComment.Id);
+                        if (deleteResult)
                         {
-                            await CoreMethods.DisplayAlert("Succes", "Route succesfull created", "Ok");
-                            await CoreMethods.PushPageModel<RoutesViewModel>();
+                            Comments.Remove(selectedComment);
+                            await CoreMethods.DisplayAlert("Delete Comment", "Comment succesfull deleted", "Ok");
                         }
                         else
                         {
-                            await CoreMethods.DisplayAlert("Failed", result, "Ok");
+                            await CoreMethods.DisplayAlert("Delete Comment", "Delete comment failed!", "Ok");
                         }
-                    }                 
-                });
-            }
-        }
-
-        public ICommand AddImageCommand
-        {
-            get
-            {
-                return new Command(async () =>
-                {
-                    string action = await CoreMethods.DisplayActionSheet("Select an option", "Annuleren", null, "Take picture", "Select picture");
-
-                    if (action == "Take picture")
-                    {
-                        var imageUrl = await _imageService.TakePhotoAsync();
-                        var image = new Domain.Models.Image
-                        {
-                            ImagePath = imageUrl,
-                        };
-                        Images.Add(image);
                     }
-                    else
-                    {
-                        var imageUrl = await _imageService.PickPhotoAsync();
-                        var image = new Domain.Models.Image
-                        {
-                            ImagePath = imageUrl,
-                        };
-                        Images.Add(image);
-                    }
-
-                });
-            }
-        }
-
-        public ICommand RecordRouteCommand
-        {
-            get
-            {
-                return new Command(async () =>
-                {
-                    await CoreMethods.PushPageModel<RecordRouteViewModel>();
                 });
             }
         }
@@ -245,6 +251,65 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command(async () =>
                 {
                     await CoreMethods.PushPageModel<RoutesViewModel>();
+                });
+            }
+        }
+
+        public ICommand DeleteRouteCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    var result = await _routesService.DeleteRouteAsync(Id);
+                    if(result == "Deleted")
+                    {
+                        await CoreMethods.DisplayAlert("Deleted", "Route succesfull deleted!", "Ok");
+                    }
+                    else
+                    {
+                        await CoreMethods.DisplayAlert("Failed", result, "Ok");
+                    }
+
+                    await CoreMethods.PushPageModel<RoutesViewModel>();
+                });
+            }
+        }
+
+        public ICommand UpdateRouteCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    var orginazerId = await SecureStorage.GetAsync("token");
+                    var updatedRoute = new Route
+                    {
+                        Id = id,
+                        Title = Title,
+                        Description = Description,
+                        Street = Street,
+                        City = City,
+                        Country = Country,
+                        DateEvent = DateTime.Now,
+                        OrganizerId = orginazerId,
+                        Images = Images ?? new ObservableCollection<Domain.Models.Image>(),
+                        Comments = Comments ?? new ObservableCollection<Comment>(),
+                    };
+
+                    if (Validate(updatedRoute))
+                    {
+                        var result = await _routesService.UpdateRouteAsync(updatedRoute);
+                        if (result)
+                        {
+                            await CoreMethods.DisplayAlert("Succes", "Route succesfull updated", "Ok");
+                            await CoreMethods.PushPageModel<RoutesViewModel>();
+                        }
+                        else
+                        {
+                            await CoreMethods.DisplayAlert("Failed", "Could not update route!", "Ok");
+                        }
+                    }
                 });
             }
         }

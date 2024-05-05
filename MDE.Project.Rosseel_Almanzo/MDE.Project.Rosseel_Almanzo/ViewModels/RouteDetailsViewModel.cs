@@ -9,6 +9,8 @@ using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.Linq;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
+using MDE.Project.Rosseel_Almanzo.Domain.Services.Mock;
+using System.Xml.Linq;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
@@ -16,7 +18,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     {
         private readonly IRoutesService _routesService;
 
-        private int id;
+        private string id;
         private string title;
         private string description;
         private string street;
@@ -25,6 +27,21 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private DateTime dateEvent;
         private ObservableCollection<Domain.Models.Image> images;
         private ObservableCollection<Comment> comments;
+        private Comment selectedComment;
+
+        public Comment SelectedComment
+        {
+            get => selectedComment;
+            set
+            {
+                selectedComment = value;
+                RaisePropertyChanged(nameof(SelectedComment));
+                if (selectedComment != null)
+                {
+                    DeleteCommentCommand.Execute(null);
+                }            
+            }
+        }
 
         public ObservableCollection<Comment> Comments
         {
@@ -113,7 +130,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public int Id
+        public string Id
         {
             get => id;
             set
@@ -127,7 +144,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         {
             base.Init(initData);
 
-            Id = (int)initData;
+            Id = initData.ToString();
 
             GetRouteDetails.Execute(null);
         }
@@ -146,7 +163,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     Country = item.Country;
                     DateEvent = item.DateEvent;
                     Images = item.Images != null ? new ObservableCollection<Domain.Models.Image>(item.Images) : new ObservableCollection<Domain.Models.Image>();
-                    comments = item.Comments != null ? new ObservableCollection<Comment>(item.Comments) : new ObservableCollection<Comment>();
+                    Comments = item.Comments != null ? new ObservableCollection<Comment>(item.Comments) : new ObservableCollection<Comment>();
                 });
             }
         }
@@ -173,7 +190,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                                 await Map.OpenAsync(locationCoordinates, new MapLaunchOptions
                                 {
                                     Name = item.Title,
-                                    NavigationMode = NavigationMode.None,
+                                    NavigationMode = NavigationMode.Driving,
                                 });
                             }
                             catch (Exception ex)
@@ -201,6 +218,43 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command(async () =>
                 {
                     await CoreMethods.PushPageModel<RoutesViewModel>();
+                });
+            }
+        }
+
+        public ICommand AddCommentCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<CreateCommentViewModel>(id);
+                });
+            }
+        }
+
+        public ICommand DeleteCommentCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    //TODO: Check if comment belongs to logged user!!!!!!!!!!!!!!!!!!!
+
+                    var result = await CoreMethods.DisplayAlert("Delete Comment", "Are u sure u want to delete comment?", "Yes", "Cancel");
+                    if (result)
+                    {
+                        var deleteResult = await _routesService.DeleteCommentAsync(Id, selectedComment.Id);
+                        if (deleteResult)
+                        {
+                            Comments.Remove(selectedComment);
+                            await CoreMethods.DisplayAlert("Delete Comment", "Comment succesfull deleted", "Ok");
+                        }
+                        else
+                        {
+                            await CoreMethods.DisplayAlert("Delete Comment", "Delete comment failed!", "Ok");
+                        }
+                    }
                 });
             }
         }

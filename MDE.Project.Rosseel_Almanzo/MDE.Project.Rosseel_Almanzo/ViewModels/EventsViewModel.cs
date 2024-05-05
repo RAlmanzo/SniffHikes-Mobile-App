@@ -63,9 +63,9 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             } 
         }
 
-        public EventsViewModel()
+        public EventsViewModel(IEventsService eventsService)
         {
-            _eventsService = new EventsService();
+            _eventsService = eventsService;
         }
 
         public override void Init(object initData)

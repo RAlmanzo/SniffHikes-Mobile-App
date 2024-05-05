@@ -8,10 +8,13 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces
 {
     public interface IRoutesService
     {
-        Task<Route> GetRouteByIdAsync(int id);
-        Task<List<Route>> GetAllRoutesAsync();
-        //Task<List<Image>> GetRouteImagesAsync(int id);
-        Task<List<Route>> GetAllRoutesByUserId(int id);
-        Task<bool> CreateRouteAsync(Route newRoute);
+        Task<Route> GetRouteByIdAsync(string id);
+        Task<IEnumerable<BaseModel>> GetAllRoutesAsync();
+        Task<IEnumerable<BaseModel>> GetAllRoutesByUserId(string id);
+        Task<string> CreateRouteAsync(Route newRoute);
+        Task<string> DeleteRouteAsync(string id);
+        Task<bool> AddCommentAsync(string id, Comment comment);
+        Task<bool> DeleteCommentAsync(string id, string commentId);
+        Task<bool> UpdateRouteAsync(Route toUpdate);
     }
 }

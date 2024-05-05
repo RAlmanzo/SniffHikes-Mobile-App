@@ -31,8 +31,8 @@
                                 <Grid.Padding>0,20,0,0</Grid.Padding>
 
                                 <StackLayout Orientation="Horizontal" Padding="15" Grid.Column="0" Grid.Row="1">
-                                    <Frame Style="{StaticResource baseImageFrameStyle}">
-                                        <Image Source="loooogin.jpg" Style="{StaticResource baseImageStyle}"></Image>
+                                    <Frame Style="{StaticResource baseImageFrameStyle}" BackgroundColor="Transparent">
+                                        <Image Source="{Binding Image.ImagePath}" Style="{StaticResource baseImageStyle}"></Image>
                                     </Frame>
                                 </StackLayout>
 

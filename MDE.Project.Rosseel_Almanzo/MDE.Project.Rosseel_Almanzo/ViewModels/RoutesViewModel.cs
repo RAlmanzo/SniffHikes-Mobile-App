@@ -8,6 +8,9 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using FreshMvvm;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
+using MDE.Project.Rosseel_Almanzo.Domain.Services;
+using System.Linq;
+using Xamarin.Essentials;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
@@ -15,19 +18,56 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     {
         private readonly IRoutesService _routesService;
 
-        private ObservableCollection<Route> routes;
+        private ObservableCollection<BaseModel> routes;
+        private ObservableCollection<BaseModel> myRoutes;
         private ObservableCollection<Domain.Models.Image> images;
-        private Route selectedRoute;
+        private Domain.Models.Image image;
+        private BaseModel selectedRoute;
+        private string id;
 
-        public Route SelectedRoute
+        public string Id 
+        {
+            get => id;
+            set => id = value;
+        }
+
+        public ObservableCollection<BaseModel> MyRoutes
+        {
+            get => myRoutes;
+            set
+            {
+                myRoutes = value;
+                RaisePropertyChanged(nameof(MyRoutes));
+            }
+        }
+
+        public Domain.Models.Image Image
+        {
+            get => image;
+            set
+            {
+                image = Images.FirstOrDefault();
+                RaisePropertyChanged(nameof(Image));
+            }
+        }
+
+        public BaseModel SelectedRoute
         {
             get => selectedRoute;
             set
             {
                 selectedRoute = value;
-
-                // RaisePropertyChanged(nameof(SelectedItem));
-                GoToDetailPage.Execute(null);
+                if (value != null)
+                {
+                    if (selectedRoute.OrginazerId == id)
+                    {
+                        GoToUpdatePage.Execute(null);
+                    }
+                    else
+                    {
+                        GoToDetailPage.Execute(null);
+                    }
+                }                  
             }
         }
 
@@ -41,7 +81,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public ObservableCollection<Route> Routes
+        public ObservableCollection<BaseModel> Routes
         {
             get => routes;
             set
@@ -51,15 +91,27 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public RoutesViewModel()
+        public RoutesViewModel(IRoutesService routesService)
         {
-            _routesService = new MockRoutesService();
+            _routesService = routesService;
         }
 
         public override void Init(object initData)
         {
             base.Init(initData);
             RefreshData.Execute(null);
+        }
+
+        public ICommand GoToUpdatePage
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (SelectedRoute != null)
+                        await CoreMethods.PushPageModel<UpdateRouteViewModel>(SelectedRoute.Id, false, true);
+                });
+            }
         }
 
         public ICommand GoToDetailPage
@@ -80,8 +132,13 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    List<Route> fetchedRoutes = await _routesService.GetAllRoutesAsync();
-                    Routes = new ObservableCollection<Route>(fetchedRoutes);
+                    id = await SecureStorage.GetAsync("token");
+
+                    var fetchedRoutes = await _routesService.GetAllRoutesAsync();
+                    Routes = new ObservableCollection<BaseModel>(fetchedRoutes);
+
+                    var myRoutes = await _routesService.GetAllRoutesByUserId(id);
+                    MyRoutes = new ObservableCollection<BaseModel>(myRoutes);
                 });
             }
         }

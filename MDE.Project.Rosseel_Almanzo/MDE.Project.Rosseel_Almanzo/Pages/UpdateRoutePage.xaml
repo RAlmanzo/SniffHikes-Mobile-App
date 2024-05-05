@@ -1,10 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MDE.Project.Rosseel_Almanzo.Pages.CreateRoutePage"
-             Title="Create"
+             x:Class="MDE.Project.Rosseel_Almanzo.Pages.UpdateRoutePage"
              NavigationPage.HasBackButton="False"
-             IconImageSource="addicon.png" 
              BackgroundImageSource="sky.jpg">
     <ContentPage.Content>
         <StackLayout>
@@ -50,11 +48,37 @@
                         <Entry Text="{Binding Country}"></Entry>
                         <Label Text="{Binding CountryError}" TextColor="red"></Label>
                     </StackLayout>
+                    <StackLayout>
+                        <ListView x:Name="lstItems" ItemsSource="{Binding Comments}" HasUnevenRows="True" SelectedItem="{Binding SelectedComment}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Frame Style="{StaticResource baseFrameStyle}">
+                                            <StackLayout Style="{StaticResource baseFormStyle}">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="auto"/>
+                                                        <RowDefinition Height="30"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.Padding>5</Grid.Padding>
+                                                    <Label Grid.Row="0" Text="{Binding Content}" Style="{StaticResource formLabelStyle}"></Label>
+                                                    <Label Grid.Row="1" Text="Created by: Almanzo Rosseel"></Label>
+                                                </Grid>
+                                            </StackLayout>
+                                        </Frame>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
                 </StackLayout>
             </ScrollView>
             <StackLayout Orientation="Horizontal" BackgroundColor="Black">
-                <Button Text="Record" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding RecordRouteCommand}"></Button>
-                <Button Text="Create" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding CreateRouteCommand}"></Button>
+                <Button Text="Update" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding UpdateRouteCommand}"></Button>
+                <Button Text="Delete" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding DeleteRouteCommand}"></Button>
                 <Button Text="Cancel" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding CancelCommand}"></Button>
             </StackLayout>
         </StackLayout>
