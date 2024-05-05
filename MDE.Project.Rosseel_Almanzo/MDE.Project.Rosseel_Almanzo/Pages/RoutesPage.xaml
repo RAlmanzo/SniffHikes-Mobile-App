@@ -13,37 +13,42 @@
     <ContentPage Title="Routes" 
              IconImageSource="lefticon.png" 
              BackgroundImageSource="sky.jpg">
-        <ListView x:Name="lstItems" ItemsSource="{Binding Routes}" HasUnevenRows="True" SelectedItem="{Binding SelectedRoute}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Frame Style="{StaticResource baseFrameStyle}">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150" />
-                                    <ColumnDefinition Width="auto" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="30"/>
-                                    <RowDefinition Height="150"/>
-                                    <RowDefinition Height="auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.Padding>0,20,0,0</Grid.Padding>
+        <StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsLoading}">
+            </ActivityIndicator>
 
-                                <StackLayout Orientation="Horizontal" Padding="15" Grid.Column="0" Grid.Row="1">
-                                    <Frame Style="{StaticResource baseImageFrameStyle}" BackgroundColor="Transparent">
-                                        <Image Source="{Binding Image.ImagePath}" Style="{StaticResource baseImageStyle}"></Image>
-                                    </Frame>
-                                </StackLayout>
+            <ListView x:Name="lstItems" ItemsSource="{Binding Routes}" HasUnevenRows="True" SelectedItem="{Binding SelectedRoute}" IsVisible="{Binding IsVisible}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Style="{StaticResource baseFrameStyle}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="150"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.Padding>0,20,0,0</Grid.Padding>
 
-                                <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Title}" Style="{StaticResource baseLabelStyle}" FontSize="20" Padding="25,0,0,0" TextDecorations="Underline"></Label>
-                                <Label Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"  Text="{Binding Description}" FontSize="Subtitle" Style="{StaticResource baseLabelStyle}" Padding="10"></Label>
-                            </Grid>
-                        </Frame>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                                    <StackLayout Orientation="Horizontal" Padding="15" Grid.Column="0" Grid.Row="1">
+                                        <Frame Style="{StaticResource baseImageFrameStyle}" BackgroundColor="Transparent">
+                                            <Image Source="{Binding Image.ImagePath}" Style="{StaticResource baseImageStyle}"></Image>
+                                        </Frame>
+                                    </StackLayout>
+
+                                    <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Title}" Style="{StaticResource baseLabelStyle}" FontSize="20" Padding="25,0,0,0" TextDecorations="Underline"></Label>
+                                    <Label Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"  Text="{Binding Description}" FontSize="Subtitle" Style="{StaticResource baseLabelStyle}" Padding="10"></Label>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </ContentPage>
     <local:CreateRoutePage></local:CreateRoutePage>
     <local:MyRoutesPage></local:MyRoutesPage>
