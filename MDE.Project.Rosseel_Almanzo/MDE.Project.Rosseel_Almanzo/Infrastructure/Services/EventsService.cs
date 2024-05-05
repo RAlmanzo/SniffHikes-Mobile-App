@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
-namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
+namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
 {
     public class EventsService : IEventsService
     {
@@ -32,7 +32,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                     .PostAsync(newEvent);
                 return await Task.FromResult("Created");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return await Task.FromResult(ex.Message);
             }
@@ -81,7 +81,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         public async Task<IEnumerable<BaseModel>> GetAllEventsByUserId(string id)
         {
             //get data
-            var myEventsSnapshot = await _client.Child("Events").OnceAsync<EventDto>();            
+            var myEventsSnapshot = await _client.Child("Events").OnceAsync<EventDto>();
             var eventsList = myEventsSnapshot.Where(e => e.Object.OrginazerId == id).OrderByDescending(e => e.Object.DateEvent).ToList();
 
             //map data to events collection

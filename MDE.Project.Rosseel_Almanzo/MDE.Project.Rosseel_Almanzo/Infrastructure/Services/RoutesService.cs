@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
-namespace MDE.Project.Rosseel_Almanzo.Domain.Services
+namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
 {
     public class RoutesService : IRoutesService
     {
@@ -149,11 +149,11 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
                 await _client.Child("Routes").Child(id).DeleteAsync();
                 return await Task.FromResult("Deleted");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return await Task.FromResult(ex.Message);
             }
-            
+
         }
 
         public async Task<bool> UpdateRouteAsync(Route toUpdate)
