@@ -23,6 +23,13 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private ObservableCollection<Domain.Models.Image> images;
         private Domain.Models.Image image;
         private BaseModel selectedRoute;
+        private string id;
+
+        public string Id 
+        {
+            get => id;
+            set => id = value;
+        }
 
         public ObservableCollection<BaseModel> MyRoutes
         {
@@ -50,9 +57,17 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             set
             {
                 selectedRoute = value;
-
-                // RaisePropertyChanged(nameof(SelectedItem));
-                GoToDetailPage.Execute(null);
+                if (value != null)
+                {
+                    if (selectedRoute.OrginazerId == id)
+                    {
+                        GoToUpdatePage.Execute(null);
+                    }
+                    else
+                    {
+                        GoToDetailPage.Execute(null);
+                    }
+                }                  
             }
         }
 
@@ -87,6 +102,18 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             RefreshData.Execute(null);
         }
 
+        public ICommand GoToUpdatePage
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (SelectedRoute != null)
+                        await CoreMethods.PushPageModel<UpdateRouteViewModel>(SelectedRoute.Id, false, true);
+                });
+            }
+        }
+
         public ICommand GoToDetailPage
         {
             get
@@ -105,10 +132,11 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
+                    id = await SecureStorage.GetAsync("token");
+
                     var fetchedRoutes = await _routesService.GetAllRoutesAsync();
                     Routes = new ObservableCollection<BaseModel>(fetchedRoutes);
 
-                    var id = await SecureStorage.GetAsync("token");
                     var myRoutes = await _routesService.GetAllRoutesByUserId(id);
                     MyRoutes = new ObservableCollection<BaseModel>(myRoutes);
                 });
