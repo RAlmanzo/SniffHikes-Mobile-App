@@ -107,10 +107,11 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
+                    Id = await SecureStorage.GetAsync("token");
+
                     var fetchedEvents = await _eventsService.GetAllEventsAsync();
                     Events = new ObservableCollection<BaseModel>(fetchedEvents);
 
-                    var id = await SecureStorage.GetAsync("token");
                     var myEvents = await _eventsService.GetAllEventsByUserId(id);
                     MyEvents = new ObservableCollection<BaseModel>(myEvents);
                 });
