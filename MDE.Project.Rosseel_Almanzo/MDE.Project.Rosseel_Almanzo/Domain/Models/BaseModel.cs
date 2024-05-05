@@ -10,5 +10,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public Image Image { get; set; }
+        public string OrginazerId { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
@@ -164,6 +165,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
+                    var orginazerId = await SecureStorage.GetAsync("token");
                     var newRoute = new Route
                     {
                         Title = Title,
@@ -172,6 +174,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         City = City,
                         Country = Country,
                         DateEvent = DateTime.Now,
+                        OrganizerId = orginazerId,
                         Images = Images ?? new ObservableCollection<Domain.Models.Image>(),
                         Comments = Comments ?? new ObservableCollection<Comment>(),
                     };
