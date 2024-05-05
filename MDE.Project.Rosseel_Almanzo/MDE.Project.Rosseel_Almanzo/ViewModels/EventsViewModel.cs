@@ -22,6 +22,13 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private ObservableCollection<Domain.Models.Image> images;
         private Domain.Models.Image image;
         private BaseModel selectedEvent;
+        private string id;
+
+        public string Id
+        {
+            get => id;
+            set => id = value;
+        }
 
         public Domain.Models.Image Image
         {
@@ -30,6 +37,26 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 image = Images.FirstOrDefault();
                 RaisePropertyChanged(nameof(Image));
+            }
+        }
+
+        public BaseModel SelectedEvent
+        {
+            get => selectedEvent;
+            set
+            {
+                selectedEvent = value;
+                if (value != null)
+                {
+                    if (selectedEvent.OrginazerId == id)
+                    {
+                        GoToUpdatePage.Execute(null);
+                    }
+                    else
+                    {
+                        GoToDetailPage.Execute(null);
+                    }
+                }
             }
         }
 
@@ -90,15 +117,15 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public BaseModel SelectedEvent
+        public ICommand GoToUpdatePage
         {
-            get => selectedEvent;
-            set
+            get
             {
-                selectedEvent = value;
-
-                // RaisePropertyChanged(nameof(SelectedItem));
-                GoToDetailPage.Execute(null);
+                return new Command(async () =>
+                {
+                    if (selectedEvent != null)
+                        await CoreMethods.PushPageModel<UpdateRouteViewModel>(selectedEvent.Id, false, true);
+                });
             }
         }
 
