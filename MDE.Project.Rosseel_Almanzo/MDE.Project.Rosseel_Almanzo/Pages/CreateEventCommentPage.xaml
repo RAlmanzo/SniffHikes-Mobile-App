@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDE.Project.Rosseel_Almanzo.Pages.CreateEventCommentPage"
+             NavigationPage.HasBackButton="False"
+             BackgroundImageSource="sky.jpg">
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Editor x:Name="commentEditor" 
+            Placeholder="Type here..."
+            Text="{Binding Comment}"
+            HeightRequest="200" 
+            VerticalOptions="StartAndExpand"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Text="OK" Command="{Binding AddCommentCommand}" Style="{StaticResource formButtonStye}"/>
+                <Button Text="Cancel" Style="{StaticResource formButtonStye}" Command="{Binding CancelCommand}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
