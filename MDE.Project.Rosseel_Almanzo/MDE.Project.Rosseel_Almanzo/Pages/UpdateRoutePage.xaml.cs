@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace MDE.Project.Rosseel_Almanzo.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class UpdatePage : ContentPage
+	public partial class UpdateRoutePage : ContentPage
 	{
-		public UpdatePage ()
+		public UpdateRoutePage ()
 		{
 			InitializeComponent ();
 		}

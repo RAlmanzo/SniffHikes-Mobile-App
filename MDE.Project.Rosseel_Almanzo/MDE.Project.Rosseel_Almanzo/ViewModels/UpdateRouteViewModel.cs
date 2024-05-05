@@ -12,7 +12,7 @@ using Xamarin.Forms;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
-    public class UpdateViewModel : FreshBasePageModel
+    public class UpdateRouteViewModel : FreshBasePageModel
     {
         private readonly IRoutesService _routesService;
 
@@ -186,7 +186,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public UpdateViewModel(IRoutesService routesService)
+        public UpdateRouteViewModel(IRoutesService routesService)
         {
             Images = new ObservableCollection<Domain.Models.Image>();
             Comments = new ObservableCollection<Comment>();
@@ -207,15 +207,15 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    var selectedRoute = await _routesService.GetRouteByIdAsync(id);
-                    Title = selectedRoute.Title;
-                    Description = selectedRoute.Description;
-                    Street = selectedRoute.Street;
-                    City = selectedRoute.City;
-                    Country = selectedRoute.Country;
-                    DateEvent = selectedRoute.DateEvent;
-                    Images = selectedRoute.Images != null ? new ObservableCollection<Domain.Models.Image>(selectedRoute.Images) : new ObservableCollection<Domain.Models.Image>();
-                    Comments = selectedRoute.Comments != null ? new ObservableCollection<Comment>(selectedRoute.Comments) : new ObservableCollection<Comment>();
+                    var item = await _routesService.GetRouteByIdAsync(id);
+                    Title = item.Title;
+                    Description = item.Description;
+                    Street = item.Street;
+                    City = item.City;
+                    Country = item.Country;
+                    DateEvent = item.DateEvent;
+                    Images = item.Images != null ? new ObservableCollection<Domain.Models.Image>(item.Images) : new ObservableCollection<Domain.Models.Image>();
+                    Comments = item.Comments != null ? new ObservableCollection<Comment>(item.Comments) : new ObservableCollection<Comment>();
                 });
             }
         }
@@ -271,7 +271,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         await CoreMethods.DisplayAlert("Failed", result, "Ok");
                     }
 
-                    await CoreMethods.PushPageModel<RoutesViewModel>();
+                    await CoreMethods.PopPageModel(true);
                 });
             }
         }
