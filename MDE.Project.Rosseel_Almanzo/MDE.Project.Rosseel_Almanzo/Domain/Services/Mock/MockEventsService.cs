@@ -117,5 +117,20 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         {
             return await Task.FromResult(_events.FirstOrDefault(e => e.Id == id));
         }
+
+        public Task<string> DeleteEventAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteCommentAsync(string id, string commentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateEventAsync(Event toUpdate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
