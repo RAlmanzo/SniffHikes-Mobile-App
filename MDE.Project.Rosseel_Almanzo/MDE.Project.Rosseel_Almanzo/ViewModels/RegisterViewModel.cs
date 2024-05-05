@@ -14,6 +14,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     public class RegisterViewModel : FreshBasePageModel
     {
         private readonly IAccountService _accountService;
+        private readonly IImageService _imageService;
 
         private string errorText;
         private string firstName;
@@ -29,6 +30,17 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private string emailError;
         private string passwordError;
         private string dateOfBirthError;
+        private Domain.Models.Image image;
+
+        public Domain.Models.Image Image
+        {
+            get => image;
+            set
+            {
+                image = value;
+                RaisePropertyChanged(nameof(Image));
+            }
+        }
 
         public string FirstNameError
         {
@@ -168,10 +180,42 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
         public int Id { get; set; }
 
-        public RegisterViewModel(IUsersService usersService, IAccountService accountService)
+        public RegisterViewModel(IUsersService usersService, IAccountService accountService, IImageService imageService)
         {
             dateOfBirth = DateTime.Now;
             _accountService = accountService;
+            _imageService = imageService;
+        }
+
+        public ICommand AddImageCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    string action = await CoreMethods.DisplayActionSheet("Select an option", "Annuleren", null, "Take picture", "Select picture");
+
+                    if (action == "Take picture")
+                    {
+                        var imageUrl = await _imageService.TakePhotoAsync();
+                        var image = new Domain.Models.Image
+                        {
+                            ImagePath = imageUrl,
+                        };
+                        Image = image;
+                    }
+                    else
+                    {
+                        var imageUrl = await _imageService.PickPhotoAsync();
+                        var image = new Domain.Models.Image
+                        {
+                            ImagePath = imageUrl,
+                        };
+                        Image = image;
+                    }
+
+                });
+            }
         }
 
         public ICommand RegisterCommand 
@@ -182,7 +226,6 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 {
                     var newUser = new User
                     {                       
-                        //Id = users.Count +1,
                         FirstName = FirstName,
                         LastName = LastName,
                         Email = Email,
@@ -191,6 +234,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         Gender = Gender,
                         DateOfBirth = DateOfBirth,
                         Password = Password,
+                        Image = Image,
                     };
 
                     if (Validate(newUser))

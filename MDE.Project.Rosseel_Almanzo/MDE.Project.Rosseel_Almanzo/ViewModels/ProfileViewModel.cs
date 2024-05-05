@@ -30,6 +30,17 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private string gender;
         private ObservableCollection<Dog> dogs;
         private string id;
+        private Domain.Models.Image image;
+
+        public Domain.Models.Image Image
+        {
+            get => image;
+            set
+            {
+                image = value;
+                RaisePropertyChanged(nameof(Image));
+            }
+        }
 
         public string Id 
         { 
@@ -37,7 +48,6 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             set
             {
                 id = value;
-                //RaisePropertyChanged(nameof(Id));
             }
         }
 
@@ -167,6 +177,38 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     DateOfBirth = currentUser.DateOfBirth;
                     Password = currentUser.Password;
                     Dogs = currentUser.Dogs != null ? new ObservableCollection<Dog>(currentUser.Dogs) : new ObservableCollection<Dog>();
+                    Image = currentUser.Image;
+                });
+            }
+        }
+
+        public ICommand UpdateProfileCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    var user = new User
+                    {
+                        Id = id,
+                        FirstName = FirstName,
+                        LastName = LastName,
+                        Email = Email,
+                        City = City,
+                        Country = Country,
+                        Gender = Gender,
+                        DateOfBirth = DateOfBirth,
+                        Password = Password,
+                        Dogs = Dogs,
+                        Image = Image,
+                    };
+
+                    if (!await _usersService.UpdateUserAsync(user)) 
+                    {
+                        await CoreMethods.DisplayAlert("Failed", "Update profile failed please later again!", "Ok");
+                    };
+
+                    await CoreMethods.PushPageModel<ProfileViewModel>();
                 });
             }
         }
@@ -177,7 +219,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    await CoreMethods.PushPageModel<AddDogViewModel>();
+                    await CoreMethods.PushPageModel<AddDogViewModel>(id);
                 });
             }
         }

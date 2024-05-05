@@ -10,7 +10,9 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
     {
         Task<List<User>> GetAllUsersAsync();
         Task<bool> CreateUserAsync(User newUser);
+        Task<bool> UpdateUserAsync(User toUpdate);
         Task<string> DeleteUserAsync(string id);
         Task<User> GetUserByIdAsync(string id);
+        Task<bool> AddDogAsync(string userId, Dog dog);
     }
 }

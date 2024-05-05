@@ -101,6 +101,11 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             };
         }
 
+        public Task<bool> AddDogAsync(string userId, Dog dog)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<bool> CreateUserAsync(User newUser)
         {
             try
@@ -127,6 +132,11 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         public async Task<User> GetUserByIdAsync(string id)
         {
             return await Task.FromResult(_users.FirstOrDefault());
+        }
+
+        public Task<bool> UpdateUserAsync(User toUpdate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

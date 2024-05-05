@@ -26,7 +26,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private string nameError;
         private string dateOfBirthError;
 
-        public int Id { get; set; }
+        public string Id { get; private set; }
 
         public string NameError
         {
@@ -108,7 +108,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         {
             base.Init(initData);
 
-            //Id = (int)initData;
+            Id = initData.ToString();
         }
 
         public ICommand AddDogCommand
@@ -117,12 +117,8 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    //var currentUser = await _usersService.GetUserByIdAsync(Id);
-                    var users = await _usersService.GetAllUsersAsync();
-                    var currentUser = users.FirstOrDefault();
                     var dog = new Dog
                     {
-                        Id = currentUser.Dogs.Count() +1,
                         Name = Name,
                         Race = Race,
                         Gender = Gender,
@@ -131,10 +127,11 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     
                     if (Validate(dog))
                     {
-                        Dogs = currentUser.Dogs.ToList();
-                        Dogs.Add(dog);
-
-                        currentUser.Dogs = Dogs;
+                        var result = await _usersService.AddDogAsync(Id, dog);
+                        if (!result)
+                        {
+                            await CoreMethods.DisplayAlert("Failed", "Could not add dog!", "Ok");
+                        }
 
                         await CoreMethods.PushPageModel<ProfileViewModel>();
                     }                   
