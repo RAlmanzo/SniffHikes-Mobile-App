@@ -10,5 +10,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces
     {
         Task<string> Login(string username, string password);
         Task<bool> Register(User newUser);
+        Task<bool> DeleteAccountAsync(string id);
     }
 }
