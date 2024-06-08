@@ -167,6 +167,26 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             };
         }
 
+        public Task<bool> AddCommentAsync(string id, Comment comment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> CreateZoneAsync(Zone newZone)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteCommentAsync(string id, string commentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> DeleteZoneAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<Zone>> GetAllZonesAsync()
         {
             return await Task.FromResult(_zones);
@@ -175,6 +195,11 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         public async Task<Zone> GetZoneByIdAsync(int id)
         {
             return await Task.FromResult(_zones.FirstOrDefault(z => z.Id == id));
+        }
+
+        public Task<bool> UpdateZoneAsync(Zone toUpdate)
+        {
+            throw new NotImplementedException();
         }
     }
 }
