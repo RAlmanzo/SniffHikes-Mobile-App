@@ -187,7 +187,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             throw new NotImplementedException();
         }
 
-        public async Task<List<Zone>> GetAllZonesAsync()
+        public async Task<List<Zone>> GetAllZonessAsync()
         {
             return await Task.FromResult(_zones);
         }
@@ -198,6 +198,11 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         }
 
         public Task<bool> UpdateZoneAsync(Zone toUpdate)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<BaseModel>> IZonesService.GetAllZonesAsync()
         {
             throw new NotImplementedException();
         }
