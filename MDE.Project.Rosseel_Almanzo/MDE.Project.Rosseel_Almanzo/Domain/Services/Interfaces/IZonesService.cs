@@ -10,5 +10,10 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces
     {
         Task<Zone> GetZoneByIdAsync(int id);
         Task<List<Zone>> GetAllZonesAsync();
+        Task<string> CreateZoneAsync(Zone newZone);
+        Task<string> DeleteZoneAsync(string id);
+        Task<bool> AddCommentAsync(string id, Comment comment);
+        Task<bool> DeleteCommentAsync(string id, string commentId);
+        Task<bool> UpdateZoneAsync(Zone toUpdate);
     }
 }
