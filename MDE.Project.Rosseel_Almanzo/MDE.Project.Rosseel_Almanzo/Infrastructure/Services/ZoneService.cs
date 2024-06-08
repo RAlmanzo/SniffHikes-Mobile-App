@@ -2,8 +2,10 @@
 using Firebase.Database.Query;
 using MDE.Project.Rosseel_Almanzo.Domain.Models;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
+using MDE.Project.Rosseel_Almanzo.Infrastructure.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -50,9 +52,22 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<Zone>> GetAllZonesAsync()
+        public async Task<List<BaseModel>> GetAllZonesAsync()
         {
-            throw new NotImplementedException();
+            //get de data
+            var eventsSnapshot = await _client.Child("Zones").OnceAsync<ZoneDto>();
+
+            //map data to event collection
+            var routes = eventsSnapshot.Select(e => new BaseModel
+            {
+                Id = e.Key,
+                Title = e.Object.Title,
+                Description = e.Object.Description,
+                Image = e.Object.Images?.FirstOrDefault(),
+                OrginazerId = e.Object.OrginazerId,
+            }).ToList();
+
+            return await Task.FromResult(routes);
         }
 
         public Task<Zone> GetZoneByIdAsync(int id)
@@ -61,6 +76,11 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
         }
 
         public Task<bool> UpdateZoneAsync(Zone toUpdate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Zone>> GetAllZonessAsync()
         {
             throw new NotImplementedException();
         }
