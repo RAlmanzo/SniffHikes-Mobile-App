@@ -5,6 +5,7 @@ using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using MDE.Project.Rosseel_Almanzo.Infrastructure.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,9 +38,24 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
             }
         }
 
-        public Task<bool> AddCommentAsync(string id, Comment comment)
+        public async Task<bool> AddCommentAsync(string id, Comment comment)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var zone = await GetZoneByIdAsync(id);
+                if (zone.Comments == null)
+                {
+                    zone.Comments = new ObservableCollection<Comment>();
+                }
+                zone.Comments.Add(comment);
+
+                await _client.Child("Zones").Child(id).PutAsync(zone);
+                return await Task.FromResult(true);
+            }
+            catch
+            {
+                return await Task.FromResult(false);
+            }
         }
 
         public Task<bool> DeleteCommentAsync(string id, string commentId)
