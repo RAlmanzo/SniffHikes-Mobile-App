@@ -47,9 +47,19 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public Task<string> DeleteZoneAsync(string id)
+        public async Task<string> DeleteZoneAsync(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //TODO delete images from db!!!!!!!!!!!!!!!!!!!!!!!
+
+                await _client.Child("Zones").Child(id).DeleteAsync();
+                return await Task.FromResult("Deleted");
+            }
+            catch (Exception ex)
+            {
+                return await Task.FromResult(ex.Message);
+            }
         }
 
         public async Task<List<BaseModel>> GetAllZonesAsync()
