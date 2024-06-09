@@ -103,9 +103,18 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
             return null;
         }
 
-        public Task<bool> UpdateZoneAsync(Zone toUpdate)
+        public async Task<bool> UpdateZoneAsync(Zone toUpdate)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _client.Child("Zones").Child(toUpdate.Id)
+                    .PutAsync(toUpdate);
+                return await Task.FromResult(true);
+            }
+            catch
+            {
+                return await Task.FromResult(false);
+            }
         }
     }
 }
