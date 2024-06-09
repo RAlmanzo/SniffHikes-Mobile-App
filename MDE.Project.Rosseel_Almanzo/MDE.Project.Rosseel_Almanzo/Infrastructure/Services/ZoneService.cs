@@ -55,32 +55,45 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
         public async Task<List<BaseModel>> GetAllZonesAsync()
         {
             //get de data
-            var eventsSnapshot = await _client.Child("Zones").OnceAsync<ZoneDto>();
+            var zonesSnapshot = await _client.Child("Zones").OnceAsync<ZoneDto>();
 
-            //map data to event collection
-            var routes = eventsSnapshot.Select(e => new BaseModel
+            //map data to zones collection
+            var zones = zonesSnapshot.Select(e => new BaseModel
             {
                 Id = e.Key,
                 Title = e.Object.Title,
                 Description = e.Object.Description,
                 Image = e.Object.Images?.FirstOrDefault(),
-                OrginazerId = e.Object.OrginazerId,
+                OrginazerId = e.Object.OrganizerId,
             }).ToList();
 
-            return await Task.FromResult(routes);
+            return await Task.FromResult(zones);
         }
 
-        public Task<Zone> GetZoneByIdAsync(int id)
+        public async Task<Zone> GetZoneByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            var zoneSnapshot = await _client.Child("Zones").Child(id).OnceSingleAsync<ZoneDto>();
+
+            if (zoneSnapshot != null)
+            {
+                var selectedZone = new Zone
+                {
+                    Id = zoneSnapshot.Id,
+                    Title = zoneSnapshot.Title,
+                    Description = zoneSnapshot.Description,
+                    Street = zoneSnapshot.Street,
+                    City = zoneSnapshot.City,
+                    Country = zoneSnapshot.Country,
+                    OrganizerId = zoneSnapshot.OrganizerId,
+                    Images = zoneSnapshot.Images,
+                    Comments = zoneSnapshot.Comments,
+                };
+                return await Task.FromResult(selectedZone);
+            };
+            return null;
         }
 
         public Task<bool> UpdateZoneAsync(Zone toUpdate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Zone>> GetAllZonessAsync()
         {
             throw new NotImplementedException();
         }
