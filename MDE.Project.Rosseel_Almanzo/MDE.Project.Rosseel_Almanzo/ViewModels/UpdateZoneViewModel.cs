@@ -300,8 +300,8 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         var result = await _zonesService.UpdateZoneAsync(updatedZone);
                         if (result)
                         {
-                            await CoreMethods.DisplayAlert("Succes", "Route succesfull updated", "Ok");
-                            await CoreMethods.PushPageModel<EventsViewModel>();
+                            await CoreMethods.DisplayAlert("Succes", "Zone succesfull updated", "Ok");
+                            await CoreMethods.PushPageModel<ZonesViewModel>();
                         }
                         else
                         {
