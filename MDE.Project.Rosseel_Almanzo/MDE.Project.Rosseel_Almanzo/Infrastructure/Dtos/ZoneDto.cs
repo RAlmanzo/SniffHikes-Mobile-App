@@ -15,6 +15,6 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Dtos
         public string City { get; set; }
         public string Country { get; set; }
         public ICollection<Comment> Comments { get; set; }
-        public string OrginazerId { get; set; }
+        public string OrganizerId { get; set; }
     }
 }
