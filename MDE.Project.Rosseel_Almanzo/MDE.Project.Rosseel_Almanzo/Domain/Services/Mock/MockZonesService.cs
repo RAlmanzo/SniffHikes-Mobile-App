@@ -18,7 +18,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             {
                 new Zone
                 {
-                    Id = 1,
+                    Id = "1",
                     Title = "Strandzone Oostende",
                     Description = "Een ruime zone op het strand van Oostende waar honden vrij kunnen rondlopen en spelen.",
                     Street = "Zeedijk",
@@ -40,7 +40,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 },
                 new Zone
                 {
-                    Id = 2,
+                    Id = "2",
                     Title = "Hondenweide Park Spoor Noord",
                     Description = "Een omheinde hondenweide in Park Spoor Noord waar honden vrij kunnen rennen en spelen.",
                     Street = "Noorderlaan",
@@ -61,7 +61,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 },
                 new Zone
                 {
-                    Id = 3,
+                    Id = "3",
                     Title = "Losloopzone Bois de la Cambre",
                     Description = "Een afgebakende losloopzone in het Bois de la Cambre park waar honden vrij kunnen rondrennen en spelen.",
                     Street = "Chaussée de la Hulpe",
@@ -82,7 +82,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 },
                 new Zone
                 {
-                    Id = 4,
+                    Id = "4",
                     Title = "Losloopzone Rivierenhof",
                     Description = "Een groot gebied in het Rivierenhof park waar honden los kunnen lopen en samen kunnen spelen.",
                     Street = "Turnhoutsebaan",
@@ -103,7 +103,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 },
                 new Zone
                 {
-                    Id = 5,
+                    Id = "5",
                     Title = "Hondenzone Kapermolenpark",
                     Description = "Een speciale hondenzone in het Kapermolenpark waar honden vrij kunnen spelen en sociaal kunnen zijn met andere honden.",
                     Street = "Elfde-Liniestraat",
@@ -124,7 +124,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 },
                 new Zone
                 {
-                    Id = 6,
+                    Id = "6",
                     Title = "Losloopweide Brielmeersen",
                     Description = "Een omheinde losloopweide in het recreatiepark De Brielmeersen waar honden veilig kunnen ravotten en plezier maken.",
                     Street = "Lucien Matthyslaan",
@@ -145,7 +145,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
                 },
                 new Zone
                 {
-                    Id = 7,
+                    Id = "7",
                     Title = "Losloopzone Ter Motten",
                     Description = "Een aangename losloopzone in het groene Ter Motten park waar honden zich kunnen uitleven en nieuwe vrienden kunnen maken.",
                     Street = "Beernemstraat",
@@ -187,22 +187,18 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             throw new NotImplementedException();
         }
 
-        public async Task<List<Zone>> GetAllZonessAsync()
+        public async Task<List<BaseModel>> GetAllZonesAsync()
         {
-            return await Task.FromResult(_zones);
+            //return await Task.FromResult(_zones);
+            return null;
         }
 
-        public async Task<Zone> GetZoneByIdAsync(int id)
+        public async Task<Zone> GetZoneByIdAsync(string id)
         {
             return await Task.FromResult(_zones.FirstOrDefault(z => z.Id == id));
         }
 
         public Task<bool> UpdateZoneAsync(Zone toUpdate)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<List<BaseModel>> IZonesService.GetAllZonesAsync()
         {
             throw new NotImplementedException();
         }
