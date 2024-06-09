@@ -16,7 +16,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     {
         private readonly IZonesService _zonesService;
 
-        private int id;
+        private string id;
         private string title;
         private string description;
         private string street;
@@ -102,7 +102,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public int Id
+        public string Id
         {
             get => id;
             set
@@ -116,7 +116,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         {
             base.Init(initData);
 
-            Id = (int)initData;
+            Id = initData.ToString();
 
             GetRouteDetails.Execute(null);
         }
