@@ -58,9 +58,24 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
             }
         }
 
-        public Task<bool> DeleteCommentAsync(string id, string commentId)
+        public async Task<bool> DeleteCommentAsync(string id, string commentId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //get the route
+                var selectedEvent = await GetZoneByIdAsync(id);
+                //get the comment
+                var selectedComment = selectedEvent.Comments.Where(c => c.Id == commentId).FirstOrDefault();
+                //delete comment and update db
+                selectedEvent.Comments.Remove(selectedComment);
+
+                await _client.Child("Zones").Child(id).PutAsync(selectedEvent);
+                return await Task.FromResult(true);
+            }
+            catch
+            {
+                return await Task.FromResult(false);
+            }
         }
 
         public async Task<string> DeleteZoneAsync(string id)
