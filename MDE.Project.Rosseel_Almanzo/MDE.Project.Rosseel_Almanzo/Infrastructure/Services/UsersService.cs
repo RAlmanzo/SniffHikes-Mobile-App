@@ -97,6 +97,7 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
                     Password = userSnapshot.Password,
                     Dogs = userSnapshot.Dogs != null ? new ObservableCollection<Dog>(userSnapshot.Dogs) : new ObservableCollection<Dog>(),
                     Image = userSnapshot.Image,
+                    IsAdmin = userSnapshot.IsAdmin,
                 };
                 
                 return await Task.FromResult(user);
