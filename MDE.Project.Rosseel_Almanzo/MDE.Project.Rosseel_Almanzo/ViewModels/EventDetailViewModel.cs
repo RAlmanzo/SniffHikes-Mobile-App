@@ -12,6 +12,7 @@ using System.Linq;
 using Newtonsoft.Json.Serialization;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using MDE.Project.Rosseel_Almanzo.Domain.Services;
+using MDE.Project.Rosseel_Almanzo.Infrastructure.Services;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
@@ -29,6 +30,27 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private ObservableCollection<Domain.Models.Image> images;
         private ObservableCollection<Comment> comments;
         private Comment selectedComment;
+        private bool isAdmin;
+        private string commentCreator;
+
+        public string CommentCreator
+        {
+            get => commentCreator;
+            set
+            {
+                commentCreator = value;
+            }
+        }
+
+        public bool IsAdmin
+        {
+            get => isAdmin;
+            set
+            {
+                isAdmin = value;
+                RaisePropertyChanged(nameof(IsAdmin));
+            }
+        }
 
         public Comment SelectedComment
         {
@@ -141,11 +163,15 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             Comments = new ObservableCollection<Comment>();
         }
 
-        public override void Init(object initData)
+        public async override void Init(object initData)
         {
             base.Init(initData);
 
             Id = initData.ToString();
+
+            string admin = await SecureStorage.GetAsync("admin");
+            IsAdmin = bool.Parse(admin);
+            CommentCreator = await SecureStorage.GetAsync("token");
 
             GetEventDetails.Execute(null);
         }
@@ -240,22 +266,44 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    //TODO: Check if comment belongs to logged user!!!!!!!!!!!!!!!!!!!
-
-                    var result = await CoreMethods.DisplayAlert("Delete Comment", "Are u sure u want to delete comment?", "Yes", "Cancel");
-                    if (result)
+                    if (selectedComment.UserId == commentCreator || IsAdmin)
                     {
-                        var deleteResult = await _eventsService.DeleteCommentAsync(Id, selectedComment.Id);
-                        if (deleteResult)
+                        var result = await CoreMethods.DisplayAlert("Delete Comment", "Are u sure u want to delete comment?", "Yes", "Cancel");
+                        if (result)
                         {
-                            Comments.Remove(selectedComment);
-                            await CoreMethods.DisplayAlert("Delete Comment", "Comment succesfull deleted", "Ok");
-                        }
-                        else
-                        {
-                            await CoreMethods.DisplayAlert("Delete Comment", "Delete comment failed!", "Ok");
+                            var deleteResult = await _eventsService.DeleteCommentAsync(Id, selectedComment.Id);
+                            if (deleteResult)
+                            {
+                                Comments.Remove(selectedComment);
+                                await CoreMethods.DisplayAlert("Delete Comment", "Comment succesfull deleted", "Ok");
+                            }
+                            else
+                            {
+                                await CoreMethods.DisplayAlert("Delete Comment", "Delete comment failed!", "Ok");
+                            }
                         }
                     }
+                });
+            }
+        }
+
+        public ICommand DeleteEventCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    var result = await _eventsService.DeleteEventAsync(Id);
+                    if (result == "Deleted")
+                    {
+                        await CoreMethods.DisplayAlert("Deleted", "Event succesfull deleted!", "Ok");
+                    }
+                    else
+                    {
+                        await CoreMethods.DisplayAlert("Failed", result, "Ok");
+                    }
+
+                    await CoreMethods.PushPageModel<EventsViewModel>();
                 });
             }
         }
