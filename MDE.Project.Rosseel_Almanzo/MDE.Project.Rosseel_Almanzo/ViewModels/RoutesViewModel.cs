@@ -27,6 +27,18 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private string id;
         private bool isLoading;
         private bool isVisible;
+        private string cityName;
+
+        public string CityName
+        {
+            get => cityName;
+            set
+            {
+                cityName = value;
+                SearchByCityName();
+                RaisePropertyChanged(nameof(CityName));
+            }
+        }
 
         public bool IsVisible
         {
@@ -187,6 +199,12 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     await CoreMethods.PushPageModel<CreateRouteViewModel>();
                 });
             }
+        }
+
+        private async void SearchByCityName()
+        {
+            var fetchedItems = await _routesService.SearchByCity(CityName);
+            Routes = new ObservableCollection<BaseModel>(fetchedItems);
         }
     }
 }
