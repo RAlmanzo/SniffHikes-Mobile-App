@@ -6,9 +6,10 @@
              BackgroundImageSource="sky.jpg">
     <ContentPage.Content>
         <StackLayout Padding="20">
+            <Label Text="{Binding ContentError}" TextColor="red"></Label>
             <Editor x:Name="commentEditor" 
             Placeholder="Type here..."
-            Text="{Binding Comment}"
+            Text="{Binding Content}"
             HeightRequest="200" 
             VerticalOptions="StartAndExpand"/>
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
