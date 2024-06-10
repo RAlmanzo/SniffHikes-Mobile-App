@@ -17,6 +17,10 @@
             <ActivityIndicator IsRunning="{Binding IsLoading}">
             </ActivityIndicator>
 
+            <StackLayout Style="{StaticResource createFormStyle}">
+                <Label Text="Search by city: "></Label>
+                <Entry Text="{Binding CityName}"></Entry>
+            </StackLayout>
             <ListView x:Name="lstItems" ItemsSource="{Binding Routes}" HasUnevenRows="True" SelectedItem="{Binding SelectedRoute}" IsVisible="{Binding IsVisible}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
