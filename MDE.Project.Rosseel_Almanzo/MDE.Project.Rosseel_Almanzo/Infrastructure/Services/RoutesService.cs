@@ -90,6 +90,11 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
                 {
                     existingRoute.Comments = new ObservableCollection<Comment>();
                 }
+                var token = await SecureStorage.GetAsync("token");
+                comment.UserId = token;
+                var name = await SecureStorage.GetAsync("name");
+                comment.UserName = name;
+
                 existingRoute.Comments.Add(comment);
 
                 await _client.Child("Routes").Child(id).PutAsync(existingRoute);

@@ -220,6 +220,17 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
+        public ICommand AddCommentCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<CreateRouteCommentViewModel>(id);
+                });
+            }
+        }
+
         public ICommand DeleteCommentCommand
         {
             get
