@@ -50,10 +50,10 @@
                     </Frame>
                     <StackLayout Orientation="Horizontal" Style="{StaticResource baseFormStyle}">
                         <Frame HeightRequest="40" CornerRadius="20" BorderColor="{StaticResource border}" BackgroundColor="{StaticResource framebackgroundcolor}">
-                            <Label Text="100" Style="{StaticResource formLabelStyle}"></Label>
+                            <Label Text="{Binding AttendingUsers}" Style="{StaticResource formLabelStyle}"></Label>
                         </Frame>
                         <Label Text=":Attending" Style="{StaticResource formLabelStyle}"></Label>
-                        <Button Text="Sign up" Style="{StaticResource formButtonStye}"></Button>
+                        <Button Text="Sign up" Style="{StaticResource formButtonStye}" Command="{Binding SignUpCommand}"></Button>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Share your experience here" Style="{StaticResource formLabelStyle}"></Label>
