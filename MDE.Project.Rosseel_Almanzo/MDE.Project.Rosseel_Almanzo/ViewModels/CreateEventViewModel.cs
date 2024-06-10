@@ -1,4 +1,5 @@
-﻿using FreshMvvm;
+﻿using Firebase.Auth;
+using FreshMvvm;
 using MDE.Project.Rosseel_Almanzo.Domain.Models;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Validators;
@@ -31,7 +32,22 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private string cityError;
         private string countryError;
         private string dateError;
+        private Domain.Models.Image selectedImage;
 
+
+        public Domain.Models.Image SelectedImage
+        {
+            get => selectedImage;
+            set
+            {
+                selectedImage = value;
+                RaisePropertyChanged(nameof(SelectedImage));
+                if (selectedImage != null)
+                {
+                    DeleteImageCommand.Execute(null);
+                }
+            }
+        }
         public string TitleError
         {
             get => titleError;
@@ -162,8 +178,8 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public string Title 
-        { 
+        public string Title
+        {
             get => title;
             set
             {
@@ -212,7 +228,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         {
                             await CoreMethods.DisplayAlert("Failed", result, "Ok");
                         }
-                    }                  
+                    }
                 });
             }
         }
@@ -221,7 +237,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         {
             get
             {
-                return new Command( async () =>
+                return new Command(async () =>
                 {
                     string action = await CoreMethods.DisplayActionSheet("Select an option", "Annuleren", null, "Take picture", "Select picture");
 
@@ -243,7 +259,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         };
                         Images.Add(image);
                     }
-                    
+
                 });
             }
         }
@@ -254,7 +270,35 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
+                    foreach (var image in Images)
+                    {
+                        await _imageService.DeleteImage(image);
+                    }
                     await CoreMethods.PushPageModel<EventsViewModel>();
+                });
+            }
+        }
+
+        public ICommand DeleteImageCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    var result = await CoreMethods.DisplayAlert("Delete Comment", "Are u sure u want to delete image?", "Yes", "Cancel");
+                    if (result)
+                    {
+                        var deleteResult = await _imageService.DeleteImage(SelectedImage);
+                        if (deleteResult)
+                        {
+                            Images.Remove(SelectedImage);
+                            await CoreMethods.DisplayAlert("Delete Comment", "Image succesfull deleted", "Ok");
+                        }
+                        else
+                        {
+                            await CoreMethods.DisplayAlert("Delete Comment", "Delete image failed!", "Ok");
+                        }
+                    }
                 });
             }
         }
