@@ -15,5 +15,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces
         Task<bool> AddCommentAsync(string id, Comment comment);
         Task<bool> DeleteCommentAsync(string id, string commentId);
         Task<bool> UpdateZoneAsync(Zone toUpdate);
+        Task<List<BaseModel>> SearchByCity(string cityName);
     }
 }
