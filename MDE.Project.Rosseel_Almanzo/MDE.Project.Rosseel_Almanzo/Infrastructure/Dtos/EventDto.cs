@@ -17,5 +17,6 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Dtos
         public DateTime DateEvent { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public string OrginazerId { get; set; }
+        public ICollection<string> AttendingUserNames { get; set; }
     }
 }
