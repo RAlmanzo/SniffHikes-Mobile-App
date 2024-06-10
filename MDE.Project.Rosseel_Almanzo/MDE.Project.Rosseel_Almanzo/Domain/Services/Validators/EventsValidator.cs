@@ -20,7 +20,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Validators
                 .NotEmpty()
                 .WithMessage("Description is required")
                 .MinimumLength(2)
-                .WithMessage("Description is to long")
+                .WithMessage("Description is to short")
                 .MaximumLength(500)
                 .WithMessage("Description is to long");
 
