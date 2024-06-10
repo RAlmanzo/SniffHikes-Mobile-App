@@ -26,6 +26,16 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private ObservableCollection<Domain.Models.Image> images;
         private ObservableCollection<Comment> comments;
         private Comment selectedComment;
+        private string commentCreator;
+
+        public string CommentCreator
+        {
+            get => commentCreator;
+            set
+            {
+                commentCreator = value;
+            }
+        }
 
         public Comment SelectedComment
         {
@@ -128,12 +138,13 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public override void Init(object initData)
+        public async override void Init(object initData)
         {
             base.Init(initData);
 
             Id = initData.ToString();
 
+            CommentCreator = await SecureStorage.GetAsync("token");
             GetZoneDetails.Execute(null);
         }
 
@@ -227,21 +238,23 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command(async () =>
                 {
                     //TODO: Check if comment belongs to logged user!!!!!!!!!!!!!!!!!!!
-
-                    var result = await CoreMethods.DisplayAlert("Delete Comment", "Are u sure u want to delete comment?", "Yes", "Cancel");
-                    if (result)
+                    if (selectedComment.UserId == commentCreator)
                     {
-                        var deleteResult = await _zonesService.DeleteCommentAsync(Id, selectedComment.Id);
-                        if (deleteResult)
+                        var result = await CoreMethods.DisplayAlert("Delete Comment", "Are u sure u want to delete comment?", "Yes", "Cancel");
+                        if (result)
                         {
-                            Comments.Remove(selectedComment);
-                            await CoreMethods.DisplayAlert("Delete Comment", "Comment succesfull deleted", "Ok");
+                            var deleteResult = await _zonesService.DeleteCommentAsync(Id, selectedComment.Id);
+                            if (deleteResult)
+                            {
+                                Comments.Remove(selectedComment);
+                                await CoreMethods.DisplayAlert("Delete Comment", "Comment succesfull deleted", "Ok");
+                            }
+                            else
+                            {
+                                await CoreMethods.DisplayAlert("Delete Comment", "Delete comment failed!", "Ok");
+                            }
                         }
-                        else
-                        {
-                            await CoreMethods.DisplayAlert("Delete Comment", "Delete comment failed!", "Ok");
-                        }
-                    }
+                    }              
                 });
             }
         }
