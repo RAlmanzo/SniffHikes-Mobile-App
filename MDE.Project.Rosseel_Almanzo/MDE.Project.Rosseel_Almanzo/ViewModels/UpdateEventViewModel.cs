@@ -15,6 +15,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     public class UpdateEventViewModel : FreshBasePageModel
     {
         private readonly IEventsService _eventsService;
+        private readonly IImageService _imageService;
 
         private string id;
         private string title;
@@ -197,11 +198,12 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public UpdateEventViewModel(IEventsService eventsService)
+        public UpdateEventViewModel(IEventsService eventsService, IImageService imageService)
         {
             Images = new ObservableCollection<Domain.Models.Image>();
             Comments = new ObservableCollection<Comment>();
             _eventsService = eventsService;
+            _imageService = imageService;
         }
 
         public override void Init(object initData)
@@ -273,6 +275,10 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command(async () =>
                 {
                     var result = await _eventsService.DeleteEventAsync(Id);
+                    foreach(var image in Images)
+                    {
+                        await _imageService.DeleteImage(image);
+                    }
                     if (result == "Deleted")
                     {
                         await CoreMethods.DisplayAlert("Deleted", "Event succesfull deleted!", "Ok");
