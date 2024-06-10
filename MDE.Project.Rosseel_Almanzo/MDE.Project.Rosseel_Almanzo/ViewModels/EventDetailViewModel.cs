@@ -31,8 +31,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private ObservableCollection<Comment> comments;
         private Comment selectedComment;
         private bool isAdmin;
-        private string commentCreator;
-        private string userName;
+        private string userId;
         private int attendingUsers;
 
         public int AttendingUsers
@@ -45,19 +44,10 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public string UserName
+        public string UserId
         {
-            get => userName;
-            set => userName = value;
-        }
-
-        public string CommentCreator
-        {
-            get => commentCreator;
-            set
-            {
-                commentCreator = value;
-            }
+            get => userId;
+            set => userId = value;
         }
 
         public bool IsAdmin
@@ -189,8 +179,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
             string admin = await SecureStorage.GetAsync("admin");
             IsAdmin = bool.Parse(admin);
-            CommentCreator = await SecureStorage.GetAsync("token");
-            UserName = await SecureStorage.GetAsync("name");
+            userId = await SecureStorage.GetAsync("token");
 
             GetEventDetails.Execute(null);
         }
@@ -286,7 +275,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    if (selectedComment.UserId == commentCreator || IsAdmin)
+                    if (selectedComment.UserId == userId || IsAdmin)
                     {
                         var result = await CoreMethods.DisplayAlert("Delete Comment", "Are u sure u want to delete comment?", "Yes", "Cancel");
                         if (result)
@@ -334,13 +323,12 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    var isSigned = await _eventsService.SignUpToEvent(Id, UserName);
+                    var isSigned = await _eventsService.SignUpToEvent(Id, userId);
                     if (isSigned)
                     {
                         AttendingUsers++;
                         await CoreMethods.DisplayAlert("Succes", "You are succesfully signed up for the event", "Ok");
-                    }
-                    
+                    }                  
                 });
             }
         }
