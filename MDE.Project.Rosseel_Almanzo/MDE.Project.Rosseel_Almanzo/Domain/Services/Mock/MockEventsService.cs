@@ -137,5 +137,10 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         {
             throw new NotImplementedException();
         }
+
+        public Task<bool> SignUpToEvent(string id, string userName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
