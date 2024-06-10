@@ -120,6 +120,7 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
                     OrginazerId = eventSnapshot.OrginazerId,
                     Images = eventSnapshot.Images,
                     Comments = eventSnapshot.Comments != null ? eventSnapshot.Comments.OrderByDescending(c => c.CreatedOn).ToList() : new List<Comment>(),
+                    AttendingUserNames = eventSnapshot.AttendingUserNames ?? new List<string>(),
                 };
                 return await Task.FromResult(selectedEvent);
             };
@@ -193,6 +194,25 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
             }).ToList();
 
             return await Task.FromResult(zones);
+        }
+
+        public async Task<bool> SignUpToEvent(string id, string userName)
+        {
+            //get event
+            var currentEvent = await GetEventByIdAsync(id);
+            if (currentEvent != null)
+            {              
+                if (currentEvent.AttendingUserNames == null)
+                {
+                    currentEvent.AttendingUserNames = new ObservableCollection<string>();
+                }
+                currentEvent.AttendingUserNames.Add(userName);
+
+                await _client.Child("Events").Child(id).PutAsync(currentEvent);
+                return await Task.FromResult(true);
+            }
+            else
+                return await Task.FromResult(false);
         }
     }
 }
