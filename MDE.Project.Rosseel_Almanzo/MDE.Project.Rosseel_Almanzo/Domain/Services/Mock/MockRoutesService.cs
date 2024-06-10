@@ -205,5 +205,10 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
         {
             throw new NotImplementedException();
         }
+
+        public Task<List<BaseModel>> SearchByCity(string cityName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
