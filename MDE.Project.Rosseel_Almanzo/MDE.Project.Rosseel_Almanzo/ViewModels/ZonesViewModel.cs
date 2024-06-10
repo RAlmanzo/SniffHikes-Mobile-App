@@ -20,6 +20,17 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private ObservableCollection<Domain.Models.Image> images;
         private BaseModel selectedZone;
         private string id;
+        private bool isAdmin;
+
+        public bool IsAdmin
+        {
+            get => isAdmin;
+            set
+            {
+                isAdmin = value;
+                RaisePropertyChanged(nameof(IsAdmin));
+            }
+        }
 
         public string Id
         {
@@ -91,6 +102,8 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command(async () =>
                 {
                     Id = await SecureStorage.GetAsync("token");
+                    string admin = await SecureStorage.GetAsync("admin");
+                    IsAdmin = bool.Parse(admin);
 
                     var fetchedEvents = await _zonesService.GetAllZonesAsync();
                     Zones = new ObservableCollection<BaseModel>(fetchedEvents);

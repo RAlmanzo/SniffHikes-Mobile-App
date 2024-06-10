@@ -7,7 +7,7 @@
              BackgroundImageSource="sky.jpg">
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout>
+            <StackLayout IsVisible="{Binding IsAdmin}">
                 <Button Text="Create" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding CreateZoneCommand}"></Button>
             </StackLayout>
             <ListView x:Name="lstItems" ItemsSource="{Binding Zones}" HasUnevenRows="True" SelectedItem="{Binding SelectedZone}">

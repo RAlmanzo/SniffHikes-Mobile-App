@@ -18,5 +18,6 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Dtos
         public string Password { get; set; }
         public IEnumerable<Dog> Dogs { get; set; }
         public Image Image { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

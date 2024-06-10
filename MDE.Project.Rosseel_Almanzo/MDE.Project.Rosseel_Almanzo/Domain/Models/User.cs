@@ -17,5 +17,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Models
         public string Password { get; set; }
         public ICollection<Dog> Dogs { get; set; }
         public Image Image { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }
