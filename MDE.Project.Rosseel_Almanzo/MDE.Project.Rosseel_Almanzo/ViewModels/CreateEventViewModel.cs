@@ -197,6 +197,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         DateEvent = DateEvent,
                         Images = Images ?? new ObservableCollection<Domain.Models.Image>(),
                         Comments = Comments ?? new ObservableCollection<Comment>(),
+                        AttendingUserNames = new List<string>(),
                     };
 
                     if (Validate(newEvent))
