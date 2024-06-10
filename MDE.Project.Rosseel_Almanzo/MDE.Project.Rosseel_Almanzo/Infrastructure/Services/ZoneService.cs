@@ -152,5 +152,25 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
                 return await Task.FromResult(false);
             }
         }
+
+        public async Task<List<BaseModel>> SearchByCity(string cityName)
+        {
+            //get de data
+            var zonesSnapshot = await _client.Child("Zones").OnceAsync<ZoneDto>();
+            //sort data
+            var cityZones = zonesSnapshot.Where(z => z.Object.City.ToLower().Contains(cityName.ToLower()));
+
+            //map data to zones collection
+            var zones = cityZones.Select(e => new BaseModel
+            {
+                Id = e.Key,
+                Title = e.Object.Title,
+                Description = e.Object.Description,
+                Image = e.Object.Images?.FirstOrDefault(),
+                OrginazerId = e.Object.OrganizerId,
+            }).ToList();
+
+            return await Task.FromResult(zones);
+        }
     }
 }
