@@ -34,7 +34,6 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private string dateError;
         private Domain.Models.Image selectedImage;
 
-
         public Domain.Models.Image SelectedImage
         {
             get => selectedImage;
@@ -48,6 +47,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 }
             }
         }
+
         public string TitleError
         {
             get => titleError;
@@ -270,10 +270,13 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    foreach (var image in Images)
+                    if(images.Count > 0)
                     {
-                        await _imageService.DeleteImage(image);
-                    }
+                        foreach (var image in Images)
+                        {
+                            await _imageService.DeleteImage(image);
+                        }
+                    }                  
                     await CoreMethods.PushPageModel<EventsViewModel>();
                 });
             }
