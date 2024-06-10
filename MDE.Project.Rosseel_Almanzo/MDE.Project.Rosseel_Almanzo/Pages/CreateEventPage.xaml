@@ -12,7 +12,7 @@
                 <StackLayout >
                     <Button Text="Add picture" HorizontalOptions="EndAndExpand" Margin="0,20,0,0" Command="{Binding AddImageCommand}"></Button>
                     <StackLayout>
-                        <CollectionView ItemsSource="{Binding Images}" HeightRequest="250" BackgroundColor="{StaticResource transparantWhite}">
+                        <CollectionView ItemsSource="{Binding Images}" HeightRequest="250" BackgroundColor="{StaticResource transparantWhite}" SelectedItem="{Binding SelectedImage}" SelectionMode="Single">
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"></LinearItemsLayout>
                             </CollectionView.ItemsLayout>
