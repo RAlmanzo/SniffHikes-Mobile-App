@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
+using Xamarin.Essentials;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
@@ -15,19 +16,57 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     {
         private readonly IZonesService _zonesService;
 
-        private ObservableCollection<Zone> zones;
+        private ObservableCollection<BaseModel> zones;
         private ObservableCollection<Domain.Models.Image> images;
-        private Zone selectedZone;
+        private BaseModel selectedZone;
+        private string id;
+        private bool isAdmin;
+        private string cityName;
 
-        public Zone SelectedZone
+        public string CityName
+        {
+            get => cityName;
+            set
+            {
+                cityName = value;
+                SearchByCityName();
+                RaisePropertyChanged(nameof(CityName));
+            }
+        }
+
+        public bool IsAdmin
+        {
+            get => isAdmin;
+            set
+            {
+                isAdmin = value;
+                RaisePropertyChanged(nameof(IsAdmin));
+            }
+        }
+
+        public string Id
+        {
+            get => id;
+            set => id = value;
+        }
+
+        public BaseModel SelectedZone
         {
             get => selectedZone;
             set
             {
                 selectedZone = value;
-
-                // RaisePropertyChanged(nameof(SelectedItem));
-                GoToDetailPage.Execute(null);
+                if (value != null)
+                {
+                    if (selectedZone.OrginazerId == id)
+                    {
+                        GoToUpdatePage.Execute(null);
+                    }
+                    else
+                    {
+                        GoToDetailPage.Execute(null);
+                    }
+                }
             }
         }
 
@@ -41,7 +80,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public ObservableCollection<Zone> Zones
+        public ObservableCollection<BaseModel> Zones
         {
             get => zones;
             set
@@ -51,14 +90,19 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public ZonesViewModel()
+        public ZonesViewModel(IZonesService zonesService)
         {
-            _zonesService = new MockZonesService();
+            _zonesService = zonesService;
         }
 
         public override void Init(object initData)
         {
             base.Init(initData);
+        }
+
+        protected override void ViewIsAppearing(object sender, EventArgs e)
+        {
+            base.ViewIsAppearing(sender, e);
             RefreshData.Execute(null);
         }
 
@@ -68,9 +112,12 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    //List<Domain.Models.Image> images = await _eventsService.GetEventImagesByEventIdAsync();
-                    List<Zone> fetchedEvents = await _zonesService.GetAllZonesAsync();
-                    Zones = new ObservableCollection<Zone>(fetchedEvents);
+                    Id = await SecureStorage.GetAsync("token");
+                    string admin = await SecureStorage.GetAsync("admin");
+                    IsAdmin = bool.Parse(admin);
+
+                    var fetchedZones = await _zonesService.GetAllZonesAsync();
+                    Zones = new ObservableCollection<BaseModel>(fetchedZones);
                 });
             }
         }
@@ -85,6 +132,35 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         await CoreMethods.PushPageModel<ZoneDetailsViewModel>(SelectedZone.Id, false, true);
                 });
             }
+        }
+
+        public ICommand GoToUpdatePage
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (selectedZone != null)
+                        await CoreMethods.PushPageModel<UpdateZoneViewModel>(selectedZone.Id, false, true);
+                });
+            }
+        }
+
+        public ICommand CreateZoneCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<CreateZoneViewModel>();
+                });
+            }
+        }
+
+        private async void SearchByCityName()
+        {
+            var fetchedZones = await _zonesService.SearchByCity(CityName);
+            Zones = new ObservableCollection<BaseModel>(fetchedZones);
         }
     }
 }

@@ -50,9 +50,9 @@
                     </Frame>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Share your experience here" Style="{StaticResource formLabelStyle}"></Label>
-                        <Button Text="Comment" Style="{StaticResource formButtonStye}"></Button>
+                        <Button Text="Comment" Style="{StaticResource formButtonStye}" Command="{Binding AddCommentCommand}"></Button>
                     </StackLayout>
-                    <ListView x:Name="lstItems" ItemsSource="{Binding Comments}" HasUnevenRows="True">
+                    <ListView x:Name="lstItems" ItemsSource="{Binding Comments}" HasUnevenRows="True" SelectedItem="{Binding SelectedComment}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -68,7 +68,7 @@
                                                 </Grid.RowDefinitions>
                                                 <Grid.Padding>5</Grid.Padding>
                                                 <Label Grid.Row="0" Text="{Binding Content}" Style="{StaticResource formLabelStyle}"></Label>
-                                                <Label Grid.Row="1" Text="Created by: Almanzo Rosseel"></Label>
+                                                <Label Grid.Row="1" Text="{Binding UserName}"></Label>
                                             </Grid>
                                         </StackLayout>
                                     </Frame>

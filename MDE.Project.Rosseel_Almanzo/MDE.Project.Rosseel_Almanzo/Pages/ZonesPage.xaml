@@ -6,36 +6,45 @@
              NavigationPage.HasBackButton="False"
              BackgroundImageSource="sky.jpg">
     <ContentPage.Content>
-        <ListView x:Name="lstItems" ItemsSource="{Binding Zones}" HasUnevenRows="True" SelectedItem="{Binding SelectedZone}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Frame Style="{StaticResource baseFrameStyle}">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150" />
-                                    <ColumnDefinition Width="auto" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="30"/>
-                                    <RowDefinition Height="150"/>
-                                    <RowDefinition Height="auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.Padding>0,20,0,0</Grid.Padding>
+        <StackLayout>
+            <StackLayout IsVisible="{Binding IsAdmin}">
+                <Button Text="Create" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding CreateZoneCommand}"></Button>
+            </StackLayout>
+            <StackLayout Style="{StaticResource createFormStyle}">
+                <Label Text="Search by city: "></Label>
+                <Entry Text="{Binding CityName}"></Entry>
+            </StackLayout>
+            <ListView x:Name="lstItems" ItemsSource="{Binding Zones}" HasUnevenRows="True" SelectedItem="{Binding SelectedZone}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Style="{StaticResource baseFrameStyle}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="150"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.Padding>0,20,0,0</Grid.Padding>
 
-                                <StackLayout Orientation="Horizontal" Padding="15" Grid.Column="0" Grid.Row="1">
-                                    <Frame Style="{StaticResource baseImageFrameStyle}">
-                                        <Image Source="loooogin.jpg" Style="{StaticResource baseImageStyle}"></Image>
-                                    </Frame>
-                                </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Padding="15" Grid.Column="0" Grid.Row="1">
+                                        <Frame Style="{StaticResource baseImageFrameStyle}">
+                                            <Image Source="{Binding Image.ImagePath}" Style="{StaticResource baseImageStyle}"></Image>
+                                        </Frame>
+                                    </StackLayout>
 
-                                <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Title}" Style="{StaticResource baseLabelStyle}" FontSize="20" Padding="25,0,0,0" TextDecorations="Underline"></Label>
-                                <Label Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"  Text="{Binding Description}" FontSize="Subtitle" Style="{StaticResource baseLabelStyle}" Padding="10"></Label>
-                            </Grid>
-                        </Frame>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                                    <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Title}" Style="{StaticResource baseLabelStyle}" FontSize="20" Padding="25,0,0,0" TextDecorations="Underline"></Label>
+                                    <Label Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"  Text="{Binding Description}" FontSize="Subtitle" Style="{StaticResource baseLabelStyle}" Padding="10"></Label>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.Linq;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
+using MDE.Project.Rosseel_Almanzo.Infrastructure.Services;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
@@ -16,7 +17,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     {
         private readonly IZonesService _zonesService;
 
-        private int id;
+        private string id;
         private string title;
         private string description;
         private string street;
@@ -24,6 +25,31 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private string country;
         private ObservableCollection<Domain.Models.Image> images;
         private ObservableCollection<Comment> comments;
+        private Comment selectedComment;
+        private string commentCreator;
+
+        public string CommentCreator
+        {
+            get => commentCreator;
+            set
+            {
+                commentCreator = value;
+            }
+        }
+
+        public Comment SelectedComment
+        {
+            get => selectedComment;
+            set
+            {
+                selectedComment = value;
+                RaisePropertyChanged(nameof(SelectedComment));
+                if (selectedComment != null)
+                {
+                    DeleteCommentCommand.Execute(null);
+                }
+            }
+        }
 
         public ObservableCollection<Comment> Comments
         {
@@ -102,7 +128,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public int Id
+        public string Id
         {
             get => id;
             set
@@ -112,16 +138,17 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public override void Init(object initData)
+        public async override void Init(object initData)
         {
             base.Init(initData);
 
-            Id = (int)initData;
+            Id = initData.ToString();
 
-            GetRouteDetails.Execute(null);
+            CommentCreator = await SecureStorage.GetAsync("token");
+            GetZoneDetails.Execute(null);
         }
 
-        public ICommand GetRouteDetails
+        public ICommand GetZoneDetails
         {
             get
             {
@@ -134,7 +161,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     City = item.City;
                     Country = item.Country;
                     Images = item.Images != null ? new ObservableCollection<Domain.Models.Image>(item.Images) : new ObservableCollection<Domain.Models.Image>();
-                    comments = item.Comments != null ? new ObservableCollection<Comment>(item.Comments) : new ObservableCollection<Comment>();
+                    Comments = item.Comments != null ? new ObservableCollection<Comment>(item.Comments) : new ObservableCollection<Comment>();
                 });
             }
         }
@@ -189,6 +216,45 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command(async () =>
                 {
                     await CoreMethods.PushPageModel<ZonesViewModel>();
+                });
+            }
+        }
+
+        public ICommand AddCommentCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<CreateZoneCommentViewModel>(id);
+                });
+            }
+        }
+
+        public ICommand DeleteCommentCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    //TODO: Check if comment belongs to logged user!!!!!!!!!!!!!!!!!!!
+                    if (selectedComment.UserId == commentCreator)
+                    {
+                        var result = await CoreMethods.DisplayAlert("Delete Comment", "Are u sure u want to delete comment?", "Yes", "Cancel");
+                        if (result)
+                        {
+                            var deleteResult = await _zonesService.DeleteCommentAsync(Id, selectedComment.Id);
+                            if (deleteResult)
+                            {
+                                Comments.Remove(selectedComment);
+                                await CoreMethods.DisplayAlert("Delete Comment", "Comment succesfull deleted", "Ok");
+                            }
+                            else
+                            {
+                                await CoreMethods.DisplayAlert("Delete Comment", "Delete comment failed!", "Ok");
+                            }
+                        }
+                    }              
                 });
             }
         }

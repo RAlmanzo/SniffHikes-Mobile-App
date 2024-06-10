@@ -1,10 +1,11 @@
-﻿using System;
+﻿using MDE.Project.Rosseel_Almanzo.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MDE.Project.Rosseel_Almanzo.Domain.Models
+namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Dtos
 {
-    public class Zone
+    public class ZoneDto
     {
         public string Id { get; set; }
         public string Title { get; set; }
