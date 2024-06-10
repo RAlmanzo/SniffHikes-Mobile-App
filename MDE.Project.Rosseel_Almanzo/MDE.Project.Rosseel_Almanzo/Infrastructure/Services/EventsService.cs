@@ -47,6 +47,11 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
                 {
                     existingEvent.Comments = new ObservableCollection<Comment>();
                 }
+                var token = await SecureStorage.GetAsync("token");
+                comment.UserId = token;
+                var name = await SecureStorage.GetAsync("name");
+                comment.UserName = name;
+
                 existingEvent.Comments.Add(comment);
 
                 await _client.Child("Events").Child(id).PutAsync(existingEvent);
@@ -114,7 +119,7 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
                     DateEvent = eventSnapshot.DateEvent,
                     OrginazerId = eventSnapshot.OrginazerId,
                     Images = eventSnapshot.Images,
-                    Comments = eventSnapshot.Comments,
+                    Comments = eventSnapshot.Comments != null ? eventSnapshot.Comments.OrderByDescending(c => c.CreatedOn).ToList() : new List<Comment>(),
                 };
                 return await Task.FromResult(selectedEvent);
             };
