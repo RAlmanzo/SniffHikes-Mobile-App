@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MDE.Project.Rosseel_Almanzo.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,5 +10,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces
     {
         Task<string> TakePhotoAsync();
         Task<string> PickPhotoAsync();
+        Task<bool> DeleteImage(Image image);
     }
 }
