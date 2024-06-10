@@ -80,6 +80,7 @@
             </ScrollView>
             <StackLayout Orientation="Horizontal" BackgroundColor="Black">
                 <Button Text="Back" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding BackCommand}"></Button>
+                <Button Text="Delete" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding DeleteRouteCommand}" IsVisible="{Binding IsAdmin}"></Button>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
