@@ -2,6 +2,7 @@
 using MDE.Project.Rosseel_Almanzo.Domain.Models;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Mock;
+using MDE.Project.Rosseel_Almanzo.Infrastructure.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,6 +27,18 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private string id;
         private bool isLoading;
         private bool isVisible;
+        private string cityName;
+
+        public string CityName
+        {
+            get => cityName;
+            set
+            {
+                cityName = value;
+                SearchByCityName();
+                RaisePropertyChanged(nameof(CityName));
+            }
+        }
 
         public bool IsVisible
         {
@@ -186,6 +199,12 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     await CoreMethods.PushPageModel<CreateEventViewModel>();
                 });
             }
+        }
+
+        private async void SearchByCityName()
+        {
+            var fetchedItems = await _eventsService.SearchByCity(CityName);
+            Events = new ObservableCollection<BaseModel>(fetchedItems);
         }
     }
 }
