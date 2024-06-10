@@ -196,7 +196,7 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
             return await Task.FromResult(zones);
         }
 
-        public async Task<bool> SignUpToEvent(string id, string userName)
+        public async Task<bool> SignUpToEvent(string id, string userId)
         {
             //get event
             var currentEvent = await GetEventByIdAsync(id);
@@ -206,13 +206,31 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
                 {
                     currentEvent.AttendingUserNames = new ObservableCollection<string>();
                 }
-                currentEvent.AttendingUserNames.Add(userName);
+                currentEvent.AttendingUserNames.Add(userId);
 
                 await _client.Child("Events").Child(id).PutAsync(currentEvent);
                 return await Task.FromResult(true);
             }
             else
                 return await Task.FromResult(false);
+        }
+
+        public async Task<IEnumerable<BaseModel>> GetRegisteredEventsByUserId(string userId)
+        {
+            //get data
+            var eventsSnapshot = await _client.Child("Events").OnceAsync<EventDto>();
+            var registeredEvents = eventsSnapshot.Where(e => e.Object.AttendingUserNames != null).Where(e => e.Object.AttendingUserNames.Any(u => u.Equals(userId))).ToList();
+
+            var events = registeredEvents.Select(e => new BaseModel
+            {
+                Id = e.Key,
+                Title = e.Object.Title,
+                Description = e.Object.Description,
+                Image = e.Object.Images?.FirstOrDefault(),
+                OrginazerId = e.Object.OrginazerId,
+            }).ToList();
+
+            return await Task.FromResult(events);
         }
     }
 }
