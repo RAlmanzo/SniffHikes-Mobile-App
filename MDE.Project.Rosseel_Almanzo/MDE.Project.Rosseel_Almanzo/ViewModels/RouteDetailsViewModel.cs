@@ -28,6 +28,17 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private ObservableCollection<Domain.Models.Image> images;
         private ObservableCollection<Comment> comments;
         private Comment selectedComment;
+        private bool isAdmin;
+
+        public bool IsAdmin
+        {
+            get => isAdmin;
+            set
+            {
+                isAdmin = value;
+                RaisePropertyChanged(nameof(IsAdmin));
+            }
+        }
 
         public Comment SelectedComment
         {
@@ -140,11 +151,13 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             _routesService = routesService;
         }
 
-        public override void Init(object initData)
+        public async override void Init(object initData)
         {
             base.Init(initData);
 
             Id = initData.ToString();
+            string admin = await SecureStorage.GetAsync("admin");
+            IsAdmin = bool.Parse(admin);
 
             GetRouteDetails.Execute(null);
         }
@@ -255,6 +268,27 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                             await CoreMethods.DisplayAlert("Delete Comment", "Delete comment failed!", "Ok");
                         }
                     }
+                });
+            }
+        }
+
+        public ICommand DeleteRouteCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    var result = await _routesService.DeleteRouteAsync(Id);
+                    if (result == "Deleted")
+                    {
+                        await CoreMethods.DisplayAlert("Deleted", "Route succesfull deleted!", "Ok");
+                    }
+                    else
+                    {
+                        await CoreMethods.DisplayAlert("Failed", result, "Ok");
+                    }
+
+                    await CoreMethods.PushPageModel<RoutesViewModel>();
                 });
             }
         }
