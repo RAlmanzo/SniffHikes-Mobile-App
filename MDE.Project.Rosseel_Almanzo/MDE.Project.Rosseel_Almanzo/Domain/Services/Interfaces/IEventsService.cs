@@ -16,6 +16,8 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces
         Task<bool> AddCommentAsync(string id, Comment comment);
         Task<bool> DeleteCommentAsync(string id, string commentId);
         Task<bool> UpdateEventAsync(Event toUpdate);
-
+        Task<List<BaseModel>> SearchByCity(string cityName);
+        Task<bool> SignUpToEvent(string id, string userId);
+        Task<IEnumerable<BaseModel>> GetRegisteredEventsByUserId(string userId);
     }
 }

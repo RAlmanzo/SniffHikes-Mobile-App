@@ -50,10 +50,10 @@
                     </Frame>
                     <StackLayout Orientation="Horizontal" Style="{StaticResource baseFormStyle}">
                         <Frame HeightRequest="40" CornerRadius="20" BorderColor="{StaticResource border}" BackgroundColor="{StaticResource framebackgroundcolor}">
-                            <Label Text="100" Style="{StaticResource formLabelStyle}"></Label>
+                            <Label Text="{Binding AttendingUsers}" Style="{StaticResource formLabelStyle}"></Label>
                         </Frame>
                         <Label Text=":Attending" Style="{StaticResource formLabelStyle}"></Label>
-                        <Button Text="Sign up" Style="{StaticResource formButtonStye}"></Button>
+                        <Button Text="Sign up" Style="{StaticResource formButtonStye}" Command="{Binding SignUpCommand}"></Button>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Share your experience here" Style="{StaticResource formLabelStyle}"></Label>
@@ -75,7 +75,7 @@
                                                 </Grid.RowDefinitions>
                                                 <Grid.Padding>5</Grid.Padding>
                                                 <Label Grid.Row="0" Text="{Binding Content}" Style="{StaticResource formLabelStyle}"></Label>
-                                                <Label Grid.Row="1" Text="Created by: Almanzo Rosseel"></Label>
+                                                <Label Grid.Row="1" Text="{Binding UserName}"></Label>
                                             </Grid>
                                         </StackLayout>
                                     </Frame>
@@ -87,6 +87,7 @@
             </ScrollView>
             <StackLayout Orientation="Horizontal" BackgroundColor="Black">
                 <Button Text="Back" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding BackCommand}"></Button>
+                <Button Text="Delete" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding DeleteEventCommand}" IsVisible="{Binding IsAdmin}"></Button>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

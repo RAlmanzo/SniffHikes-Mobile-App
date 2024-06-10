@@ -264,7 +264,6 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    //TODO: Check if comment belongs to logged user!!!!!!!!!!!!!!!!!!!
                     if(selectedComment.UserId == commentCreator || IsAdmin)
                     {
                         var result = await CoreMethods.DisplayAlert("Delete Comment", "Are u sure u want to delete comment?", "Yes", "Cancel");

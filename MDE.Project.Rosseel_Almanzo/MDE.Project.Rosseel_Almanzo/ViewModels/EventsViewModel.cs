@@ -1,7 +1,9 @@
-﻿using FreshMvvm;
+﻿using FluentValidation.Validators;
+using FreshMvvm;
 using MDE.Project.Rosseel_Almanzo.Domain.Models;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Mock;
+using MDE.Project.Rosseel_Almanzo.Infrastructure.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,6 +28,56 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private string id;
         private bool isLoading;
         private bool isVisible;
+        private string cityName;
+        private bool created;
+        private bool registered;
+        private string userId;
+
+        public string UserId
+        {
+            get => userId;
+            set => userId = value;
+        }
+
+        public bool Registered
+        {
+            get => registered;
+            set
+            {
+                registered = value;
+                if (value)
+                {
+                    GetRegisteredEvents();
+                }              
+                RaisePropertyChanged(nameof(Registered));
+            }
+        }
+
+        public bool Created
+        {
+            get => created;
+            set 
+            { 
+                created = value;
+                if (value)
+                {
+                    GetEventsByUserId();
+                }             
+                RaisePropertyChanged(nameof(Created));
+            }
+        }
+
+
+        public string CityName
+        {
+            get => cityName;
+            set
+            {
+                cityName = value;
+                SearchByCityName();
+                RaisePropertyChanged(nameof(CityName));
+            }
+        }
 
         public bool IsVisible
         {
@@ -137,14 +189,14 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 {
                     IsLoading = true;
                     IsVisible = false;
+                    Created = true;
 
                     Id = await SecureStorage.GetAsync("token");
 
                     var fetchedEvents = await _eventsService.GetAllEventsAsync();
                     Events = new ObservableCollection<BaseModel>(fetchedEvents);
 
-                    var myEvents = await _eventsService.GetAllEventsByUserId(id);
-                    MyEvents = new ObservableCollection<BaseModel>(myEvents);
+                    GetEventsByUserId();
 
                     await Task.Delay(500);
                     IsLoading = false;
@@ -186,6 +238,26 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     await CoreMethods.PushPageModel<CreateEventViewModel>();
                 });
             }
+        }
+
+        private async void SearchByCityName()
+        {
+            var fetchedItems = await _eventsService.SearchByCity(CityName);
+            Events = new ObservableCollection<BaseModel>(fetchedItems);
+        }
+
+        private async void GetEventsByUserId()
+        {
+            Registered = false;
+            var myEvents = await _eventsService.GetAllEventsByUserId(Id);
+            MyEvents = new ObservableCollection<BaseModel>(myEvents);
+        }
+
+        private async void GetRegisteredEvents()
+        {
+            Created = false;
+            var registeredEvents = await _eventsService.GetRegisteredEventsByUserId(Id);
+            MyEvents = new ObservableCollection<BaseModel>(registeredEvents);
         }
     }
 }

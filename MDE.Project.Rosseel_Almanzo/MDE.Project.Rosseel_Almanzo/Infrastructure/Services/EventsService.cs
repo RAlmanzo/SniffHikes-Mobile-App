@@ -47,6 +47,11 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
                 {
                     existingEvent.Comments = new ObservableCollection<Comment>();
                 }
+                var token = await SecureStorage.GetAsync("token");
+                comment.UserId = token;
+                var name = await SecureStorage.GetAsync("name");
+                comment.UserName = name;
+
                 existingEvent.Comments.Add(comment);
 
                 await _client.Child("Events").Child(id).PutAsync(existingEvent);
@@ -114,7 +119,8 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
                     DateEvent = eventSnapshot.DateEvent,
                     OrginazerId = eventSnapshot.OrginazerId,
                     Images = eventSnapshot.Images,
-                    Comments = eventSnapshot.Comments,
+                    Comments = eventSnapshot.Comments != null ? eventSnapshot.Comments.OrderByDescending(c => c.CreatedOn).ToList() : new List<Comment>(),
+                    AttendingUserNames = eventSnapshot.AttendingUserNames ?? new List<string>(),
                 };
                 return await Task.FromResult(selectedEvent);
             };
@@ -169,6 +175,62 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
             {
                 return await Task.FromResult(false);
             }
+        }
+
+        public async Task<List<BaseModel>> SearchByCity(string cityName)
+        {
+            //get de data
+            var eventsSnapshot = await _client.Child("Events").OnceAsync<RouteDto>();
+            //sort data
+            var cityEvents = eventsSnapshot.Where(z => z.Object.City.ToLower().Contains(cityName.ToLower()));
+
+            var zones = cityEvents.Select(e => new BaseModel
+            {
+                Id = e.Key,
+                Title = e.Object.Title,
+                Description = e.Object.Description,
+                Image = e.Object.Images?.FirstOrDefault(),
+                OrginazerId = e.Object.OrganizerId,
+            }).ToList();
+
+            return await Task.FromResult(zones);
+        }
+
+        public async Task<bool> SignUpToEvent(string id, string userId)
+        {
+            //get event
+            var currentEvent = await GetEventByIdAsync(id);
+            if (currentEvent != null)
+            {              
+                if (currentEvent.AttendingUserNames == null)
+                {
+                    currentEvent.AttendingUserNames = new ObservableCollection<string>();
+                }
+                currentEvent.AttendingUserNames.Add(userId);
+
+                await _client.Child("Events").Child(id).PutAsync(currentEvent);
+                return await Task.FromResult(true);
+            }
+            else
+                return await Task.FromResult(false);
+        }
+
+        public async Task<IEnumerable<BaseModel>> GetRegisteredEventsByUserId(string userId)
+        {
+            //get data
+            var eventsSnapshot = await _client.Child("Events").OnceAsync<EventDto>();
+            var registeredEvents = eventsSnapshot.Where(e => e.Object.AttendingUserNames != null).Where(e => e.Object.AttendingUserNames.Any(u => u.Equals(userId))).ToList();
+
+            var events = registeredEvents.Select(e => new BaseModel
+            {
+                Id = e.Key,
+                Title = e.Object.Title,
+                Description = e.Object.Description,
+                Image = e.Object.Images?.FirstOrDefault(),
+                OrginazerId = e.Object.OrginazerId,
+            }).ToList();
+
+            return await Task.FromResult(events);
         }
     }
 }
