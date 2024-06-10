@@ -198,6 +198,11 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             return await Task.FromResult(_zones.FirstOrDefault(z => z.Id == id));
         }
 
+        public Task<List<BaseModel>> SearchByCity(string cityName)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<bool> UpdateZoneAsync(Zone toUpdate)
         {
             throw new NotImplementedException();
