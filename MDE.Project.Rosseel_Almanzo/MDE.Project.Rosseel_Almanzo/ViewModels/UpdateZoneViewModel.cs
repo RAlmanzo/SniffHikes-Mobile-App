@@ -207,7 +207,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    var item = await _zonesService.GetZoneByIdAsync(id);
+                    var item = await _zonesService.GetZoneByIdAsync(Id);
                     Title = item.Title;
                     Description = item.Description;
                     Street = item.Street;
@@ -215,6 +215,17 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     Country = item.Country;
                     Images = item.Images != null ? new ObservableCollection<Domain.Models.Image>(item.Images) : new ObservableCollection<Domain.Models.Image>();
                     Comments = item.Comments != null ? new ObservableCollection<Comment>(item.Comments) : new ObservableCollection<Comment>();
+                });
+            }
+        }
+
+        public ICommand AddCommentCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<CreateZoneCommentViewModel>(Id);
                 });
             }
         }
