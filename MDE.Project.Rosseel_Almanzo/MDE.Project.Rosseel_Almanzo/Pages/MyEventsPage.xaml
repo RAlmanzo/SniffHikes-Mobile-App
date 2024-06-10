@@ -9,9 +9,9 @@
     <StackLayout>
         <StackLayout Orientation="Horizontal">
             <Label Text="Created" Style="{StaticResource switchLabelStyle}"></Label>
-            <Switch/>
+            <Switch IsToggled="{Binding Created}"/>
             <Label Text="Registered" Style="{StaticResource switchLabelStyle}"></Label>
-            <Switch/>
+            <Switch IsToggled="{Binding Registered}"/>
         </StackLayout>
         <ListView x:Name="lstItems" ItemsSource="{Binding MyEvents}" HasUnevenRows="True" SelectedItem="{Binding SelectedEvent}">
             <ListView.ItemTemplate>
