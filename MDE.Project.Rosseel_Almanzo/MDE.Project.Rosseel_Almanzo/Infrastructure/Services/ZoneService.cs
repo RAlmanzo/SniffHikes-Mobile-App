@@ -47,6 +47,11 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
                 {
                     zone.Comments = new ObservableCollection<Comment>();
                 }
+                var token = await SecureStorage.GetAsync("token");
+                comment.UserId = token;
+                var name = await SecureStorage.GetAsync("name");
+                comment.UserName = name;
+
                 zone.Comments.Add(comment);
 
                 await _client.Child("Zones").Child(id).PutAsync(zone);
