@@ -10,6 +10,10 @@
             <StackLayout IsVisible="{Binding IsAdmin}">
                 <Button Text="Create" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding CreateZoneCommand}"></Button>
             </StackLayout>
+            <StackLayout Style="{StaticResource createFormStyle}">
+                <Label Text="Search by city: "></Label>
+                <Entry Text="{Binding CityName}"></Entry>
+            </StackLayout>
             <ListView x:Name="lstItems" ItemsSource="{Binding Zones}" HasUnevenRows="True" SelectedItem="{Binding SelectedZone}">
                 <ListView.ItemTemplate>
                     <DataTemplate>

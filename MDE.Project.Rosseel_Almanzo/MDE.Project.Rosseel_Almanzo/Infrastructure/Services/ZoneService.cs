@@ -132,7 +132,7 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
                     Country = zoneSnapshot.Country,
                     OrganizerId = zoneSnapshot.OrganizerId,
                     Images = zoneSnapshot.Images,
-                    Comments = zoneSnapshot.Comments,
+                    Comments = zoneSnapshot.Comments != null ? zoneSnapshot.Comments.OrderByDescending(c => c.CreatedOn).ToList() : new List<Comment>(),
                 };
                 return await Task.FromResult(selectedZone);
             };
