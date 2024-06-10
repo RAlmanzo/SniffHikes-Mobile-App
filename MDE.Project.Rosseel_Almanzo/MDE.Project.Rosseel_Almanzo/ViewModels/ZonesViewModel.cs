@@ -21,6 +21,18 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private BaseModel selectedZone;
         private string id;
         private bool isAdmin;
+        private string cityName;
+
+        public string CityName
+        {
+            get => cityName;
+            set
+            {
+                cityName = value;
+                SearchByCityName();
+                RaisePropertyChanged(nameof(CityName));
+            }
+        }
 
         public bool IsAdmin
         {
@@ -86,7 +98,6 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         public override void Init(object initData)
         {
             base.Init(initData);
-            //RefreshData.Execute(null);
         }
 
         protected override void ViewIsAppearing(object sender, EventArgs e)
@@ -105,8 +116,8 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     string admin = await SecureStorage.GetAsync("admin");
                     IsAdmin = bool.Parse(admin);
 
-                    var fetchedEvents = await _zonesService.GetAllZonesAsync();
-                    Zones = new ObservableCollection<BaseModel>(fetchedEvents);
+                    var fetchedZones = await _zonesService.GetAllZonesAsync();
+                    Zones = new ObservableCollection<BaseModel>(fetchedZones);
                 });
             }
         }
@@ -144,6 +155,12 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     await CoreMethods.PushPageModel<CreateZoneViewModel>();
                 });
             }
+        }
+
+        private async void SearchByCityName()
+        {
+            var fetchedZones = await _zonesService.SearchByCity(CityName);
+            Zones = new ObservableCollection<BaseModel>(fetchedZones);
         }
     }
 }
