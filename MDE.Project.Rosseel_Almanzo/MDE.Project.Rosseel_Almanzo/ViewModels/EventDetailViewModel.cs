@@ -32,6 +32,24 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private Comment selectedComment;
         private bool isAdmin;
         private string commentCreator;
+        private string userName;
+        private int attendingUsers;
+
+        public int AttendingUsers
+        {
+            get => attendingUsers;
+            set
+            {
+                attendingUsers = value;
+                RaisePropertyChanged(nameof(AttendingUsers));
+            }
+        }
+
+        public string UserName
+        {
+            get => userName;
+            set => userName = value;
+        }
 
         public string CommentCreator
         {
@@ -172,6 +190,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             string admin = await SecureStorage.GetAsync("admin");
             IsAdmin = bool.Parse(admin);
             CommentCreator = await SecureStorage.GetAsync("token");
+            UserName = await SecureStorage.GetAsync("name");
 
             GetEventDetails.Execute(null);
         }
@@ -191,6 +210,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     DateEvent = item.DateEvent;
                     Images = item.Images != null ? new ObservableCollection<Domain.Models.Image>(item.Images) : new ObservableCollection<Domain.Models.Image>();
                     Comments = item.Comments != null ? new ObservableCollection<Comment>(item.Comments) : new ObservableCollection<Comment>();
+                    AttendingUsers = item.AttendingUserNames.Count();
                 });
             }
         }
@@ -304,6 +324,23 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     }
 
                     await CoreMethods.PushPageModel<EventsViewModel>();
+                });
+            }
+        }
+
+        public ICommand SignUpCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    var isSigned = await _eventsService.SignUpToEvent(Id, UserName);
+                    if (isSigned)
+                    {
+                        AttendingUsers++;
+                        await CoreMethods.DisplayAlert("Succes", "You are succesfully signed up for the event", "Ok");
+                    }
+                    
                 });
             }
         }
