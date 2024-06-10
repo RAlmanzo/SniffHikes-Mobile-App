@@ -29,6 +29,16 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private ObservableCollection<Comment> comments;
         private Comment selectedComment;
         private bool isAdmin;
+        private string commentCreator;
+
+        public string CommentCreator
+        {
+            get => commentCreator;
+            set
+            {
+                commentCreator = value;
+            }
+        }
 
         public bool IsAdmin
         {
@@ -156,8 +166,10 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             base.Init(initData);
 
             Id = initData.ToString();
+
             string admin = await SecureStorage.GetAsync("admin");
             IsAdmin = bool.Parse(admin);
+            CommentCreator = await SecureStorage.GetAsync("token");
 
             GetRouteDetails.Execute(null);
         }
@@ -253,19 +265,21 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command(async () =>
                 {
                     //TODO: Check if comment belongs to logged user!!!!!!!!!!!!!!!!!!!
-
-                    var result = await CoreMethods.DisplayAlert("Delete Comment", "Are u sure u want to delete comment?", "Yes", "Cancel");
-                    if (result)
+                    if(selectedComment.UserId == commentCreator || IsAdmin)
                     {
-                        var deleteResult = await _routesService.DeleteCommentAsync(Id, selectedComment.Id);
-                        if (deleteResult)
+                        var result = await CoreMethods.DisplayAlert("Delete Comment", "Are u sure u want to delete comment?", "Yes", "Cancel");
+                        if (result)
                         {
-                            Comments.Remove(selectedComment);
-                            await CoreMethods.DisplayAlert("Delete Comment", "Comment succesfull deleted", "Ok");
-                        }
-                        else
-                        {
-                            await CoreMethods.DisplayAlert("Delete Comment", "Delete comment failed!", "Ok");
+                            var deleteResult = await _routesService.DeleteCommentAsync(Id, selectedComment.Id);
+                            if (deleteResult)
+                            {
+                                Comments.Remove(selectedComment);
+                                await CoreMethods.DisplayAlert("Delete Comment", "Comment succesfull deleted", "Ok");
+                            }
+                            else
+                            {
+                                await CoreMethods.DisplayAlert("Delete Comment", "Delete comment failed!", "Ok");
+                            }
                         }
                     }
                 });
