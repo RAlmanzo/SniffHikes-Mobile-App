@@ -204,7 +204,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         };
                         Image = image;
                     }
-                    else
+                    else if (action == "Select picture")
                     {
                         var imageUrl = await _imageService.PickPhotoAsync();
                         var image = new Domain.Models.Image
@@ -213,7 +213,6 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         };
                         Image = image;
                     }
-
                 });
             }
         }
@@ -250,6 +249,30 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                             await CoreMethods.PushPageModel<LoginViewModel>();
                         }                       
                     }                   
+                });
+            }
+        }
+
+        public ICommand DeleteImageCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    var result = await CoreMethods.DisplayAlert("Delete Image", "Are u sure u want to delete image?", "Yes", "Cancel");
+                    if (result)
+                    {
+                        var deleteResult = await _imageService.DeleteImage(image);
+                        if (deleteResult)
+                        {
+                            Image = null;
+                            await CoreMethods.DisplayAlert("Delete image", "Image succesfull deleted", "Ok");
+                        }
+                        else
+                        {
+                            await CoreMethods.DisplayAlert("Delete image", "Delete image failed!", "Ok");
+                        }
+                    }
                 });
             }
         }
