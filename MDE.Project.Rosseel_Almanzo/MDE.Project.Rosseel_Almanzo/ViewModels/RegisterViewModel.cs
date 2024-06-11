@@ -259,20 +259,23 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    var result = await CoreMethods.DisplayAlert("Delete Image", "Are u sure u want to delete image?", "Yes", "Cancel");
-                    if (result)
+                    if(Image != null)
                     {
-                        var deleteResult = await _imageService.DeleteImage(image);
-                        if (deleteResult)
+                        var result = await CoreMethods.DisplayAlert("Delete Image", "Are u sure u want to delete image?", "Yes", "Cancel");
+                        if (result)
                         {
-                            Image = null;
-                            await CoreMethods.DisplayAlert("Delete image", "Image succesfull deleted", "Ok");
+                            var deleteResult = await _imageService.DeleteImage(image);
+                            if (deleteResult)
+                            {
+                                Image = null;
+                                await CoreMethods.DisplayAlert("Delete image", "Image succesfull deleted", "Ok");
+                            }
+                            else
+                            {
+                                await CoreMethods.DisplayAlert("Delete image", "Delete image failed!", "Ok");
+                            }
                         }
-                        else
-                        {
-                            await CoreMethods.DisplayAlert("Delete image", "Delete image failed!", "Ok");
-                        }
-                    }
+                    }                 
                 });
             }
         }
