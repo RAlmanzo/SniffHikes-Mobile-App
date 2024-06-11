@@ -10,7 +10,11 @@
                 <StackLayout>
                     <StackLayout HeightRequest="200" Orientation="Horizontal" Padding="0,25,0,0" HorizontalOptions="CenterAndExpand">
                         <Frame Padding="0" CornerRadius="100" IsClippedToBounds="True">
-                            <Image Source="{Binding Image.ImagePath}" WidthRequest="200" HeightRequest="200"></Image>
+                            <Image Source="{Binding Image.ImagePath}" WidthRequest="200" HeightRequest="200">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding DeleteImageCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
                         </Frame>
                         <Button Text="Add picture" HeightRequest="50" Style="{StaticResource formButtonStye}" Command="{Binding AddImageCommand}"></Button>
                     </StackLayout>

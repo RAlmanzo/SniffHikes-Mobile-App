@@ -250,7 +250,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         };
                         Images.Add(image);
                     }
-                    else
+                    else if (action == "Select picture")
                     {
                         var imageUrl = await _imageService.PickPhotoAsync();
                         var image = new Domain.Models.Image
@@ -274,7 +274,10 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     {
                         foreach (var image in Images)
                         {
-                            await _imageService.DeleteImage(image);
+                            if(image.ImagePath != "error")
+                            {
+                                await _imageService.DeleteImage(image);
+                            }                          
                         }
                     }                  
                     await CoreMethods.PushPageModel<EventsViewModel>();

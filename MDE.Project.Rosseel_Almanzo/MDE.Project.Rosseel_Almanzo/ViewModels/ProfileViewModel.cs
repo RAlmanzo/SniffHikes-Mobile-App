@@ -18,6 +18,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     {
         private readonly IUsersService _usersService;
         private readonly IAccountService _accountService;
+        private readonly IImageService _imageService;
 
         private string errorText;
         private string firstName;
@@ -147,11 +148,12 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             set { errorText = value; RaisePropertyChanged(nameof(ErrorText)); }
         }
 
-        public ProfileViewModel(IAccountService accountService, IUsersService usersService)
+        public ProfileViewModel(IAccountService accountService, IUsersService usersService, IImageService imageService)
         {
             dogs = new ObservableCollection<Dog>();
             _accountService = accountService;
             _usersService = usersService;
+            _imageService = imageService;
         }
 
         protected override void ViewIsAppearing(object sender, EventArgs e)
@@ -240,6 +242,63 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     else
                     {
                         await CoreMethods.DisplayAlert("Failed", "Account couldn not be deleted, please contact app services", "Ok");
+                    }
+                });
+            }
+        }
+
+        public ICommand DeleteImageCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (Image != null)
+                    {
+                        var result = await CoreMethods.DisplayAlert("Delete Image", "Are u sure u want to delete image?", "Yes", "Cancel");
+                        if (result)
+                        {
+                            var deleteResult = await _imageService.DeleteImage(image);
+                            if (deleteResult)
+                            {
+                                Image = null;
+                                await CoreMethods.DisplayAlert("Delete image", "Image succesfull deleted", "Ok");
+                            }
+                            else
+                            {
+                                await CoreMethods.DisplayAlert("Delete image", "Delete image failed!", "Ok");
+                            }
+                        }
+                    }                  
+                });
+            }
+        }
+
+        public ICommand AddImageCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    string action = await CoreMethods.DisplayActionSheet("Select an option", "Annuleren", null, "Take picture", "Select picture");
+
+                    if (action == "Take picture")
+                    {
+                        var imageUrl = await _imageService.TakePhotoAsync();
+                        var image = new Domain.Models.Image
+                        {
+                            ImagePath = imageUrl,
+                        };
+                        Image = image;
+                    }
+                    else if (action == "Select picture")
+                    {
+                        var imageUrl = await _imageService.PickPhotoAsync();
+                        var image = new Domain.Models.Image
+                        {
+                            ImagePath = imageUrl,
+                        };
+                        Image = image;
                     }
                 });
             }

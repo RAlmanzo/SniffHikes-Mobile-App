@@ -16,9 +16,9 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services
         private readonly FirebaseStorage _storageClient;
         public string PhotoPath { get; set; }
 
-        public ImageService()
+        public ImageService(FirebaseStorage storageClient)
         {
-            _storageClient = new FirebaseStorage("sniffhikes-8e9a6.appspot.com");
+            _storageClient = storageClient;
         }
 
         public async Task<string> TakePhotoAsync()

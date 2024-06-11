@@ -1,5 +1,6 @@
 ﻿using FreshMvvm;
 using MDE.Project.Rosseel_Almanzo.Domain.Models;
+using MDE.Project.Rosseel_Almanzo.Domain.Services;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Validators;
 using System;
@@ -15,6 +16,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     public class UpdateRouteViewModel : FreshBasePageModel
     {
         private readonly IRoutesService _routesService;
+        private readonly IImageService _imageService;
 
         private string id;
         private string title;
@@ -31,6 +33,21 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private string streetError;
         private string cityError;
         private string countryError;
+        private Domain.Models.Image selectedImage;
+
+        public Domain.Models.Image SelectedImage
+        {
+            get => selectedImage;
+            set
+            {
+                selectedImage = value;
+                RaisePropertyChanged(nameof(SelectedImage));
+                if (selectedImage != null)
+                {
+                    DeleteImageCommand.Execute(null);
+                }
+            }
+        }
 
         public string TitleError
         {
@@ -186,11 +203,12 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public UpdateRouteViewModel(IRoutesService routesService)
+        public UpdateRouteViewModel(IRoutesService routesService, IImageService imageService)
         {
             Images = new ObservableCollection<Domain.Models.Image>();
             Comments = new ObservableCollection<Comment>();
             _routesService = routesService;
+            _imageService = imageService;
         }
 
         public override void Init(object initData)
@@ -273,7 +291,11 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 return new Command(async () =>
                 {
                     var result = await _routesService.DeleteRouteAsync(Id);
-                    if(result == "Deleted")
+                    foreach (var image in Images)
+                    {
+                        await _imageService.DeleteImage(image);
+                    }
+                    if (result == "Deleted")
                     {
                         await CoreMethods.DisplayAlert("Deleted", "Route succesfull deleted!", "Ok");
                     }
@@ -319,6 +341,60 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         else
                         {
                             await CoreMethods.DisplayAlert("Failed", "Could not update route!", "Ok");
+                        }
+                    }
+                });
+            }
+        }
+
+        public ICommand AddImageCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    string action = await CoreMethods.DisplayActionSheet("Select an option", "Annuleren", null, "Take picture", "Select picture");
+
+                    if (action == "Take picture")
+                    {
+                        var imageUrl = await _imageService.TakePhotoAsync();
+                        var image = new Domain.Models.Image
+                        {
+                            ImagePath = imageUrl,
+                        };
+                        Images.Add(image);
+                    }
+                    else if (action == "Select picture")
+                    {
+                        var imageUrl = await _imageService.PickPhotoAsync();
+                        var image = new Domain.Models.Image
+                        {
+                            ImagePath = imageUrl,
+                        };
+                        Images.Add(image);
+                    }
+                });
+            }
+        }
+
+        public ICommand DeleteImageCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    var result = await CoreMethods.DisplayAlert("Delete Comment", "Are u sure u want to delete image?", "Yes", "Cancel");
+                    if (result)
+                    {
+                        var deleteResult = await _imageService.DeleteImage(SelectedImage);
+                        if (deleteResult)
+                        {
+                            Images.Remove(SelectedImage);
+                            await CoreMethods.DisplayAlert("Delete Image", "Image succesfull deleted! Please update to save changes!", "Ok");
+                        }
+                        else
+                        {
+                            await CoreMethods.DisplayAlert("Delete Image", "Delete image failed!", "Ok");
                         }
                     }
                 });
