@@ -119,9 +119,11 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             }            
         }
 
-        public Task<string> DeleteUserAsync(string id)
+        public async Task<string> DeleteUserAsync(string id)
         {
-            throw new NotImplementedException();
+            var user = await GetUserByIdAsync(id);
+            _users.Remove(user);
+            return "Deleted";
         }
 
         public async Task<List<User>> GetAllUsersAsync()

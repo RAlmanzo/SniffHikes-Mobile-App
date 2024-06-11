@@ -10,7 +10,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
 {
     public class MockZonesService : IZonesService
     {
-        public static List<Zone> _zones;
+        public List<Zone> _zones;
 
         public MockZonesService()
         {
@@ -172,9 +172,10 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
             throw new NotImplementedException();
         }
 
-        public Task<string> CreateZoneAsync(Zone newZone)
+        public async Task<string> CreateZoneAsync(Zone newZone)
         {
-            throw new NotImplementedException();
+            _zones.Add(newZone);
+            return await Task.FromResult("Created");
         }
 
         public Task<bool> DeleteCommentAsync(string id, string commentId)
@@ -189,8 +190,15 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
 
         public async Task<List<BaseModel>> GetAllZonesAsync()
         {
-            //return await Task.FromResult(_zones);
-            return null;
+            var zones = _zones.Select(e => new BaseModel
+            {
+                Id = e.Id,
+                Title = e.Title,
+                Description = e.Description,
+                Image = e.Images?.FirstOrDefault(),
+            }).ToList();
+
+            return await Task.FromResult(zones);
         }
 
         public async Task<Zone> GetZoneByIdAsync(string id)
