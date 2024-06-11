@@ -11,12 +11,14 @@ using Xamarin.Forms;
 using System.Linq;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Validators;
 using Xamarin.Essentials;
+using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
     public class AddDogViewModel : FreshBasePageModel
     {
         private readonly IUsersService _usersService;
+        private readonly IImageService _imageService;
 
         private string name;
         private DateTime dateOfBirth;
@@ -25,6 +27,17 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private List<Dog> dogs;
         private string nameError;
         private string dateOfBirthError;
+        private Domain.Models.Image image;
+
+        public Domain.Models.Image Image
+        {
+            get => image;
+            set
+            {
+                image = value;
+                RaisePropertyChanged(nameof(Image));
+            }
+        }
 
         public string Id { get; private set; }
 
@@ -98,10 +111,11 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public AddDogViewModel(IUsersService usersService)
+        public AddDogViewModel(IUsersService usersService, IImageService imageService)
         {
             _usersService = usersService;
             dogs = new List<Dog>();
+            _imageService = imageService;
         }
 
         public override void Init(object initData)
@@ -123,6 +137,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         Race = Race,
                         Gender = Gender,
                         DateOfBirth = DateOfBirth,
+                        Image = Image,
                     };
                     
                     if (Validate(dog))
@@ -135,6 +150,63 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
 
                         await CoreMethods.PushPageModel<ProfileViewModel>();
                     }                   
+                });
+            }
+        }
+
+        public ICommand AddImageCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    string action = await CoreMethods.DisplayActionSheet("Select an option", "Annuleren", null, "Take picture", "Select picture");
+
+                    if (action == "Take picture")
+                    {
+                        var imageUrl = await _imageService.TakePhotoAsync();
+                        var image = new Domain.Models.Image
+                        {
+                            ImagePath = imageUrl,
+                        };
+                        Image = image;
+                    }
+                    else if (action == "Select picture")
+                    {
+                        var imageUrl = await _imageService.PickPhotoAsync();
+                        var image = new Domain.Models.Image
+                        {
+                            ImagePath = imageUrl,
+                        };
+                        Image = image;
+                    }
+                });
+            }
+        }
+
+        public ICommand DeleteImageCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (Image != null)
+                    {
+                        var result = await CoreMethods.DisplayAlert("Delete Image", "Are u sure u want to delete image?", "Yes", "Cancel");
+                        if (result)
+                        {
+                            var deleteResult = await _imageService.DeleteImage(image);
+                            if (deleteResult)
+                            {
+                                Image = null;
+                                await CoreMethods.DisplayAlert("Delete image", "Image succesfull deleted", "Ok");
+                            }
+                            else
+                            {
+                                await CoreMethods.DisplayAlert("Delete image", "Delete image failed!", "Ok");
+                            }
+                        }
+                    }
                 });
             }
         }
