@@ -15,6 +15,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
     public class UpdateZoneViewModel : FreshBasePageModel
     {
         private readonly IZonesService _zonesService;
+        private readonly IImageService _imageService;
 
         private string id;
         private string title;
@@ -31,6 +32,21 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private string cityError;
         private string countryError;
         private string dateError;
+        private Domain.Models.Image selectedImage;
+
+        public Domain.Models.Image SelectedImage
+        {
+            get => selectedImage;
+            set
+            {
+                selectedImage = value;
+                RaisePropertyChanged(nameof(SelectedImage));
+                if (selectedImage != null)
+                {
+                    DeleteImageCommand.Execute(null);
+                }
+            }
+        }
 
         public string DateError
         {
@@ -186,11 +202,12 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
-        public UpdateZoneViewModel(IZonesService zonesService)
+        public UpdateZoneViewModel(IZonesService zonesService, IImageService imageService)
         {
             Images = new ObservableCollection<Domain.Models.Image>();
             Comments = new ObservableCollection<Comment>();
             _zonesService = zonesService;
+            _imageService = imageService;
         }
 
         public override void Init(object initData)
@@ -317,6 +334,60 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         else
                         {
                             await CoreMethods.DisplayAlert("Failed", "Could not update route!", "Ok");
+                        }
+                    }
+                });
+            }
+        }
+
+        public ICommand AddImageCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    string action = await CoreMethods.DisplayActionSheet("Select an option", "Annuleren", null, "Take picture", "Select picture");
+
+                    if (action == "Take picture")
+                    {
+                        var imageUrl = await _imageService.TakePhotoAsync();
+                        var image = new Domain.Models.Image
+                        {
+                            ImagePath = imageUrl,
+                        };
+                        Images.Add(image);
+                    }
+                    else if (action == "Select picture")
+                    {
+                        var imageUrl = await _imageService.PickPhotoAsync();
+                        var image = new Domain.Models.Image
+                        {
+                            ImagePath = imageUrl,
+                        };
+                        Images.Add(image);
+                    }
+                });
+            }
+        }
+
+        public ICommand DeleteImageCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    var result = await CoreMethods.DisplayAlert("Delete Comment", "Are u sure u want to delete image?", "Yes", "Cancel");
+                    if (result)
+                    {
+                        var deleteResult = await _imageService.DeleteImage(SelectedImage);
+                        if (deleteResult)
+                        {
+                            Images.Remove(SelectedImage);
+                            await CoreMethods.DisplayAlert("Delete Image", "Image succesfull deleted! Please update to save changes!", "Ok");
+                        }
+                        else
+                        {
+                            await CoreMethods.DisplayAlert("Delete Image", "Delete image failed!", "Ok");
                         }
                     }
                 });
