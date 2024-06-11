@@ -30,6 +30,21 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private string streetError;
         private string cityError;
         private string countryError;
+        private Domain.Models.Image selectedImage;
+
+        public Domain.Models.Image SelectedImage
+        {
+            get => selectedImage;
+            set
+            {
+                selectedImage = value;
+                RaisePropertyChanged(nameof(SelectedImage));
+                if (selectedImage != null)
+                {
+                    DeleteImageCommand.Execute(null);
+                }
+            }
+        }
 
         public string TitleError
         {
@@ -244,7 +259,41 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
+                    if (images.Count > 0)
+                    {
+                        foreach (var image in Images)
+                        {
+                            if (image.ImagePath != "error")
+                            {
+                                await _imageService.DeleteImage(image);
+                            }
+                        }
+                    }
                     await CoreMethods.PushPageModel<RoutesViewModel>();
+                });
+            }
+        }
+
+        public ICommand DeleteImageCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    var result = await CoreMethods.DisplayAlert("Delete Comment", "Are u sure u want to delete image?", "Yes", "Cancel");
+                    if (result)
+                    {
+                        var deleteResult = await _imageService.DeleteImage(SelectedImage);
+                        if (deleteResult)
+                        {
+                            Images.Remove(SelectedImage);
+                            await CoreMethods.DisplayAlert("Delete Comment", "Image succesfull deleted", "Ok");
+                        }
+                        else
+                        {
+                            await CoreMethods.DisplayAlert("Delete Comment", "Delete image failed!", "Ok");
+                        }
+                    }
                 });
             }
         }
