@@ -17,9 +17,9 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
     {
         private readonly FirebaseClient _client;
 
-        public UsersService()
+        public UsersService(FirebaseClient client)
         {
-            _client = new FirebaseClient("https://sniffhikes-8e9a6-default-rtdb.europe-west1.firebasedatabase.app/");
+            _client = client;
         }
 
         public async Task<bool> AddDogAsync(string userId, Dog dog)
