@@ -114,8 +114,11 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                 {
                     Id = await SecureStorage.GetAsync("token");
                     string admin = await SecureStorage.GetAsync("admin");
-                    IsAdmin = bool.Parse(admin);
-
+                    if (admin != null)
+                    {
+                        IsAdmin = bool.Parse(admin);
+                    }
+                    
                     var fetchedZones = await _zonesService.GetAllZonesAsync();
                     Zones = new ObservableCollection<BaseModel>(fetchedZones);
                 });

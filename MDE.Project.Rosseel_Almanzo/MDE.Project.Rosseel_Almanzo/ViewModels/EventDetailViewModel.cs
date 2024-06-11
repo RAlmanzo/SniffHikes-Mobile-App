@@ -178,7 +178,10 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             Id = initData.ToString();
 
             string admin = await SecureStorage.GetAsync("admin");
-            IsAdmin = bool.Parse(admin);
+            if(admin != null)
+            {
+                IsAdmin = bool.Parse(admin);
+            }     
             userId = await SecureStorage.GetAsync("token");
 
             GetEventDetails.Execute(null);
