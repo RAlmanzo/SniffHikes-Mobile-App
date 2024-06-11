@@ -9,6 +9,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using MDE.Project.Rosseel_Almanzo.Domain.Services.Interfaces;
 using Xamarin.Essentials;
+using System.Threading.Tasks;
 
 namespace MDE.Project.Rosseel_Almanzo.ViewModels
 {
@@ -22,6 +23,28 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private string id;
         private bool isAdmin;
         private string cityName;
+        private bool isLoading;
+        private bool isVisible;
+
+        public bool IsVisible
+        {
+            get => isVisible;
+            set
+            {
+                isVisible = value;
+                RaisePropertyChanged(nameof(IsVisible));
+            }
+        }
+
+        public bool IsLoading
+        {
+            get => isLoading;
+            set
+            {
+                isLoading = value;
+                RaisePropertyChanged(nameof(IsLoading));
+            }
+        }
 
         public string CityName
         {
@@ -112,6 +135,9 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
+                    IsLoading = true;
+                    IsVisible = false;
+
                     Id = await SecureStorage.GetAsync("token");
                     string admin = await SecureStorage.GetAsync("admin");
                     if (admin != null)
@@ -121,6 +147,10 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     
                     var fetchedZones = await _zonesService.GetAllZonesAsync();
                     Zones = new ObservableCollection<BaseModel>(fetchedZones);
+
+                    await Task.Delay(500);
+                    IsLoading = false;
+                    IsVisible = true;
                 });
             }
         }

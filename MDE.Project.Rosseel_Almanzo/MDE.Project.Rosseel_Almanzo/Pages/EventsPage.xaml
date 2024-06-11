@@ -16,7 +16,7 @@
                  IconImageSource="lefticon.png" 
                  BackgroundImageSource="sky.jpg">
         <StackLayout>
-            <ActivityIndicator IsRunning="{Binding IsLoading}">
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}">
             </ActivityIndicator>
 
             <StackLayout Style="{StaticResource createFormStyle}">

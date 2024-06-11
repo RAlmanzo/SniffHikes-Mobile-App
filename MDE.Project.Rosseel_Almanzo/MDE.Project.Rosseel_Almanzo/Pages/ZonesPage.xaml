@@ -7,6 +7,8 @@
              BackgroundImageSource="sky.jpg">
     <ContentPage.Content>
         <StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}">
+            </ActivityIndicator>
             <StackLayout IsVisible="{Binding IsAdmin}">
                 <Button Text="Create" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding CreateZoneCommand}"></Button>
             </StackLayout>
@@ -14,7 +16,7 @@
                 <Label Text="Search by city: "></Label>
                 <Entry Text="{Binding CityName}"></Entry>
             </StackLayout>
-            <ListView x:Name="lstItems" ItemsSource="{Binding Zones}" HasUnevenRows="True" SelectedItem="{Binding SelectedZone}">
+            <ListView x:Name="lstItems" ItemsSource="{Binding Zones}" HasUnevenRows="True" SelectedItem="{Binding SelectedZone}" IsVisible="{Binding IsVisible}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
