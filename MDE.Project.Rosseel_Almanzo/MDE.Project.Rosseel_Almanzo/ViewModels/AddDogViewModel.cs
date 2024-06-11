@@ -211,6 +211,23 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             }
         }
 
+        public ICommand CancelCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (Image != null)
+                    {
+                        var imageToDelete = new Domain.Models.Image { ImagePath = Image.ImagePath };
+                        await _imageService.DeleteImage(imageToDelete);
+                        image = null;
+                    }
+                    await CoreMethods.PushPageModel<ProfileViewModel>();
+                });
+            }
+        }
+
         private bool Validate(Dog dog)
         {
 

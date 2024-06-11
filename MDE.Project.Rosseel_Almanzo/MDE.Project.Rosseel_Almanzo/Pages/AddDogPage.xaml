@@ -46,7 +46,8 @@
                     </StackLayout>
                 </ScrollView>
                 <StackLayout>
-                    <Button Text="Add Dog" Style="{StaticResource formButtonStye}" Command="{Binding AddDogCommand}" />
+                    <Button Text="Add Dog" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding AddDogCommand}" />
+                    <Button Text="Cancel" HorizontalOptions="CenterAndExpand" Style="{StaticResource formButtonStye}" Command="{Binding CancelCommand}"></Button>
                 </StackLayout>
             </StackLayout>
         </StackLayout>
