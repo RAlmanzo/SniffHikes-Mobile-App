@@ -274,7 +274,10 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     {
                         foreach (var image in Images)
                         {
-                            await _imageService.DeleteImage(image);
+                            if(image.ImagePath != "error")
+                            {
+                                await _imageService.DeleteImage(image);
+                            }                          
                         }
                     }                  
                     await CoreMethods.PushPageModel<EventsViewModel>();
