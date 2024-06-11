@@ -11,5 +11,6 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Models
         public string Race { get; set; }
         public string Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public Image Image { get; set; }
     }
 }
