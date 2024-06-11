@@ -228,7 +228,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         };
                         Images.Add(image);
                     }
-                    else
+                    else if (action == "Select picture")
                     {
                         var imageUrl = await _imageService.PickPhotoAsync();
                         var image = new Domain.Models.Image
