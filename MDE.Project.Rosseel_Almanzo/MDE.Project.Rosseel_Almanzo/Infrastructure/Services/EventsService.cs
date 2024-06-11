@@ -17,9 +17,9 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
     {
         private readonly FirebaseClient _client;
 
-        public EventsService()
+        public EventsService(FirebaseClient client)
         {
-            _client = new FirebaseClient("https://sniffhikes-8e9a6-default-rtdb.europe-west1.firebasedatabase.app/");
+            _client = client;
         }
 
         public async Task<string> CreateEventAsync(Event newEvent)
@@ -28,7 +28,7 @@ namespace MDE.Project.Rosseel_Almanzo.Infrastructure.Services
             {
                 var token = await SecureStorage.GetAsync("token");
                 newEvent.OrginazerId = token;
-                await _client.Child("Events")
+                var result = await _client.Child("Events")
                     .PostAsync(newEvent);
                 return await Task.FromResult("Created");
             }
