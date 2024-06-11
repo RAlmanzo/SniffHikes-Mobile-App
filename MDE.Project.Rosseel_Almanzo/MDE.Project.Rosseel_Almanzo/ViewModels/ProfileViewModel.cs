@@ -33,6 +33,8 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
         private string id;
         private Domain.Models.Image image;
 
+        public bool IsAdmin { get; set; }
+
         public Domain.Models.Image Image
         {
             get => image;
@@ -180,6 +182,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                     Password = currentUser.Password;
                     Dogs = currentUser.Dogs != null ? new ObservableCollection<Dog>(currentUser.Dogs) : new ObservableCollection<Dog>();
                     Image = currentUser.Image;
+                    IsAdmin = currentUser.IsAdmin;
                 });
             }
         }
@@ -203,6 +206,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         Password = Password,
                         Dogs = Dogs,
                         Image = Image,
+                        IsAdmin = IsAdmin,
                     };
 
                     if (!await _usersService.UpdateUserAsync(user)) 

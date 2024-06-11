@@ -216,7 +216,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                         var result = await _zoneService.CreateZoneAsync(newZone);
                         if (result == "Created")
                         {
-                            await CoreMethods.DisplayAlert("Succes", "Event succesfull created", "Ok");
+                            await CoreMethods.DisplayAlert("Succes", "Zone succesfull created", "Ok");
                             await CoreMethods.PushPageModel<ZonesViewModel>();
                         }
                         else
@@ -274,7 +274,7 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
                             }
                         }
                     }
-                    await CoreMethods.PushPageModel<EventsViewModel>();
+                    await CoreMethods.PushPageModel<ZonesViewModel>();
                 });
             }
         }
@@ -285,18 +285,18 @@ namespace MDE.Project.Rosseel_Almanzo.ViewModels
             {
                 return new Command(async () =>
                 {
-                    var result = await CoreMethods.DisplayAlert("Delete Comment", "Are u sure u want to delete image?", "Yes", "Cancel");
+                    var result = await CoreMethods.DisplayAlert("Delete image", "Are u sure u want to delete image?", "Yes", "Cancel");
                     if (result)
                     {
                         var deleteResult = await _imageService.DeleteImage(SelectedImage);
                         if (deleteResult)
                         {
                             Images.Remove(SelectedImage);
-                            await CoreMethods.DisplayAlert("Delete Comment", "Image succesfull deleted", "Ok");
+                            await CoreMethods.DisplayAlert("Delete image", "Image succesfull deleted", "Ok");
                         }
                         else
                         {
-                            await CoreMethods.DisplayAlert("Delete Comment", "Delete image failed!", "Ok");
+                            await CoreMethods.DisplayAlert("Delete image", "Delete image failed!", "Ok");
                         }
                     }
                 });
