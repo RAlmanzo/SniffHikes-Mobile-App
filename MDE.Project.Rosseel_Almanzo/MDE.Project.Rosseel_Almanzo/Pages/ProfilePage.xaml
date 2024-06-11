@@ -66,7 +66,7 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout>
-                                        <Image Source="login.jpg" Aspect="AspectFill" HeightRequest="150" WidthRequest="150" BackgroundColor="{StaticResource transparantWhite}"/>
+                                        <Image Source="{Binding Image.ImagePath}" Aspect="AspectFill" HeightRequest="150" WidthRequest="150" BackgroundColor="{StaticResource transparantWhite}"/>
                                         <Label Text="{Binding Name}"></Label>
                                     </StackLayout>
                                 </DataTemplate>
