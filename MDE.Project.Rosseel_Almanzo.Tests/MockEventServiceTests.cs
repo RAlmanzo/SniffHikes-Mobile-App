@@ -25,8 +25,8 @@ namespace MDE.Project.Rosseel_Almanzo.Tests
             var newEvent = new Event
             {
                 Id = "7",
-                Title = "Test Route",
-                Description = "This is a test route.",
+                Title = "Test event",
+                Description = "This is a test event.",
                 Street = "Test Street",
                 City = "Test City",
                 Country = "Test Country",
@@ -43,7 +43,7 @@ namespace MDE.Project.Rosseel_Almanzo.Tests
         }
 
         [Fact]
-        public async Task CreateEventAsync_WithValidEvent_AddsRouteToList()
+        public async Task CreateEventAsync_WithValidEvent_AddsEventToList()
         {
             // Arrange
             var mockEvents = new List<Event>();
@@ -72,13 +72,13 @@ namespace MDE.Project.Rosseel_Almanzo.Tests
                 new Event
                 {
                     Id = "1",
-                    Title = "Test Route 1",
+                    Title = "Test event 1",
                     Description = "Test Description 1",
                 },
                 new Event
                 {
                     Id = "2",
-                    Title = "Test Route 2",
+                    Title = "Test event 2",
                     Description = "Test Description 2",
                 }
             };
@@ -121,8 +121,8 @@ namespace MDE.Project.Rosseel_Almanzo.Tests
             // Arrange
             var mockEvents = new List<Event>
             {
-                new Event { Id = "1", Title = "Route 1" },
-                new Event { Id = "2", Title = "Route 2" }
+                new Event { Id = "1", Title = "event 1" },
+                new Event { Id = "2", Title = "event 2" }
             };
 
             var mockService = new Mock<IEventsService>();
@@ -145,8 +145,8 @@ namespace MDE.Project.Rosseel_Almanzo.Tests
             // Arrange
             var mockEvents = new List<Event>
             {
-                new Event { Id = "1", Title = "Route 1" },
-                new Event { Id = "2", Title = "Route 2" }
+                new Event { Id = "1", Title = "event 1" },
+                new Event { Id = "2", Title = "event 2" }
             };
 
             var mockService = new Mock<IEventsService>();
