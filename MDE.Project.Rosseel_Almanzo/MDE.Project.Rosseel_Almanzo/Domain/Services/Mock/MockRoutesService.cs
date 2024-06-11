@@ -10,7 +10,7 @@ namespace MDE.Project.Rosseel_Almanzo.Domain.Services.Mock
 {
     public class MockRoutesService : IRoutesService
     {
-        public static List<Route> _routes;
+        public List<Route> _routes;
         public MockRoutesService()
         {
             _routes = new List<Route>
