@@ -3,6 +3,8 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+MDE.Project.Rosseel_Almanzo/Constants/
+
 # User-specific files
 *.rsuser
 *.suo
