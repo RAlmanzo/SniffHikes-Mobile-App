@@ -57,13 +57,13 @@ XUnit for unit testing
 
 🔹 Backend:
 
-C#, domain and infrastructure
+- C#, domain and infrastructure
 
-Entity-based services with DTOs and models
+- Entity-based services with DTOs and models
 
-Firebase (Realtime Database)
+- Firebase (Realtime Database)
 
-Firebase authentication
+- Firebase authentication
 
 ---
 
@@ -159,13 +159,13 @@ Throughout this project, I gained practical experience with:
 
 ### Requires:
 
-.NET SDK 8.0+
+- .NET SDK 8.0+
 
-Visual Studio with Xamarin Workload
+- Visual Studio with Xamarin Workload
 
-Android SDK or Windows UWP support
+- Android SDK or Windows UWP support
 
-Emulator or physical device
+- Emulator or physical device
 
 ### Clone & Run
 ```bash
@@ -189,6 +189,7 @@ Open the .sln file in Visual Studio, build the solution, and run it on:
 ---
 
 ## 📬 Contact
+
 Want to connect or ask questions?
 
 📧 Email: ralmanzo@gmail.com
