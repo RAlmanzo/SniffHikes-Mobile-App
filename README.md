@@ -55,7 +55,7 @@ Community comments
 
 XUnit for unit testing
 
-🔹 Backend (In Progress):
+🔹 Backend:
 
 C#, domain and infrastructure
 
@@ -169,8 +169,7 @@ Emulator or physical device
 
 ### Clone & Run
 ```bash
-git clone https://github.com/your-username/sniffhikes-mobileapp.git
-cd sniffhikes-mobileapp
+git clone https://github.com/RAlmanzo/SniffHikes-Mobile-App.git
 ```
 Open the .sln file in Visual Studio, build the solution, and run it on:
 
@@ -180,9 +179,20 @@ Open the .sln file in Visual Studio, build the solution, and run it on:
 
 ---
 
-### 🛠 In Progress
-🔧 Full GraphQL backend API using HotChocolate
+## 🛠 In Progress
+🔧 Full GraphQL backend API using HotChocolate and ASP.NET Web API with Onion/ Clean Architecture
 
 🗺️ Hike tracking & route sharing
 
 📥 Offline caching & sync functionality
+
+---
+
+## 📬 Contact
+Want to connect or ask questions?
+
+📧 Email: ralmanzo@gmail.com
+
+💼 LinkedIn: https://www.linkedin.com/in/rosseel-almanzo-5241172ba/
+
+🐙 GitHub: https://github.com/RAlmanzo
